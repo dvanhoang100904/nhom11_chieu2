@@ -43,6 +43,8 @@ class DanhSachTraSuaActivity : AppCompatActivity() {
 
         imgBtnDanhSachSinhTo.setOnClickListener {
             Toast.makeText(this, "Danh sách sinh tố", Toast.LENGTH_SHORT).show()
+            val intentDSST = Intent(this, DanhSachSinhToActivity::class.java)
+            startActivity(intentDSST)
         }
 
         imgBtnDanhSachOrder.setOnClickListener {
