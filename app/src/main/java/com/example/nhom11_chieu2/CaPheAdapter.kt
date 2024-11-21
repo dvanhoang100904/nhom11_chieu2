@@ -1,5 +1,6 @@
 package com.example.nhom11_chieu2
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +35,15 @@ class CaPheAdapter(private val danhSachCaPhe: List<CaPhe>) :
         holder.ivHinhAnhCaPhe.setImageResource(caPhe.hinhAnh)
 
         holder.btnChiTietCaPhe.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Xem chi tiết thành công", Toast.LENGTH_SHORT).show()
+            Toast.makeText(holder.itemView.context, "Chi tiết ${caPhe.ten} thành công", Toast.LENGTH_SHORT)
+                .show()
+            val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
+                putExtra("ten", caPhe.ten)
+                putExtra("hinhAnh", caPhe.hinhAnh)
+                putExtra("gia", caPhe.gia)
+                putExtra("moTa", caPhe.moTa)
+            }
+            holder.itemView.context.startActivity(intentChiTiet)
         }
     }
 }

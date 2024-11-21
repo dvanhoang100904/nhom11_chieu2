@@ -1,5 +1,6 @@
 package com.example.nhom11_chieu2
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,8 +35,15 @@ class TraSuaAdapter(private val danhSachTraSua: List<TraSua>) :
         holder.ivHinhAnhTraSua.setImageResource(traSua.hinhAnh)
 
         holder.btnChiTietTraSua.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Xem chi tiết thành công", Toast.LENGTH_SHORT)
+            Toast.makeText(holder.itemView.context, "Chi tiết ${traSua.ten}", Toast.LENGTH_SHORT)
                 .show()
+            val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
+                putExtra("ten", traSua.ten)
+                putExtra("hinhAnh", traSua.hinhAnh)
+                putExtra("gia", traSua.gia)
+                putExtra("moTa", traSua.moTa)
+            }
+            holder.itemView.context.startActivity(intentChiTiet)
         }
     }
 }

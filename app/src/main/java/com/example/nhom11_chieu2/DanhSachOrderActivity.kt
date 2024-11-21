@@ -40,21 +40,21 @@ class DanhSachOrderActivity : AppCompatActivity() {
         val ten = intent.getStringExtra("ten")
         val hinhAnh = intent.getIntExtra("hinhAnh", 0)
         val gia = intent.getDoubleExtra("gia", 0.0)
+        val moTa = intent.getStringExtra("moTa")
 
         // Kiểm tra dữ liệu hợp lệ và xử lý
-        if (ten != null && hinhAnh != 0 && gia != 0.0) {
+        if (ten != null && hinhAnh != 0 && gia != 0.0 && moTa != null) {
             // Kiểm tra xem đã có trong danh sách chưa
             val kiemTraOrder = danhSachOrder.find { it.ten == ten }
 
             if (kiemTraOrder != null) {
                 // Nếu đã có, tăng số lượng lên
                 kiemTraOrder.soLuong++
-                Toast.makeText(this, "Số lượng tăng lên", Toast.LENGTH_SHORT).show()
+
             } else {
                 // Nếu chưa có, thêm mới vào danh sách
-                val order = Order(ten, hinhAnh, gia, 1) // Số lượng mặc định là 1
+                val order = Order(ten, hinhAnh, gia, 1, moTa) // Số lượng mặc định là 1
                 danhSachOrder.add(order)
-                Toast.makeText(this, "Order thành công!", Toast.LENGTH_SHORT).show()
             }
         }
         // Thiết lập adapter cho RecyclerView
@@ -66,7 +66,11 @@ class DanhSachOrderActivity : AppCompatActivity() {
         btnQuayLai.setOnClickListener { finish() }
 
         btnXacNhan.setOnClickListener {
-            Toast.makeText(this, "Xác nhận thành công!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Xác nhận order", Toast.LENGTH_SHORT).show()
+            // Xóa toàn bộ dữ liệu trong danh sách
+            danhSachOrder.clear()
+            // Thông báo cho adapter rằng dữ liệu đã thay đổi
+            orderAdapter.notifyDataSetChanged()
             val intentDSVTB = Intent(this, DanhSachViTriBanActivity::class.java)
             startActivity(intentDSVTB)
         }

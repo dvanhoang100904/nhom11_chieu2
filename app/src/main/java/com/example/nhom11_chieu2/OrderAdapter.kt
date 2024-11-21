@@ -1,5 +1,6 @@
 package com.example.nhom11_chieu2
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +42,30 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
         holder.tvGiaOrder.text = formatGia(order.gia)
         holder.tvSoLuongOrder.text = order.soLuong.toString()
         holder.ivHinhAnhOrder.setImageResource(order.hinhAnh)
+
+        holder.ivHinhAnhOrder.setOnClickListener {
+            Toast.makeText(holder.itemView.context, "Chi tiết ${order.ten}", Toast.LENGTH_SHORT)
+                .show()
+            val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
+                putExtra("ten", order.ten)
+                putExtra("hinhAnh", order.hinhAnh)
+                putExtra("gia", order.gia)
+                putExtra("moTa", order.moTa)
+            }
+            holder.itemView.context.startActivity(intentChiTiet)
+        }
+
+        holder.tvTenOrder.setOnClickListener {
+            Toast.makeText(holder.itemView.context, "Chi tiết ${order.ten}", Toast.LENGTH_SHORT)
+                .show()
+            val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
+                putExtra("ten", order.ten)
+                putExtra("hinhAnh", order.hinhAnh)
+                putExtra("gia", order.gia)
+                putExtra("moTa", order.moTa)
+            }
+            holder.itemView.context.startActivity(intentChiTiet)
+        }
 
         holder.btnTangOrder.setOnClickListener {
             order.soLuong++

@@ -1,5 +1,6 @@
 package com.example.nhom11_chieu2
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,8 +34,15 @@ class SinhToAdapter(private val danhSachSinhTo: List<SinhTo>) :
         holder.tvTenSinhTo.text = sinhTo.ten
         holder.ivHinhAnhSinhTo.setImageResource(sinhTo.hinhAnh)
         holder.btnChiTietSinhTo.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Xem chi tiết thành công", Toast.LENGTH_SHORT)
+            Toast.makeText(holder.itemView.context, "Chi tiết ${sinhTo.ten}", Toast.LENGTH_SHORT)
                 .show()
+            val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
+                putExtra("ten", sinhTo.ten)
+                putExtra("hinhAnh", sinhTo.hinhAnh)
+                putExtra("gia", sinhTo.gia)
+                putExtra("moTa", sinhTo.moTa)
+            }
+            holder.itemView.context.startActivity(intentChiTiet)
         }
     }
 }
