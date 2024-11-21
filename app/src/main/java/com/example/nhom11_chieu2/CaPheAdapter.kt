@@ -14,7 +14,7 @@ class CaPheAdapter(private val danhSachCaPhe: List<CaPhe>) :
     class CaPheViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvTenCaPhe: TextView = itemView.findViewById(R.id.tvTenCaPhe)
         val ivHinhAnhCaPhe: ImageView = itemView.findViewById(R.id.ivHinhAnhCaPhe)
-        val btnDetailCaPhe: Button = itemView.findViewById(R.id.btnDetailCaPhe)
+        val btnChiTietCaPhe: Button = itemView.findViewById(R.id.btnChiTietCaPhe)
 
     }
 
@@ -33,7 +33,7 @@ class CaPheAdapter(private val danhSachCaPhe: List<CaPhe>) :
         holder.tvTenCaPhe.text = caPhe.ten
         holder.ivHinhAnhCaPhe.setImageResource(caPhe.hinhAnh)
 
-        holder.btnDetailCaPhe.setOnClickListener {
+        holder.btnChiTietCaPhe.setOnClickListener {
             Toast.makeText(holder.itemView.context, "Xem chi tiết thành công", Toast.LENGTH_SHORT).show()
         }
     }

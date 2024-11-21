@@ -80,6 +80,8 @@ class DanhSachOrderActivity : AppCompatActivity() {
 
         imgBtnDanhSachTraSua.setOnClickListener {
             Toast.makeText(this, "Danh sách trà sữa", Toast.LENGTH_SHORT).show()
+            val intentDSTS = Intent(this, DanhSachTraSuaActivity::class.java)
+            startActivity(intentDSTS)
 
         }
 

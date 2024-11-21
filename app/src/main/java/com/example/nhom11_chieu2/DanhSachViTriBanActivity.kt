@@ -30,7 +30,7 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
         val danhSachViTriBanA1 = getDanhSachViTriBanKhuA1()
         val danhSachViTriBanA2 = getDanhSachViTriBanKhuA2()
         val danhSachViTriBanA3 = getDanhSachViTriBanKhuA3()
-        val danhSachViTriBanA4 = getDanhSachViTriBanKhuA3()
+        val danhSachViTriBanA4 = getDanhSachViTriBanKhuA4()
 
         // Thiết lập adapter cho RecyclerView
         viTriBanAdapter = ViTriBanAdapter(danhSachViTriBanA1)
