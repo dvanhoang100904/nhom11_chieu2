@@ -16,7 +16,7 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
         val tvTenOrder: TextView = view.findViewById(R.id.tvTenOrder)
         val tvGiaOrder: TextView = view.findViewById(R.id.tvGiaOrder)
         val tvSoLuongOrder: TextView = view.findViewById(R.id.tvSoLuongOrder)
-        val imgHinhAnhOrder: ImageView = view.findViewById(R.id.ivHinhAnhOrder)
+        val ivHinhAnhOrder: ImageView = view.findViewById(R.id.ivHinhAnhOrder)
         val btnTangOrder: Button = view.findViewById(R.id.btnTangOrder)
         val btnGiamOrder: Button = view.findViewById(R.id.btnGiamOrder)
 
@@ -40,7 +40,7 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
         holder.tvTenOrder.text = order.ten
         holder.tvGiaOrder.text = formatGia(order.gia)
         holder.tvSoLuongOrder.text = order.soLuong.toString()
-        holder.imgHinhAnhOrder.setImageResource(order.hinhAnh)
+        holder.ivHinhAnhOrder.setImageResource(order.hinhAnh)
 
         holder.btnTangOrder.setOnClickListener {
             order.soLuong++

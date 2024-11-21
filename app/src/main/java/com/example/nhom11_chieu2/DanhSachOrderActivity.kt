@@ -73,7 +73,8 @@ class DanhSachOrderActivity : AppCompatActivity() {
 
         imgBtnDanhSachCaPhe.setOnClickListener {
             Toast.makeText(this, "Danh sách cà phê", Toast.LENGTH_SHORT).show()
-
+            val intentDSCP = Intent(this, DanhSachCaPheActivity::class.java)
+            startActivity(intentDSCP)
 
         }
 
