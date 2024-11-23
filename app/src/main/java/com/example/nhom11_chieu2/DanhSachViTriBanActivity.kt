@@ -2,6 +2,7 @@ package com.example.nhom11_chieu2
 
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,7 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
     private lateinit var rvDanhSachViTriBanKhuA4: RecyclerView
     private lateinit var viTriBanAdapter: ViTriBanAdapter
     private lateinit var imgBtnThoat: ImageButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_danh_sach_vi_tri_ban)
@@ -30,7 +32,7 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
         val danhSachViTriBanA1 = getDanhSachViTriBanKhuA1()
         val danhSachViTriBanA2 = getDanhSachViTriBanKhuA2()
         val danhSachViTriBanA3 = getDanhSachViTriBanKhuA3()
-        val danhSachViTriBanA4 = getDanhSachViTriBanKhuA3()
+        val danhSachViTriBanA4 = getDanhSachViTriBanKhuA4()
 
         // Thiết lập adapter cho RecyclerView
         viTriBanAdapter = ViTriBanAdapter(danhSachViTriBanA1)
@@ -218,5 +220,6 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
         rvDanhSachViTriBanKhuA4.layoutManager = LinearLayoutManager(this)
 
         imgBtnThoat = findViewById(R.id.imgBtnThoat)
+
     }
 }

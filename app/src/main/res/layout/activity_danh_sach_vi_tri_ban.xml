@@ -25,6 +25,7 @@
             android:gravity="center"
             android:text="Vị Trí Bàn "
             android:textSize="24sp"
+            android:layout_marginRight="20dp"
             android:textStyle="bold"></TextView>
     </LinearLayout>
 

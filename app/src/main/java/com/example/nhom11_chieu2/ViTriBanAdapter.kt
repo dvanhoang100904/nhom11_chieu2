@@ -11,16 +11,16 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ViTriBanAdapter(private val danhSachViTriBan: List<ViTriBan>) :
     RecyclerView.Adapter<ViTriBanAdapter.ViTriBanViewHolder>() {
-    class ViTriBanViewHolder(itemViTriBan: View) : RecyclerView.ViewHolder(itemViTriBan) {
-        val ivHinhAnhViTriBan = itemViTriBan.findViewById<ImageView>(R.id.ivHinhAnhViTriBan)
-        val tvTenViTriBan = itemViTriBan.findViewById<TextView>(R.id.tvTenViTriBan)
+    class ViTriBanViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val ivHinhAnhViTriBan = view.findViewById<ImageView>(R.id.ivHinhAnhViTriBan)
+        val tvTenViTriBan = view.findViewById<TextView>(R.id.tvTenViTriBan)
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViTriBanViewHolder {
-        val itemViTriBan =
+        val itemView =
             LayoutInflater.from(parent.context).inflate(R.layout.item_vi_tri_ban, parent, false)
-        return ViTriBanViewHolder(itemViTriBan)
+        return ViTriBanViewHolder(itemView)
     }
 
     override fun getItemCount(): Int {
@@ -33,10 +33,9 @@ class ViTriBanAdapter(private val danhSachViTriBan: List<ViTriBan>) :
         holder.tvTenViTriBan.text = viTriBan.ten
 
         holder.itemView.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Danh Sách Order", Toast.LENGTH_SHORT).show()
+            Toast.makeText(holder.itemView.context, "Danh Sách Order ${viTriBan.ten}", Toast.LENGTH_SHORT).show()
+            val intentDSOD = Intent(holder.itemView.context, DanhSachOrderActivity::class.java)
+            holder.itemView.context.startActivity(intentDSOD)
         }
-
-
-
     }
 }
