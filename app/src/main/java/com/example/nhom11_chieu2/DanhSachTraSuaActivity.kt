@@ -59,20 +59,44 @@ class DanhSachTraSuaActivity : AppCompatActivity() {
             TraSua(
                 "Trà sữa trân châu",
                 R.drawable.imgtrasua1,
-                22000.0,
-                "Trà sữa trân châu là thức uống kết hợp trà, sữa và trân châu dai, ngọt béo."
+                40000.0,
+                "Trà sữa trân châu hương trà sữa thơm ngon, ngọt dịu, kết hợp với trân châu dẻo mềm, tạo nên trải nghiệm thú vị."
             ),
             TraSua(
                 "Trà sữa matcha",
                 R.drawable.imgtrasua2,
-                26000.0,
-                "Trà sữa matcha là thức uống kết hợp trà xanh matcha, sữa và thường có thêm trân châu, mang hương vị đậm đà và béo ngậy."
+                45000.0,
+                "Trà sữa matcha hương vị trà matcha đậm đà, kết hợp với sữa ngọt ngào, tạo nên thức uống thơm ngon, bổ dưỡng"
             ),
             TraSua(
                 "Trà sữa dâu",
                 R.drawable.imgtrasua3,
-                24000.0,
-                "Trà sữa dâu là thức uống kết hợp trà, sữa và siro dâu, tạo vị ngọt, chua nhẹ và béo ngậy."
+                40000.0,
+                "Trà sữa dâu hương vị dâu ngọt ngào, kết hợp với trà sữa mịn màng, tạo nên thức uống thơm ngon, giải khát."
+            ),
+            TraSua(
+                "Trà sữa hồng trà",
+                R.drawable.imgtrasua4,
+                40000.0,
+                "Trà sữa hồng trà hương vị hồng trà nhẹ nhàng, kết hợp với sữa ngọt thanh, mang đến sự hài hòa, thơm ngon."
+            ),
+            TraSua(
+                "Trà sữa ô long",
+                R.drawable.imgtrasua5,
+                45000.0,
+                "Trà sữa ô long hương vị trà ô long đậm đà, kết hợp với sữa mịn màng, tạo nên một thức uống thơm ngon, đặc biệt."
+            ),
+            TraSua(
+                "Trà sữa khoai môn",
+                R.drawable.imgtrasua6,
+                45000.0,
+                "Trà sữa khoai môn hương vị khoai môn béo ngậy, kết hợp với trà sữa ngọt thanh, tạo nên một thức uống độc đáo và thơm ngon."
+            ),
+            TraSua(
+                "Trà sữa thái",
+                R.drawable.imgtrasua7,
+                40000.0,
+                "Trà sữa thái hương vị trà Thái đậm đà, kết hợp với sữa ngọt mát, tạo nên thức uống thơm ngon, lạ miệng."
             ),
         )
     }

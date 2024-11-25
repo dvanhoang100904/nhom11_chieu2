@@ -1,10 +1,12 @@
 package com.example.nhom11_chieu2
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -18,6 +20,7 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
     private lateinit var rvDanhSachViTriBanKhuA4: RecyclerView
     private lateinit var viTriBanAdapter: ViTriBanAdapter
     private lateinit var imgBtnThoat: ImageButton
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +53,15 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
         rvDanhSachViTriBanKhuA4.adapter = viTriBanAdapter
 
         imgBtnThoat.setOnClickListener {
-            Toast.makeText(this, "Thoát thành công", Toast.LENGTH_SHORT).show()
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Thoát")
+            builder.setMessage("Bạn có chắc chắn muốn thoát không?")
+            builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
+                Toast.makeText(this, "Thoát thành công", Toast.LENGTH_SHORT).show()
+            }
+            builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
+            }
+            builder.show()
         }
     }
 

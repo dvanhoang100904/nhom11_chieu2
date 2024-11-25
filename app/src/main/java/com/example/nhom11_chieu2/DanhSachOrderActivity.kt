@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -18,11 +19,12 @@ class DanhSachOrderActivity : AppCompatActivity() {
 
     private lateinit var rvDanhSachOrder: RecyclerView
     private lateinit var orderAdapter: OrderAdapter
-    private lateinit var btnQuayLai: Button
     private lateinit var btnXacNhan: Button
+    private lateinit var imgBtnThoat: ImageButton
     private lateinit var imgBtnDanhSachCaPhe: ImageButton
     private lateinit var imgBtnDanhSachTraSua: ImageButton
     private lateinit var imgBtnDanhSachSinhTo: ImageButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_danh_sach_order)
@@ -62,17 +64,41 @@ class DanhSachOrderActivity : AppCompatActivity() {
 
         // Gán adapter cho RecyclerView
         rvDanhSachOrder.adapter = orderAdapter
-
-        btnQuayLai.setOnClickListener { finish() }
-
+        
         btnXacNhan.setOnClickListener {
-            Toast.makeText(this, "Xác nhận order", Toast.LENGTH_SHORT).show()
-            // Xóa toàn bộ dữ liệu trong danh sách
-            danhSachOrder.clear()
-            // Thông báo cho adapter rằng dữ liệu đã thay đổi
-            orderAdapter.notifyDataSetChanged()
-            val intentDSVTB = Intent(this, DanhSachViTriBanActivity::class.java)
-            startActivity(intentDSVTB)
+            if (!danhSachOrder.isEmpty()) {
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Xác nhận")
+                builder.setMessage("Bạn có chắc chắn muốn xác nhận không?")
+                builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
+                    Toast.makeText(this, "xác nhận thành công", Toast.LENGTH_SHORT).show()
+                    danhSachOrder.clear()
+                    orderAdapter.notifyDataSetChanged()
+                    val intentDSVTB = Intent(this, DanhSachViTriBanActivity::class.java)
+                    startActivity(intentDSVTB)
+                }
+                builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
+                }
+                builder.show()
+            } else {
+                Toast.makeText(
+                    this, "Chưa có đồ uống nào được order, vui lòng order!", Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+        imgBtnThoat.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Thoát")
+            builder.setMessage("Bạn có chắc chắn muốn thoát không?")
+            builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
+                Toast.makeText(this, "Thoát thành công", Toast.LENGTH_SHORT).show()
+                val intentDSVTB = Intent(this, DanhSachViTriBanActivity::class.java)
+                startActivity(intentDSVTB)
+            }
+            builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
+            }
+            builder.show()
         }
 
         imgBtnDanhSachCaPhe.setOnClickListener {
@@ -94,6 +120,8 @@ class DanhSachOrderActivity : AppCompatActivity() {
             val intentDSST = Intent(this, DanhSachSinhToActivity::class.java)
             startActivity(intentDSST)
         }
+
+
     }
 
     private fun setControl() {
@@ -101,8 +129,8 @@ class DanhSachOrderActivity : AppCompatActivity() {
         rvDanhSachOrder = findViewById(R.id.rvDanhSachOrder)
         rvDanhSachOrder.layoutManager = LinearLayoutManager(this)
 
-        btnQuayLai = findViewById(R.id.btnQuayLai)
         btnXacNhan = findViewById(R.id.btnXacNhan)
+        imgBtnThoat = findViewById(R.id.imgBtnThoat)
         imgBtnDanhSachCaPhe = findViewById(R.id.imgBtnDanhSachCaPhe)
         imgBtnDanhSachTraSua = findViewById(R.id.imgBtnDanhSachTraSua)
         imgBtnDanhSachSinhTo = findViewById(R.id.imgBtnDanhSachSinhTo)

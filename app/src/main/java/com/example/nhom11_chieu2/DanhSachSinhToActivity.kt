@@ -60,19 +60,58 @@ class DanhSachSinhToActivity : AppCompatActivity() {
             SinhTo(
                 "Sinh tố dừa",
                 R.drawable.imgsinhto1,
-                22000.0,
-                "Sinh tố dừa là thức uống kết hợp dừa, sữa ngọt béo."
-            ), SinhTo(
+                35000.0,
+                "Sinh tố dừa béo ngậy, thơm mát, giàu dinh dưỡng, giúp giải nhiệt và tăng cường năng lượng."
+            ),
+            SinhTo(
                 "Sinh tố bơ",
                 R.drawable.imgsinhto2,
-                26000.0,
-                "Sinh tố bơ là thức uống kết hợp bơ, sữa mang hương vị đậm đà và béo ngậy."
-            ), SinhTo(
+                4000.0,
+                "Sinh tố bơ béo mịn, thơm ngon, giàu vitamin E và chất xơ, tốt cho da và sức khỏe."
+            ),
+            SinhTo(
                 "Sinh tố chuối",
                 R.drawable.imgsinhto3,
-                20000.0,
-                "Sinh tố chuối là thức uống kết hợp chuối, sữa, ngọt béo ngậy."
+                30000.0,
+                "Sinh tố chuối ngọt dịu, béo mịn, giàu kali và vitamin B6, giúp bổ sung năng lượng và tốt cho tiêu hóa."
+            ),
+            SinhTo(
+                "Sinh tố kiwi",
+                R.drawable.imgsinhto4,
+                40000.0,
+                "Sinh tố kiwi mát lạnh, chua ngọt, giàu vitamin C, giúp giải khát và bổ sung năng lượng."
+            ),
+            SinhTo(
+                "Sinh tố nho",
+                R.drawable.imgsinhto5,
+                45000.0,
+                "Sinh tố nho ngọt dịu, thơm mát, giàu chất chống oxy hóa, tốt cho sức khỏe."
+            ),
+            SinhTo(
+                "Sinh tố xoài",
+                R.drawable.imgsinhto6,
+                35000.0,
+                "Sinh tố xoài ngọt thơm, béo mịn, giàu vitamin A, giải khát và bổ sung năng lượng."
+            ),
+            SinhTo(
+                "Sinh tố dưa hấu",
+                R.drawable.imgsinhto7,
+                30000.0,
+                "Sinh tố dưa hấu ngọt mát, thanh nhẹ, giàu nước và vitamin, giúp giải nhiệt hiệu quả."
+            ),
+            SinhTo(
+                "Sinh tố thơm",
+                R.drawable.imgsinhto8,
+                35000.0,
+                "Sinh tố thơm chua ngọt, thơm lừng, giàu vitamin C, hỗ trợ tiêu hóa và làm mát cơ thể."
+            ),
+            SinhTo(
+                "Sinh tố dâu",
+                R.drawable.imgsinhto9,
+                40000.0,
+                "Sinh tố dâu chua ngọt dịu, thơm ngon, giàu vitamin C và chất chống oxy hóa."
             )
+
         )
 
     }
