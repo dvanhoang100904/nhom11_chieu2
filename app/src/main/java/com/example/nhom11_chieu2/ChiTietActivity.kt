@@ -50,7 +50,7 @@ class ChiTietActivity : AppCompatActivity() {
 
         // Xử lý sự kiện khi nhấn nút "Order"
         btnOrder.setOnClickListener {
-            Toast.makeText(this, "Order $ten", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Order $ten thành công" , Toast.LENGTH_SHORT).show()
             // Xử lý việc thêm vào danh sách order
             val intentOrder = Intent(this, DanhSachOrderActivity::class.java).apply {
                 putExtra("ten", ten)

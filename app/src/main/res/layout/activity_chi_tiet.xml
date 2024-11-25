@@ -11,7 +11,7 @@
         android:layout_marginBottom="16dp"
         android:background="#F5F6CF"
         android:gravity="center"
-        android:text="Chi tiết"
+        android:text="Chi Tiết Đồ Uống"
         android:textSize="24sp"
         android:textStyle="bold" />
 

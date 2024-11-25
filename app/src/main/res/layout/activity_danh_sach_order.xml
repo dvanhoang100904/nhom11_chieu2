@@ -5,14 +5,29 @@
     android:background="#fff"
     android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#F5F6CF"
-        android:gravity="center"
-        android:text="Order"
-        android:textSize="24sp"
-        android:textStyle="bold"></TextView>
+        android:layout_height="wrap_content"
+        android:background="#f5f6cf"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/imgBtnThoat"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/imgbtnthoat"></ImageButton>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:text="Danh Sách Order "
+            android:textSize="24sp"
+            android:textStyle="bold"></TextView>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDanhSachOrder"
@@ -31,23 +46,13 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnQuayLai"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginRight="230dp"
-            android:layout_weight="1"
-            android:background="@drawable/background_quaylai"
-            android:text="Quay lại"
-            android:textColor="#000"
-            android:textStyle="bold" />
-
-        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnXacNhan"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:background="@drawable/background_xacnhan"
             android:text="Xác nhận"
             android:textColor="#000"
+
             android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
     </LinearLayout>
 
