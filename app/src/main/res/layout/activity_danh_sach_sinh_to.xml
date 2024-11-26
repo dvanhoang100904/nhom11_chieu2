@@ -26,9 +26,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:padding="10dp"
-        android:layout_marginTop="10dp"
         android:text="Danh Sách Đồ Uống Sinh Tố"
         android:textSize="22sp"
         android:textStyle="bold"></TextView>
@@ -36,7 +36,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDanhSachSinhTo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_margin="10dp"
         android:layout_weight="1"
         android:background="#fff"></androidx.recyclerview.widget.RecyclerView>
@@ -56,7 +56,6 @@
             android:layout_weight="1"
             android:background="@drawable/imgbtn1"></ImageButton>
 
-
         <ImageButton
             android:id="@+id/imgBtnDanhSachTraSua"
             android:layout_width="30dp"
@@ -65,7 +64,6 @@
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:background="@drawable/imgbtn2"></ImageButton>
-
 
         <ImageButton
             android:id="@+id/imgBtnDanhSachSinhTo"
@@ -76,7 +74,6 @@
             android:layout_weight="1"
             android:background="@drawable/imgbtn3"></ImageButton>
 
-
         <ImageButton
             android:id="@+id/imgBtnDanhSachOrder"
             android:layout_width="30dp"
@@ -85,7 +82,6 @@
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:background="@drawable/imgbtn4"></ImageButton>
-
 
     </LinearLayout>
 </LinearLayout>

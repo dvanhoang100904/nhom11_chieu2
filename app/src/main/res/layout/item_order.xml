@@ -14,7 +14,7 @@
         android:scaleType="centerCrop"></ImageView>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="170dp"
         android:layout_height="100dp"
         android:orientation="vertical">
 
@@ -74,5 +74,16 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnXoaOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="@drawable/background_xoa"
+        android:text="Xóa"
+        android:textColor="#000"
+        android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
 
 </LinearLayout>

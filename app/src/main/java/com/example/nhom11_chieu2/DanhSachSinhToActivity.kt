@@ -36,13 +36,13 @@ class DanhSachSinhToActivity : AppCompatActivity() {
         rvDanhSachSinhTo.adapter = sinhToAdapter
 
         imgBtnDanhSachCaPhe.setOnClickListener {
-            Toast.makeText(this, "Danh sách cà phê", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Danh sách đồ uống cà phê", Toast.LENGTH_SHORT).show()
             val intentDSCP = Intent(this, DanhSachCaPheActivity::class.java)
             startActivity(intentDSCP)
         }
 
         imgBtnDanhSachTraSua.setOnClickListener {
-            Toast.makeText(this, "Danh sách trà sữa", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Danh sách đồ uống trà sữa", Toast.LENGTH_SHORT).show()
             val intentDSTS = Intent(this, DanhSachTraSuaActivity::class.java)
             startActivity(intentDSTS)
         }
@@ -57,63 +57,61 @@ class DanhSachSinhToActivity : AppCompatActivity() {
 
     private fun getDanhSachSinhTo(): List<SinhTo> {
         return listOf(
-            SinhTo(
+            SinhTo(1,
                 "Sinh tố dừa",
                 R.drawable.imgsinhto1,
                 35000.0,
                 "Sinh tố dừa béo ngậy, thơm mát, giàu dinh dưỡng, giúp giải nhiệt và tăng cường năng lượng."
             ),
-            SinhTo(
+            SinhTo(2,
                 "Sinh tố bơ",
                 R.drawable.imgsinhto2,
                 4000.0,
                 "Sinh tố bơ béo mịn, thơm ngon, giàu vitamin E và chất xơ, tốt cho da và sức khỏe."
             ),
-            SinhTo(
+            SinhTo(3,
                 "Sinh tố chuối",
                 R.drawable.imgsinhto3,
                 30000.0,
                 "Sinh tố chuối ngọt dịu, béo mịn, giàu kali và vitamin B6, giúp bổ sung năng lượng và tốt cho tiêu hóa."
             ),
-            SinhTo(
+            SinhTo(4,
                 "Sinh tố kiwi",
                 R.drawable.imgsinhto4,
                 40000.0,
                 "Sinh tố kiwi mát lạnh, chua ngọt, giàu vitamin C, giúp giải khát và bổ sung năng lượng."
             ),
-            SinhTo(
+            SinhTo(5,
                 "Sinh tố nho",
                 R.drawable.imgsinhto5,
                 45000.0,
                 "Sinh tố nho ngọt dịu, thơm mát, giàu chất chống oxy hóa, tốt cho sức khỏe."
             ),
-            SinhTo(
+            SinhTo(6,
                 "Sinh tố xoài",
                 R.drawable.imgsinhto6,
                 35000.0,
                 "Sinh tố xoài ngọt thơm, béo mịn, giàu vitamin A, giải khát và bổ sung năng lượng."
             ),
-            SinhTo(
+            SinhTo(7,
                 "Sinh tố dưa hấu",
                 R.drawable.imgsinhto7,
                 30000.0,
                 "Sinh tố dưa hấu ngọt mát, thanh nhẹ, giàu nước và vitamin, giúp giải nhiệt hiệu quả."
             ),
-            SinhTo(
+            SinhTo(8,
                 "Sinh tố thơm",
                 R.drawable.imgsinhto8,
                 35000.0,
                 "Sinh tố thơm chua ngọt, thơm lừng, giàu vitamin C, hỗ trợ tiêu hóa và làm mát cơ thể."
             ),
-            SinhTo(
+            SinhTo(9,
                 "Sinh tố dâu",
                 R.drawable.imgsinhto9,
                 40000.0,
                 "Sinh tố dâu chua ngọt dịu, thơm ngon, giàu vitamin C và chất chống oxy hóa."
             )
-
         )
-
     }
 
     private fun setControl() {

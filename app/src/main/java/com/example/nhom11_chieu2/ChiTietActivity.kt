@@ -30,6 +30,7 @@ class ChiTietActivity : AppCompatActivity() {
 
     private fun setEvent() {
         // Nhận dữ liệu từ Intent
+        val ma = intent.getStringExtra("ma")
         val ten = intent.getStringExtra("ten")
         val hinhAnh = intent.getIntExtra("hinhAnh", 0)
         val gia = intent.getDoubleExtra("gia", 0.0)
@@ -53,6 +54,7 @@ class ChiTietActivity : AppCompatActivity() {
             Toast.makeText(this, "Order $ten thành công" , Toast.LENGTH_SHORT).show()
             // Xử lý việc thêm vào danh sách order
             val intentOrder = Intent(this, DanhSachOrderActivity::class.java).apply {
+                putExtra("ma", ma)
                 putExtra("ten", ten)
                 putExtra("hinhAnh", hinhAnh)
                 putExtra("gia", gia)

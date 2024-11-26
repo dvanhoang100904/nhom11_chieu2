@@ -37,6 +37,7 @@ class SinhToAdapter(private val danhSachSinhTo: List<SinhTo>) :
             Toast.makeText(holder.itemView.context, "Chi tiết ${sinhTo.ten}", Toast.LENGTH_SHORT)
                 .show()
             val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
+                putExtra("ma", sinhTo.ma)
                 putExtra("ten", sinhTo.ten)
                 putExtra("hinhAnh", sinhTo.hinhAnh)
                 putExtra("gia", sinhTo.gia)
