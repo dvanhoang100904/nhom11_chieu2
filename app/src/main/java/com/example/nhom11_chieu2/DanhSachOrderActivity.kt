@@ -39,10 +39,12 @@ class DanhSachOrderActivity : AppCompatActivity() {
 
     private fun setEvent() {
         // Nhận dữ liệu từ Intent
+        val ma = intent.getIntExtra("ma", 0)
         val ten = intent.getStringExtra("ten")
         val hinhAnh = intent.getIntExtra("hinhAnh", 0)
         val gia = intent.getDoubleExtra("gia", 0.0)
         val moTa = intent.getStringExtra("moTa")
+
 
         // Kiểm tra dữ liệu hợp lệ và xử lý
         if (ten != null && hinhAnh != 0 && gia != 0.0 && moTa != null) {
@@ -53,9 +55,10 @@ class DanhSachOrderActivity : AppCompatActivity() {
                 // Nếu đã có, tăng số lượng lên
                 kiemTraOrder.soLuong++
 
+
             } else {
                 // Nếu chưa có, thêm mới vào danh sách
-                val order = Order(ten, hinhAnh, gia, 1, moTa) // Số lượng mặc định là 1
+                val order = Order(ma, ten, hinhAnh, gia, 1, moTa) // Số lượng mặc định là 1
                 danhSachOrder.add(order)
             }
         }
@@ -64,22 +67,29 @@ class DanhSachOrderActivity : AppCompatActivity() {
 
         // Gán adapter cho RecyclerView
         rvDanhSachOrder.adapter = orderAdapter
-        
+
         btnXacNhan.setOnClickListener {
             if (!danhSachOrder.isEmpty()) {
+                // Hiển thị hộp thoại xác nhận
                 val builder = AlertDialog.Builder(this)
-                builder.setTitle("Xác nhận")
+                builder.setTitle("Xác nhận order")
                 builder.setMessage("Bạn có chắc chắn muốn xác nhận không?")
-                builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
-                    Toast.makeText(this, "xác nhận thành công", Toast.LENGTH_SHORT).show()
+
+                // Nếu người dùng chọn "Có", thực hiện xác nhận
+                builder.setPositiveButton("Có") { dialog, which ->
+                    Toast.makeText(this, "Xác nhận thành công", Toast.LENGTH_SHORT).show()
                     danhSachOrder.clear()
                     orderAdapter.notifyDataSetChanged()
                     val intentDSVTB = Intent(this, DanhSachViTriBanActivity::class.java)
                     startActivity(intentDSVTB)
                 }
-                builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
+
+                // Nếu người dùng chọn "Không", không làm gì cả
+                builder.setNegativeButton("Không") { dialog, which ->
+                    // Không làm gì khi người dùng chọn "Không"
                 }
-                builder.show()
+
+                builder.show()  // Hiển thị hộp thoại
             } else {
                 Toast.makeText(
                     this, "Chưa có đồ uống nào được order, vui lòng order!", Toast.LENGTH_SHORT
@@ -87,36 +97,45 @@ class DanhSachOrderActivity : AppCompatActivity() {
             }
         }
 
+
         imgBtnThoat.setOnClickListener {
+            // Hiển thị hộp thoại xác nhận trước khi thoát
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Thoát")
             builder.setMessage("Bạn có chắc chắn muốn thoát không?")
+
+            // Nếu người dùng chọn "Có", thực hiện thoát
             builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
                 Toast.makeText(this, "Thoát thành công", Toast.LENGTH_SHORT).show()
                 val intentDSVTB = Intent(this, DanhSachViTriBanActivity::class.java)
                 startActivity(intentDSVTB)
             }
+
+            // Nếu người dùng chọn "Không", không làm gì cả
             builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
+                // Không làm gì khi người dùng chọn "Không"
             }
-            builder.show()
+
+            builder.show()  // Hiển thị hộp thoại
         }
 
+
         imgBtnDanhSachCaPhe.setOnClickListener {
-            Toast.makeText(this, "Danh sách cà phê", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Danh sách đồ uống cà phê", Toast.LENGTH_SHORT).show()
             val intentDSCP = Intent(this, DanhSachCaPheActivity::class.java)
             startActivity(intentDSCP)
 
         }
 
         imgBtnDanhSachTraSua.setOnClickListener {
-            Toast.makeText(this, "Danh sách trà sữa", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Danh sách đồ uống trà sữa", Toast.LENGTH_SHORT).show()
             val intentDSTS = Intent(this, DanhSachTraSuaActivity::class.java)
             startActivity(intentDSTS)
 
         }
 
         imgBtnDanhSachSinhTo.setOnClickListener {
-            Toast.makeText(this, "Danh sách sinh tố", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Danh sách đồ uống sinh tố", Toast.LENGTH_SHORT).show()
             val intentDSST = Intent(this, DanhSachSinhToActivity::class.java)
             startActivity(intentDSST)
         }

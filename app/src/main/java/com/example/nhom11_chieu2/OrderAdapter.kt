@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 
 class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
@@ -15,11 +16,12 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
     class OrderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         // Khai báo các view trong item
         val tvTenOrder: TextView = view.findViewById(R.id.tvTenOrder)
+        val ivHinhAnhOrder: ImageView = view.findViewById(R.id.ivHinhAnhOrder)
         val tvGiaOrder: TextView = view.findViewById(R.id.tvGiaOrder)
         val tvSoLuongOrder: TextView = view.findViewById(R.id.tvSoLuongOrder)
-        val ivHinhAnhOrder: ImageView = view.findViewById(R.id.ivHinhAnhOrder)
         val btnTangOrder: Button = view.findViewById(R.id.btnTangOrder)
         val btnGiamOrder: Button = view.findViewById(R.id.btnGiamOrder)
+        val btnXoaOrder: Button = view.findViewById(R.id.btnXoaOrder)
 
     }
 
@@ -39,14 +41,15 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         val order = danhSachOrder[position]
         holder.tvTenOrder.text = order.ten
+        holder.ivHinhAnhOrder.setImageResource(order.hinhAnh)
         holder.tvGiaOrder.text = formatGia(order.gia)
         holder.tvSoLuongOrder.text = order.soLuong.toString()
-        holder.ivHinhAnhOrder.setImageResource(order.hinhAnh)
 
         holder.ivHinhAnhOrder.setOnClickListener {
             Toast.makeText(holder.itemView.context, "Chi tiết ${order.ten}", Toast.LENGTH_SHORT)
                 .show()
             val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
+                putExtra("ma", order.ma)
                 putExtra("ten", order.ten)
                 putExtra("hinhAnh", order.hinhAnh)
                 putExtra("gia", order.gia)
@@ -59,6 +62,7 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
             Toast.makeText(holder.itemView.context, "Chi tiết ${order.ten}", Toast.LENGTH_SHORT)
                 .show()
             val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
+                putExtra("ma", order.ma)
                 putExtra("ten", order.ten)
                 putExtra("hinhAnh", order.hinhAnh)
                 putExtra("gia", order.gia)
@@ -73,15 +77,37 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
         }
 
         holder.btnGiamOrder.setOnClickListener {
-            if (order.soLuong > 0) {
+            if (order.soLuong > 1) {
                 order.soLuong--
                 holder.tvSoLuongOrder.text = order.soLuong.toString()
             } else {
                 Toast.makeText(
-                    holder.itemView.context, "Số lượng không được nhỏ hơn 0", Toast.LENGTH_SHORT
+                    holder.itemView.context, "Số lượng không được nhỏ hơn 1", Toast.LENGTH_SHORT
                 ).show()
             }
         }
+
+        holder.btnXoaOrder.setOnClickListener {
+            // Hiển thị hộp thoại xác nhận
+            val builder = AlertDialog.Builder(holder.itemView.context)
+            builder.setTitle("Xóa")
+            builder.setMessage("Bạn có chắc chắn muốn xóa ${order.ten}?")
+
+            // Nếu người dùng chọn "Có", xóa item
+            builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
+                danhSachOrder.removeAt(position)
+                notifyItemRemoved(position)
+                Toast.makeText(holder.itemView.context, "Đã xóa ${order.ten}", Toast.LENGTH_SHORT).show()
+            }
+
+            // Nếu người dùng chọn "Không", không làm gì cả
+            builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
+                // Không làm gì khi người dùng chọn "Không"
+            }
+
+            builder.show()  // Hiển thị hộp thoại
+        }
+
     }
 
     private fun formatGia(gia: Double): CharSequence? {
