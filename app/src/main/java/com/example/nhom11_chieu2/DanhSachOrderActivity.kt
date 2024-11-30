@@ -97,7 +97,6 @@ class DanhSachOrderActivity : AppCompatActivity() {
             }
         }
 
-
         imgBtnThoat.setOnClickListener {
             // Hiển thị hộp thoại xác nhận trước khi thoát
             val builder = AlertDialog.Builder(this)
