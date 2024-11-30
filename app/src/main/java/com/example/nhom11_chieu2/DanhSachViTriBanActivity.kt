@@ -61,7 +61,7 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
             // Nếu người dùng chọn "Có", thực hiện thoát
             builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
                 Toast.makeText(this, "Thoát thành công", Toast.LENGTH_SHORT).show()
-                val intentDSVTB = Intent(this, DanhSachViTriBanActivity::class.java)
+                val intentDSVTB = Intent(this, TrangChuActivity::class.java)
                 startActivity(intentDSVTB)
             }
 
