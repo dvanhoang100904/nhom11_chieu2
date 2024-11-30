@@ -3,21 +3,21 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="18dp">
+    android:padding="16dp">
 
     <ImageView
         android:id="@+id/ivHinhAnhViTriBan"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:background="@drawable/imgvitriban"></ImageView>
 
     <TextView
         android:id="@+id/tvTenViTriBan"
-        android:layout_width="70dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Bàn 1"
-        android:textSize="18sp"
+        android:text="Bàn số 10"
+        android:textSize="16sp"
         android:textStyle="bold"></TextView>
 
 </LinearLayout>
