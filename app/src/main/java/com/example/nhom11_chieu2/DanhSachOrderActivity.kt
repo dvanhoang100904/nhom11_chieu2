@@ -72,8 +72,8 @@ class DanhSachOrderActivity : AppCompatActivity() {
             if (!danhSachOrder.isEmpty()) {
                 // Hiển thị hộp thoại xác nhận
                 val builder = AlertDialog.Builder(this)
-                builder.setTitle("Xác nhận order")
-                builder.setMessage("Bạn có chắc chắn muốn xác nhận không?")
+                builder.setTitle("Xác nhận ")
+                builder.setMessage("Bạn có chắc chắn muốn xác nhận order không?")
 
                 // Nếu người dùng chọn "Có", thực hiện xác nhận
                 builder.setPositiveButton("Có") { dialog, which ->
