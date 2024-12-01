@@ -108,6 +108,7 @@ class DanhSachOrderActivity : AppCompatActivity() {
                 Toast.makeText(this, "Thoát thành công", Toast.LENGTH_SHORT).show()
                 val intentDSVTB = Intent(this, DanhSachViTriBanActivity::class.java)
                 startActivity(intentDSVTB)
+                finish()
             }
 
             // Nếu người dùng chọn "Không", không làm gì cả

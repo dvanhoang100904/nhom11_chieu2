@@ -38,7 +38,13 @@ class DangNhapActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            Toast.makeText(this, "Trang chủ", Toast.LENGTH_SHORT).show()
+            if (matKhau.length < 6) {
+                Toast.makeText(this, "Mật khẩu phải có ít nhất 6 ký tự!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+
+            Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show()
             val intentDangNhap = Intent(this, TrangChuActivity::class.java)
             startActivity(intentDangNhap)
         }
