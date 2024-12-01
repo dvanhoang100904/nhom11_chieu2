@@ -26,42 +26,55 @@ class ChiTietActivity : AppCompatActivity() {
         setControl()
         // Xử lý sự kiện
         setEvent()
+
     }
 
     private fun setEvent() {
-        // Nhận dữ liệu từ Intent
-        val ma = intent.getStringExtra("ma")
-        val ten = intent.getStringExtra("ten")
-        val hinhAnh = intent.getIntExtra("hinhAnh", 0)
-        val gia = intent.getDoubleExtra("gia", 0.0)
-        val moTa = intent.getStringExtra("moTa")
-
-        // Gán dữ liệu vào TextView và ImageView
-        tvTenChiTiet.text = ten
-        ivHinhAnhChiTiet.setImageResource(hinhAnh)
-        // Kiểm tra giá có hợp lệ không rồi hiển thị
-        if (gia >= 0.0) {
-            tvGiaChiTiet.text = formatGia(gia)
-        } else {
-            tvGiaChiTiet.text = "Giá không hợp lệ" // Trường hợp nếu không có giá hợp lệ
+        // Nhận đối tượng Order từ Intent
+        val caPhe: CaPhe? = intent.getParcelableExtra("caphe")
+        val traSua: TraSua? = intent.getParcelableExtra("trasua")
+        val sinhTo: SinhTo? = intent.getParcelableExtra("sinhto")
+        val order: Order? = intent.getParcelableExtra<Order>("order")
+        if (caPhe != null) {
+            tvTenChiTiet.text = caPhe.ten
+            ivHinhAnhChiTiet.setImageResource(caPhe.hinhAnh)
+            tvGiaChiTiet.text = formatGia(caPhe.gia)
+            tvMoTaChiTiet.text = caPhe.moTa
+        } else if (traSua != null) {
+            tvTenChiTiet.text = traSua.ten
+            ivHinhAnhChiTiet.setImageResource(traSua.hinhAnh)
+            tvGiaChiTiet.text = formatGia(traSua.gia)
+            tvMoTaChiTiet.text = traSua.moTa
+        } else if (sinhTo != null) {
+            tvTenChiTiet.text = sinhTo.ten
+            ivHinhAnhChiTiet.setImageResource(sinhTo.hinhAnh)
+            tvGiaChiTiet.text = formatGia(sinhTo.gia)
+            tvMoTaChiTiet.text = sinhTo.moTa
+        } else if (order != null) {
+            tvTenChiTiet.text = order.ten
+            ivHinhAnhChiTiet.setImageResource(order.hinhAnh)
+            tvGiaChiTiet.text = formatGia(order.gia)
+            tvMoTaChiTiet.text = order.moTa
         }
-        tvMoTaChiTiet.text = moTa
 
         btnQuayLai.setOnClickListener { finish() }
 
-        // Xử lý sự kiện khi nhấn nút "Order"
         btnOrder.setOnClickListener {
-            Toast.makeText(this, "Order $ten thành công" , Toast.LENGTH_SHORT).show()
-            // Xử lý việc thêm vào danh sách order
-            val intentOrder = Intent(this, DanhSachOrderActivity::class.java).apply {
-                putExtra("ma", ma)
-                putExtra("ten", ten)
-                putExtra("hinhAnh", hinhAnh)
-                putExtra("gia", gia)
-                putExtra("moTa", moTa)
-            }
-            startActivity(intentOrder)
+            val doUong = order ?: caPhe ?: traSua ?: sinhTo
 
+            if (doUong != null) {
+                val intentOrder = Intent(this, DanhSachOrderActivity::class.java).apply {
+                    when (doUong) {
+                        is CaPhe -> putExtra("caphe", doUong)
+                        is TraSua -> putExtra("trasua", doUong)
+                        is SinhTo -> putExtra("sinhto", doUong)
+                        is Order -> putExtra("order", doUong)
+                    }
+                }
+                startActivity(intentOrder)
+            } else {
+                Toast.makeText(this, "Chưa có đồ uống nào", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

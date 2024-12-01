@@ -37,16 +37,12 @@ class CaPheAdapter(private val danhSachCaPhe: List<CaPhe>) :
         holder.btnChiTietCaPhe.setOnClickListener {
             Toast.makeText(
                 holder.itemView.context,
-                "Chi tiết ${caPhe.ten} thành công",
+                "Chi tiết ${caPhe.ten}",
                 Toast.LENGTH_SHORT
             )
                 .show()
             val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
-                putExtra("ma", caPhe.ma)
-                putExtra("ten", caPhe.ten)
-                putExtra("hinhAnh", caPhe.hinhAnh)
-                putExtra("gia", caPhe.gia)
-                putExtra("moTa", caPhe.moTa)
+                putExtra("caphe", caPhe)
             }
             holder.itemView.context.startActivity(intentChiTiet)
         }

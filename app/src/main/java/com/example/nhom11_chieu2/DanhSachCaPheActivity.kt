@@ -19,6 +19,7 @@ class DanhSachCaPheActivity : AppCompatActivity() {
     private lateinit var imgBtnDanhSachOrder: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_danh_sach_ca_phe)
         setControl()
         setEvent()
@@ -35,19 +36,16 @@ class DanhSachCaPheActivity : AppCompatActivity() {
         rvDanhSachCaPhe.adapter = caPheAdapter
 
         imgBtnDanhSachTraSua.setOnClickListener {
-            Toast.makeText(this, "Danh sách đồ uống trà sữa", Toast.LENGTH_SHORT).show()
             val intentDSTS = Intent(this, DanhSachTraSuaActivity::class.java)
             startActivity(intentDSTS)
         }
 
         imgBtnDanhSachSinhTo.setOnClickListener {
-            Toast.makeText(this, "Danh sách đồ uống sinh tố", Toast.LENGTH_SHORT).show()
             val intentDSST = Intent(this, DanhSachSinhToActivity::class.java)
             startActivity(intentDSST)
         }
 
         imgBtnDanhSachOrder.setOnClickListener {
-            Toast.makeText(this, "Danh sách order!", Toast.LENGTH_SHORT).show()
             val intentDSOD = Intent(this, DanhSachOrderActivity::class.java)
             startActivity(intentDSOD)
         }
@@ -60,6 +58,7 @@ class DanhSachCaPheActivity : AppCompatActivity() {
                 "Cà phê đen",
                 R.drawable.imgcaphe1,
                 12000.0,
+                1,
                 "Hạt cà phê rang xay, nước sôi, đá viên. Có thể kèm theo: sữa, đường, hoặc các phụ gia khác tùy sở thich."
             ),
             CaPhe(
@@ -67,6 +66,7 @@ class DanhSachCaPheActivity : AppCompatActivity() {
                 "Cà phê sữa đá",
                 R.drawable.imgcaphe2,
                 18000.0,
+                1,
                 "Cà phê đen pha với sữa đặc hoặc sữa tươi, được phục vụ với đá viên, tạo ra một thức uống ngọt ngào, đậm đà và mát lạnh."
             ),
             CaPhe(
@@ -74,6 +74,7 @@ class DanhSachCaPheActivity : AppCompatActivity() {
                 "Bạc xỉu",
                 R.drawable.imgcaphe3,
                 22000.0,
+                1,
                 "cà phê pha với sữa đặc, có vị ngọt nhẹ và béo, thường được phục vụ với ít đá."
             ),
             CaPhe(
@@ -81,6 +82,7 @@ class DanhSachCaPheActivity : AppCompatActivity() {
                 "Cà phê sữa nóng",
                 R.drawable.imgcaphe4,
                 20000.0,
+                1,
                 "cà phê đen pha với sữa tươi hoặc sữa đặc, được phục vụ nóng, mang lại hương vị đậm đà, ngọt ngào và béo ngậy."
             ),
             CaPhe(
@@ -88,6 +90,7 @@ class DanhSachCaPheActivity : AppCompatActivity() {
                 "Cà phê sữa dừa",
                 R.drawable.imgcaphe5,
                 26000.0,
+                1,
                 "cà phê đen kết hợp với sữa dừa, tạo ra một thức uống ngọt ngào, béo ngậy và thơm mát, với hương vị đặc trưng từ dừa kết hợp cùng cà phê đậm đà."
             ),
             CaPhe(
@@ -95,6 +98,7 @@ class DanhSachCaPheActivity : AppCompatActivity() {
                 "Cà phê sữa chua",
                 R.drawable.imgcaphe6,
                 28000.0,
+                1,
                 "sự kết hợp giữa cà phê đen đậm đà và sữa chua, tạo nên một thức uống độc đáo, vừa chua nhẹ, vừa ngọt và béo. mát mẻ, dễ chịu."
             ),
             CaPhe(
@@ -102,6 +106,7 @@ class DanhSachCaPheActivity : AppCompatActivity() {
                 "Cà phê đá xay",
                 R.drawable.imgcaphe7,
                 24000.0,
+                1,
                 "cà phê xay nhuyễn kết hợp với đá viên, tạo ra một thức uống mát lạnh, đậm đà và thường được thêm sữa hoặc đường."
             ),
             CaPhe(
@@ -109,6 +114,7 @@ class DanhSachCaPheActivity : AppCompatActivity() {
                 "Cà phê chồn",
                 R.drawable.imgcaphe8,
                 32000.0,
+                1,
                 "cà phê làm từ hạt đã qua quá trình tiêu hóa trong dạ dày của chồn, mang hương vị đặc biệt, mềm mại và ít đắng."
             ),
         )

@@ -16,14 +16,15 @@
     <LinearLayout
         android:layout_width="170dp"
         android:layout_height="100dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <TextView
             android:id="@+id/tvTenOrder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tên order"
-            android:textSize="22sp">
+            android:textSize="18sp">
 
         </TextView>
 
@@ -31,7 +32,7 @@
             android:id="@+id/tvGiaOrder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="6dp"
             android:text="Giá order"
             android:textSize="16sp">
 

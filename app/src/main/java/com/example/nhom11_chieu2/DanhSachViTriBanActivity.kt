@@ -21,6 +21,8 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         setContentView(R.layout.activity_danh_sach_vi_tri_ban)
 
         setControl()
@@ -41,7 +43,7 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
             // Hiển thị hộp thoại xác nhận trước khi thoát
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Thoát")
-            builder.setMessage("Bạn có chắc chắn muốn thoát không?")
+            builder.setMessage("Bạn có chắc chắn muốn thoát Danh sách vị trí bàn không?")
 
             // Nếu người dùng chọn "Có", thực hiện thoát
             builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
