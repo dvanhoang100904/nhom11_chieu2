@@ -38,11 +38,8 @@ class TraSuaAdapter(private val danhSachTraSua: List<TraSua>) :
             Toast.makeText(holder.itemView.context, "Chi tiết ${traSua.ten}", Toast.LENGTH_SHORT)
                 .show()
             val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
-                putExtra("ma", traSua.ma)
-                putExtra("ten", traSua.ten)
-                putExtra("hinhAnh", traSua.hinhAnh)
-                putExtra("gia", traSua.gia)
-                putExtra("moTa", traSua.moTa)
+                putExtra("trasua", traSua)
+
             }
             holder.itemView.context.startActivity(intentChiTiet)
         }

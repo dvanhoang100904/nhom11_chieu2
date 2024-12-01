@@ -3,12 +3,13 @@ package com.example.nhom11_chieu2
 import android.os.Parcel
 import android.os.Parcelable
 
-data class CaPhe(
+
+data class ThanhToan(
     val ma: Int,
     val ten: String,
     val hinhAnh: Int,
     val gia: Double,
-    val soLuong: Int,
+    var soLuong: Int,
     val moTa: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -33,13 +34,14 @@ data class CaPhe(
         parcel.writeString(moTa)
     }
 
-    companion object CREATOR : Parcelable.Creator<CaPhe> {
-        override fun createFromParcel(parcel: Parcel): CaPhe {
-            return CaPhe(parcel)
+    companion object CREATOR : Parcelable.Creator<ThanhToan> {
+        override fun createFromParcel(parcel: Parcel): ThanhToan {
+            return ThanhToan(parcel)
         }
 
-        override fun newArray(size: Int): Array<CaPhe?> {
+        override fun newArray(size: Int): Array<ThanhToan?> {
             return arrayOfNulls(size)
         }
     }
+
 }

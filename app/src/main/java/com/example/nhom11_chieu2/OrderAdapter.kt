@@ -49,11 +49,7 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
             Toast.makeText(holder.itemView.context, "Chi tiết ${order.ten}", Toast.LENGTH_SHORT)
                 .show()
             val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
-                putExtra("ma", order.ma)
-                putExtra("ten", order.ten)
-                putExtra("hinhAnh", order.hinhAnh)
-                putExtra("gia", order.gia)
-                putExtra("moTa", order.moTa)
+                putExtra("order", order)
             }
             holder.itemView.context.startActivity(intentChiTiet)
         }
@@ -62,11 +58,7 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
             Toast.makeText(holder.itemView.context, "Chi tiết ${order.ten}", Toast.LENGTH_SHORT)
                 .show()
             val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
-                putExtra("ma", order.ma)
-                putExtra("ten", order.ten)
-                putExtra("hinhAnh", order.hinhAnh)
-                putExtra("gia", order.gia)
-                putExtra("moTa", order.moTa)
+                putExtra("order", order)
             }
             holder.itemView.context.startActivity(intentChiTiet)
         }
@@ -110,7 +102,7 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
 
     }
 
-    private fun formatGia(gia: Double): CharSequence? {
+    private fun formatGia(gia: Double): String {
         val decimalFormat = java.text.DecimalFormat("#,###")
         return decimalFormat.format(gia) + " đ"
     }

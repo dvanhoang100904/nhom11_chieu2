@@ -13,9 +13,11 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-private val danhSachOrder = mutableListOf<Order>()
 
 class DanhSachOrderActivity : AppCompatActivity() {
+    companion object {
+        val danhSachOrder = mutableListOf<Order>()
+    }
 
     private lateinit var rvDanhSachOrder: RecyclerView
     private lateinit var orderAdapter: OrderAdapter
@@ -31,65 +33,129 @@ class DanhSachOrderActivity : AppCompatActivity() {
 
         // Ánh xạ view
         setControl()
-
         // Xử lý sự kiện
         setEvent()
 
     }
 
     private fun setEvent() {
-        // Nhận dữ liệu từ Intent
-        val ma = intent.getIntExtra("ma", 0)
-        val ten = intent.getStringExtra("ten")
-        val hinhAnh = intent.getIntExtra("hinhAnh", 0)
-        val gia = intent.getDoubleExtra("gia", 0.0)
-        val moTa = intent.getStringExtra("moTa")
 
+        val caPhe = intent.getParcelableExtra<CaPhe>("caphe")
+        val traSua = intent.getParcelableExtra<TraSua>("trasua")
+        val sinhTo = intent.getParcelableExtra<SinhTo>("sinhto")
+        val order = intent.getParcelableExtra<Order>("order")
+        val doUong = caPhe ?: traSua ?: sinhTo ?: order
 
-        // Kiểm tra dữ liệu hợp lệ và xử lý
-        if (ten != null && hinhAnh != 0 && gia != 0.0 && moTa != null) {
-            // Kiểm tra xem đã có trong danh sách chưa
-            val kiemTraOrder = danhSachOrder.find { it.ten == ten }
+        if (doUong != null) {
+            when (doUong) {
+                is CaPhe -> {
+                    // Xử lý với CaPhe
+                    val kiemTraOrder = danhSachOrder.find { it.ten == doUong.ten }
+                    if (kiemTraOrder != null) {
+                        kiemTraOrder.soLuong++
+                    } else {
+                        danhSachOrder.add(
+                            Order(
+                                ma = doUong.ma,
+                                ten = doUong.ten,
+                                hinhAnh = doUong.hinhAnh,
+                                gia = doUong.gia,
+                                moTa = doUong.moTa,
+                                soLuong = 1
+                            )
+                        )
+                    }
+                }
 
-            if (kiemTraOrder != null) {
-                // Nếu đã có, tăng số lượng lên
-                kiemTraOrder.soLuong++
+                is TraSua -> {
+                    // Xử lý với TraSua
+                    val kiemTraOrder = danhSachOrder.find { it.ten == doUong.ten }
+                    if (kiemTraOrder != null) {
+                        kiemTraOrder.soLuong++
+                    } else {
+                        danhSachOrder.add(
+                            Order(
+                                ma = doUong.ma,
+                                ten = doUong.ten,
+                                hinhAnh = doUong.hinhAnh,
+                                gia = doUong.gia,
+                                moTa = doUong.moTa,
+                                soLuong = 1
+                            )
+                        )
+                    }
+                }
 
+                is SinhTo -> {
+                    // Xử lý với SinhTo
+                    val kiemTraOrder = danhSachOrder.find { it.ten == doUong.ten }
+                    if (kiemTraOrder != null) {
+                        kiemTraOrder.soLuong++
+                    } else {
+                        danhSachOrder.add(
+                            Order(
+                                ma = doUong.ma,
+                                ten = doUong.ten,
+                                hinhAnh = doUong.hinhAnh,
+                                gia = doUong.gia,
+                                moTa = doUong.moTa,
+                                soLuong = 1
+                            )
+                        )
+                    }
+                }
 
-            } else {
-                // Nếu chưa có, thêm mới vào danh sách
-                val order = Order(ma, ten, hinhAnh, gia, 1, moTa) // Số lượng mặc định là 1
-                danhSachOrder.add(order)
+                is Order -> {
+                    // Xử lý với Order
+                    val kiemTraOrder = danhSachOrder.find { it.ten == doUong.ten }
+                    if (kiemTraOrder != null) {
+                        kiemTraOrder.soLuong++
+                    } else {
+                        danhSachOrder.add(
+                            Order(
+                                ma = doUong.ma,
+                                ten = doUong.ten,
+                                hinhAnh = doUong.hinhAnh,
+                                gia = doUong.gia,
+                                moTa = doUong.moTa,
+                                soLuong = 1
+                            )
+                        )
+                    }
+                }
+
+                else -> {
+                    Toast.makeText(this, "order không thành công", Toast.LENGTH_SHORT).show()
+                }
             }
         }
-        // Thiết lập adapter cho RecyclerView
+
         orderAdapter = OrderAdapter(danhSachOrder)
 
-        // Gán adapter cho RecyclerView
         rvDanhSachOrder.adapter = orderAdapter
 
         btnXacNhan.setOnClickListener {
             if (!danhSachOrder.isEmpty()) {
-                // Hiển thị hộp thoại xác nhận
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Xác nhận ")
-                builder.setMessage("Bạn có chắc chắn muốn xác nhận order không?")
+                builder.setMessage("Bạn có chắc chắn muốn xác nhận danh sách order không?")
 
-                // Nếu người dùng chọn "Có", thực hiện xác nhận
-                builder.setPositiveButton("Có") { dialog, which ->
-                    Toast.makeText(this, "Xác nhận thành công", Toast.LENGTH_SHORT).show()
+                builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
+                    Toast.makeText(this, "xác nhận thành công", Toast.LENGTH_SHORT).show()
+                    val intentTT = Intent(this, ThanhToanActivity::class.java)
+                    intentTT.putParcelableArrayListExtra(
+                        "danhSachOrder",
+                        ArrayList(danhSachOrder)
+                    ) // Danh sách Order
+                    startActivity(intentTT)
                     danhSachOrder.clear()
                     orderAdapter.notifyDataSetChanged()
-                    val intentDSVTB = Intent(this, DanhSachViTriBanActivity::class.java)
-                    startActivity(intentDSVTB)
                 }
 
-                // Nếu người dùng chọn "Không", không làm gì cả
-                builder.setNegativeButton("Không") { dialog, which ->
-                    // Không làm gì khi người dùng chọn "Không"
+                builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
                 }
 
-                builder.show()  // Hiển thị hộp thoại
+                builder.show()
             } else {
                 Toast.makeText(
                     this, "Chưa có đồ uống nào được order, vui lòng order!", Toast.LENGTH_SHORT
@@ -101,7 +167,7 @@ class DanhSachOrderActivity : AppCompatActivity() {
             // Hiển thị hộp thoại xác nhận trước khi thoát
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Thoát")
-            builder.setMessage("Bạn có chắc chắn muốn thoát không?")
+            builder.setMessage("Bạn có chắc chắn muốn thoát danh sách order không?")
 
             // Nếu người dùng chọn "Có", thực hiện thoát
             builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
@@ -119,23 +185,19 @@ class DanhSachOrderActivity : AppCompatActivity() {
             builder.show()  // Hiển thị hộp thoại
         }
 
-
         imgBtnDanhSachCaPhe.setOnClickListener {
-            Toast.makeText(this, "Danh sách đồ uống cà phê", Toast.LENGTH_SHORT).show()
             val intentDSCP = Intent(this, DanhSachCaPheActivity::class.java)
             startActivity(intentDSCP)
 
         }
 
         imgBtnDanhSachTraSua.setOnClickListener {
-            Toast.makeText(this, "Danh sách đồ uống trà sữa", Toast.LENGTH_SHORT).show()
             val intentDSTS = Intent(this, DanhSachTraSuaActivity::class.java)
             startActivity(intentDSTS)
 
         }
 
         imgBtnDanhSachSinhTo.setOnClickListener {
-            Toast.makeText(this, "Danh sách đồ uống sinh tố", Toast.LENGTH_SHORT).show()
             val intentDSST = Intent(this, DanhSachSinhToActivity::class.java)
             startActivity(intentDSST)
         }

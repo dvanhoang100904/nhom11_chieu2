@@ -1,53 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="40dp"
         android:text="Đăng Nhập"
         android:textColor="#000"
         android:textSize="24sp"
-        android:textStyle="bold"></TextView>
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/edtTen"
-        android:layout_width="340dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/background_ten_matkhau"
         android:hint="Tên"
         android:inputType="text"
         android:paddingLeft="20dp"
-        android:textSize="20sp"></EditText>
+        android:textSize="16sp" />
 
-    <EditText
-        android:id="@+id/edtMatKhau"
-        android:layout_width="340dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/background_ten_matkhau"
-        android:hint="Mật khẩu"
-        android:inputType="textPassword"
-        android:paddingLeft="20dp"
-        android:textSize="20sp"></EditText>
+    <!-- Mật khẩu -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <EditText
+            android:id="@+id/edtMatKhau"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/background_ten_matkhau"
+            android:hint="Mật khẩu"
+            android:inputType="textPassword"
+            android:paddingLeft="20dp"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/ivShowMatKhau"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/imgeye" />
+    </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnDangNhap"
-        android:layout_width="340dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:background="@drawable/background_dangnhap"
         android:text="Đăng Nhập"
         android:textColor="#fff"
-        android:textSize="14sp"
-        android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
+        android:textSize="16sp"
+        android:textStyle="bold" />
 </LinearLayout>
