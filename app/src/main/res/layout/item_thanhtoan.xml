@@ -21,28 +21,27 @@
 
         <TextView
             android:id="@+id/tvTenThanhToan"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="14dp"
-            android:layout_weight="1"
             android:text="Tên "
             android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvSoLuongThanhToan"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="14dp"
-            android:layout_weight="1"
-            android:text="số lượng"
+
+            android:text="x1"
             android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvGiaThanhToan"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="14dp"
-            android:layout_weight="1"
+
             android:text="giá"
             android:textColor="#000"
             android:textSize="18sp" />

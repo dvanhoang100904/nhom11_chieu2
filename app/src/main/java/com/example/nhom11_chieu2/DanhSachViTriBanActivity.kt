@@ -21,10 +21,7 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         setContentView(R.layout.activity_danh_sach_vi_tri_ban)
-
         setControl()
         setEvent()
 
@@ -33,32 +30,20 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
     private fun setEvent() {
         val danhSachViTriBan = getDanhSachViTriBan()
 
-        // Thiết lập adapter cho RecyclerView
         viTriBanAdapter = ViTriBanAdapter(danhSachViTriBan)
-        // Gán adapter cho RecyclerView
         rvDanhSachViTriBan.adapter = viTriBanAdapter
 
-
         imgBtnThoat.setOnClickListener {
-            // Hiển thị hộp thoại xác nhận trước khi thoát
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Thoát")
-            builder.setMessage("Bạn có chắc chắn muốn thoát Danh sách vị trí bàn không?")
-
-            // Nếu người dùng chọn "Có", thực hiện thoát
+            builder.setMessage("Bạn có chắc chắn muốn thoát vị trí bàn không?")
             builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
-                Toast.makeText(this, "Thoát thành công", Toast.LENGTH_SHORT).show()
                 val intentDSVTB = Intent(this, TrangChuActivity::class.java)
                 startActivity(intentDSVTB)
-                finish()
             }
-
-            // Nếu người dùng chọn "Không", không làm gì cả
             builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
-                // Không làm gì khi người dùng chọn "Không"
             }
-
-            builder.show()  // Hiển thị hộp thoại
+            builder.show()
         }
     }
 
@@ -106,7 +91,7 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
                 R.drawable.imgvitriban,
             ), ViTriBan(
                 11,
-                "Bàn số 1 (A3)",
+                "Bàn số 11 (A3)",
                 R.drawable.imgvitriban,
             ), ViTriBan(
                 12,
@@ -185,11 +170,17 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
                 30,
                 "Bàn số 30 (A2)",
                 R.drawable.imgvitriban,
+            ), ViTriBan(
+                31,
+                "Bàn số 31 (A3)",
+                R.drawable.imgvitriban,
+            ), ViTriBan(
+                32,
+                "Bàn số 32 (A4)",
+                R.drawable.imgvitriban,
             )
-
         )
     }
-
 
     private fun setControl() {
         rvDanhSachViTriBan = findViewById(R.id.rvDanhSachViTriBan)

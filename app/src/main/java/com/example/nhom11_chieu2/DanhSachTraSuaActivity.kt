@@ -28,10 +28,7 @@ class DanhSachTraSuaActivity : AppCompatActivity() {
     private fun setEvent() {
         val danhSachTraSua = getDanhSachTraSua()
 
-        // Thiết lập adapter cho RecyclerView
         traSuaAdapter = TraSuaAdapter(danhSachTraSua)
-
-        // Gán adapter cho RecyclerView
         rvDanhSachTraSua.adapter = traSuaAdapter
 
         imgBtnDanhSachCaPhe.setOnClickListener {
@@ -57,7 +54,6 @@ class DanhSachTraSuaActivity : AppCompatActivity() {
                 "Trà sữa trân châu",
                 R.drawable.imgtrasua1,
                 40000.0,
-                1,
                 "Trà sữa trân châu hương trà sữa thơm ngon, ngọt dịu, kết hợp với trân châu dẻo mềm, tạo nên trải nghiệm thú vị."
             ),
             TraSua(
@@ -65,7 +61,6 @@ class DanhSachTraSuaActivity : AppCompatActivity() {
                 "Trà sữa matcha",
                 R.drawable.imgtrasua2,
                 45000.0,
-                1,
                 "Trà sữa matcha hương vị trà matcha đậm đà, kết hợp với sữa ngọt ngào, tạo nên thức uống thơm ngon, bổ dưỡng"
             ),
             TraSua(
@@ -73,7 +68,6 @@ class DanhSachTraSuaActivity : AppCompatActivity() {
                 "Trà sữa dâu",
                 R.drawable.imgtrasua3,
                 40000.0,
-                1,
                 "Trà sữa dâu hương vị dâu ngọt ngào, kết hợp với trà sữa mịn màng, tạo nên thức uống thơm ngon, giải khát."
             ),
             TraSua(
@@ -81,7 +75,6 @@ class DanhSachTraSuaActivity : AppCompatActivity() {
                 "Trà sữa hồng trà",
                 R.drawable.imgtrasua4,
                 40000.0,
-                1,
                 "Trà sữa hồng trà hương vị hồng trà nhẹ nhàng, kết hợp với sữa ngọt thanh, mang đến sự hài hòa, thơm ngon."
             ),
             TraSua(
@@ -89,7 +82,6 @@ class DanhSachTraSuaActivity : AppCompatActivity() {
                 "Trà sữa ô long",
                 R.drawable.imgtrasua5,
                 45000.0,
-                1,
                 "Trà sữa ô long hương vị trà ô long đậm đà, kết hợp với sữa mịn màng, tạo nên một thức uống thơm ngon, đặc biệt."
             ),
             TraSua(
@@ -97,7 +89,6 @@ class DanhSachTraSuaActivity : AppCompatActivity() {
                 "Trà sữa khoai môn",
                 R.drawable.imgtrasua6,
                 45000.0,
-                1,
                 "Trà sữa khoai môn hương vị khoai môn béo ngậy, kết hợp với trà sữa ngọt thanh, tạo nên một thức uống độc đáo và thơm ngon."
             ),
             TraSua(
@@ -105,7 +96,6 @@ class DanhSachTraSuaActivity : AppCompatActivity() {
                 "Trà sữa thái",
                 R.drawable.imgtrasua7,
                 40000.0,
-                1,
                 "Trà sữa thái hương vị trà Thái đậm đà, kết hợp với sữa ngọt mát, tạo nên thức uống thơm ngon, lạ miệng."
             ),
         )

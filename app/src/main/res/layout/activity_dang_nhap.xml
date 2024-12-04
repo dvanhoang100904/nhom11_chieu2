@@ -21,7 +21,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/background_ten_matkhau"
-        android:hint="Tên"
+        android:hint="Tên đăng nhập"
         android:inputType="text"
         android:paddingLeft="20dp"
         android:textSize="16sp" />
@@ -44,12 +44,12 @@
 
         <ImageView
             android:id="@+id/ivShowMatKhau"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/imgeye" />
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/imgeyeview" />
     </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatButton

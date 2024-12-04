@@ -35,7 +35,7 @@ class ViTriBanAdapter(private val danhSachViTriBan: List<ViTriBan>) :
         holder.itemView.setOnClickListener {
             Toast.makeText(
                 holder.itemView.context,
-                "Danh Sách Order ${viTriBan.ten}",
+                "Order ${viTriBan.ten}",
                 Toast.LENGTH_SHORT
             ).show()
             val intentDSOD = Intent(holder.itemView.context, DanhSachOrderActivity::class.java)

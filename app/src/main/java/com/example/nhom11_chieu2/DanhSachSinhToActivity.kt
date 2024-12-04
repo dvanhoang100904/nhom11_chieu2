@@ -19,8 +19,6 @@ class DanhSachSinhToActivity : AppCompatActivity() {
     private lateinit var imgBtnDanhSachOrder: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         setContentView(R.layout.activity_danh_sach_sinh_to)
 
         // Ánh xạ
@@ -34,7 +32,6 @@ class DanhSachSinhToActivity : AppCompatActivity() {
         val danhSachSinhTo = getDanhSachSinhTo()
 
         sinhToAdapter = SinhToAdapter(danhSachSinhTo)
-
         rvDanhSachSinhTo.adapter = sinhToAdapter
 
         imgBtnDanhSachCaPhe.setOnClickListener {
@@ -51,7 +48,6 @@ class DanhSachSinhToActivity : AppCompatActivity() {
             val intentDSOD = Intent(this, DanhSachOrderActivity::class.java)
             startActivity(intentDSOD)
         }
-
     }
 
     private fun getDanhSachSinhTo(): List<SinhTo> {
@@ -61,15 +57,13 @@ class DanhSachSinhToActivity : AppCompatActivity() {
                 "Sinh tố dừa",
                 R.drawable.imgsinhto1,
                 35000.0,
-                1,
                 "Sinh tố dừa béo ngậy, thơm mát, giàu dinh dưỡng, giúp giải nhiệt và tăng cường năng lượng."
             ),
             SinhTo(
                 2,
                 "Sinh tố bơ",
                 R.drawable.imgsinhto2,
-                4000.0,
-                1,
+                40000.0,
                 "Sinh tố bơ béo mịn, thơm ngon, giàu vitamin E và chất xơ, tốt cho da và sức khỏe."
             ),
             SinhTo(
@@ -77,7 +71,6 @@ class DanhSachSinhToActivity : AppCompatActivity() {
                 "Sinh tố chuối",
                 R.drawable.imgsinhto3,
                 30000.0,
-                1,
                 "Sinh tố chuối ngọt dịu, béo mịn, giàu kali và vitamin B6, giúp bổ sung năng lượng và tốt cho tiêu hóa."
             ),
             SinhTo(
@@ -85,7 +78,6 @@ class DanhSachSinhToActivity : AppCompatActivity() {
                 "Sinh tố kiwi",
                 R.drawable.imgsinhto4,
                 40000.0,
-                1,
                 "Sinh tố kiwi mát lạnh, chua ngọt, giàu vitamin C, giúp giải khát và bổ sung năng lượng."
             ),
             SinhTo(
@@ -93,7 +85,6 @@ class DanhSachSinhToActivity : AppCompatActivity() {
                 "Sinh tố nho",
                 R.drawable.imgsinhto5,
                 45000.0,
-                1,
                 "Sinh tố nho ngọt dịu, thơm mát, giàu chất chống oxy hóa, tốt cho sức khỏe."
             ),
             SinhTo(
@@ -101,7 +92,6 @@ class DanhSachSinhToActivity : AppCompatActivity() {
                 "Sinh tố xoài",
                 R.drawable.imgsinhto6,
                 35000.0,
-                1,
                 "Sinh tố xoài ngọt thơm, béo mịn, giàu vitamin A, giải khát và bổ sung năng lượng."
             ),
             SinhTo(
@@ -109,7 +99,6 @@ class DanhSachSinhToActivity : AppCompatActivity() {
                 "Sinh tố dưa hấu",
                 R.drawable.imgsinhto7,
                 30000.0,
-                1,
                 "Sinh tố dưa hấu ngọt mát, thanh nhẹ, giàu nước và vitamin, giúp giải nhiệt hiệu quả."
             ),
             SinhTo(
@@ -117,7 +106,6 @@ class DanhSachSinhToActivity : AppCompatActivity() {
                 "Sinh tố thơm",
                 R.drawable.imgsinhto8,
                 35000.0,
-                1,
                 "Sinh tố thơm chua ngọt, thơm lừng, giàu vitamin C, hỗ trợ tiêu hóa và làm mát cơ thể."
             ),
             SinhTo(
@@ -125,7 +113,6 @@ class DanhSachSinhToActivity : AppCompatActivity() {
                 "Sinh tố dâu",
                 R.drawable.imgsinhto9,
                 40000.0,
-                1,
                 "Sinh tố dâu chua ngọt dịu, thơm ngon, giàu vitamin C và chất chống oxy hóa."
             )
         )

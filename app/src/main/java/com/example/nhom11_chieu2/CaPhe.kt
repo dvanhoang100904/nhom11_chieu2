@@ -8,7 +8,6 @@ data class CaPhe(
     val ten: String,
     val hinhAnh: Int,
     val gia: Double,
-    val soLuong: Int,
     val moTa: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -16,7 +15,6 @@ data class CaPhe(
         parcel.readString() ?: "",
         parcel.readInt(),
         parcel.readDouble(),
-        parcel.readInt(),
         parcel.readString() ?: ""
     )
 
@@ -29,7 +27,6 @@ data class CaPhe(
         parcel.writeString(ten)
         parcel.writeInt(hinhAnh)
         parcel.writeDouble(gia)
-        parcel.writeInt(soLuong)
         parcel.writeString(moTa)
     }
 

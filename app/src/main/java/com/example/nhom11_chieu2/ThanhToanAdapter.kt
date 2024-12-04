@@ -16,7 +16,6 @@ class ThanhToanAdapter(private val danhSachThanhToan: List<ThanhToan>) :
         val tvGiaThanhToan: TextView = view.findViewById(R.id.tvGiaThanhToan)
         val tvSoLuongThanhToan: TextView = view.findViewById(R.id.tvSoLuongThanhToan)
 
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThanhToanViewHolder {
@@ -35,7 +34,6 @@ class ThanhToanAdapter(private val danhSachThanhToan: List<ThanhToan>) :
         holder.ivHinhAnhThanhToan.setImageResource(thanhToan.hinhAnh)
         holder.tvGiaThanhToan.text = formatGia(thanhToan.gia)
         holder.tvSoLuongThanhToan.text = "x${thanhToan.soLuong}"
-
     }
 
     private fun formatGia(gia: Double): String {
