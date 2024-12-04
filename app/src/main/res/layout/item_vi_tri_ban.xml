@@ -16,7 +16,7 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Bàn số 10"
+        android:text="Bàn số 10 (A1)"
         android:textSize="16sp"
         android:textStyle="bold"></TextView>
 

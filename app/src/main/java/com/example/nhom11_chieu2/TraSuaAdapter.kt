@@ -35,11 +35,8 @@ class TraSuaAdapter(private val danhSachTraSua: List<TraSua>) :
         holder.ivHinhAnhTraSua.setImageResource(traSua.hinhAnh)
 
         holder.btnChiTietTraSua.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Chi tiết ${traSua.ten}", Toast.LENGTH_SHORT)
-                .show()
             val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
                 putExtra("trasua", traSua)
-
             }
             holder.itemView.context.startActivity(intentChiTiet)
         }

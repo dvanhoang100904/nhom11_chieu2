@@ -27,7 +27,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginLeft="20dp"
-                android:background="@drawable/imgnhanvien"></ImageView>
+                android:background="@drawable/imgemployes"></ImageView>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnChucNangNhanVien"
@@ -51,16 +51,16 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginLeft="20dp"
-                android:background="@drawable/imgquanly"></ImageView>
+                android:background="@drawable/imgadmin"></ImageView>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnChucNangQuanLy"
+                android:id="@+id/btnChucNangQuanTri"
                 android:layout_width="260dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="30dp"
                 android:background="@drawable/background_nhanvien_quanly"
-                android:text="Chức Năng Quản Lý"
+                android:text="Chức Năng Quản Trị"
                 android:textSize="18sp"
                 android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
         </LinearLayout>
@@ -88,7 +88,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginLeft="34dp"
-            android:background="@drawable/imgtrangchu"></ImageView>
+            android:background="@drawable/imghome"></ImageView>
     </LinearLayout>
 
 </LinearLayout>

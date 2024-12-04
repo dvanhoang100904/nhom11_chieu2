@@ -13,15 +13,13 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-
 class DanhSachOrderActivity : AppCompatActivity() {
     companion object {
         val danhSachOrder = mutableListOf<Order>()
     }
-
     private lateinit var rvDanhSachOrder: RecyclerView
     private lateinit var orderAdapter: OrderAdapter
-    private lateinit var btnXacNhan: Button
+    private lateinit var btnThanhToan: Button
     private lateinit var imgBtnThoat: ImageButton
     private lateinit var imgBtnDanhSachCaPhe: ImageButton
     private lateinit var imgBtnDanhSachTraSua: ImageButton
@@ -30,7 +28,6 @@ class DanhSachOrderActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_danh_sach_order)
-
         // Ánh xạ view
         setControl()
         // Xử lý sự kiện
@@ -39,7 +36,6 @@ class DanhSachOrderActivity : AppCompatActivity() {
     }
 
     private fun setEvent() {
-
         val caPhe = intent.getParcelableExtra<CaPhe>("caphe")
         val traSua = intent.getParcelableExtra<TraSua>("trasua")
         val sinhTo = intent.getParcelableExtra<SinhTo>("sinhto")
@@ -61,7 +57,7 @@ class DanhSachOrderActivity : AppCompatActivity() {
                                 hinhAnh = doUong.hinhAnh,
                                 gia = doUong.gia,
                                 moTa = doUong.moTa,
-                                soLuong = 1
+                                soLuong = 1,
                             )
                         )
                     }
@@ -80,7 +76,7 @@ class DanhSachOrderActivity : AppCompatActivity() {
                                 hinhAnh = doUong.hinhAnh,
                                 gia = doUong.gia,
                                 moTa = doUong.moTa,
-                                soLuong = 1
+                                soLuong = 1,
                             )
                         )
                     }
@@ -99,7 +95,7 @@ class DanhSachOrderActivity : AppCompatActivity() {
                                 hinhAnh = doUong.hinhAnh,
                                 gia = doUong.gia,
                                 moTa = doUong.moTa,
-                                soLuong = 1
+                                soLuong = 1,
                             )
                         )
                     }
@@ -118,7 +114,7 @@ class DanhSachOrderActivity : AppCompatActivity() {
                                 hinhAnh = doUong.hinhAnh,
                                 gia = doUong.gia,
                                 moTa = doUong.moTa,
-                                soLuong = 1
+                                soLuong = 1,
                             )
                         )
                     }
@@ -131,30 +127,26 @@ class DanhSachOrderActivity : AppCompatActivity() {
         }
 
         orderAdapter = OrderAdapter(danhSachOrder)
-
         rvDanhSachOrder.adapter = orderAdapter
 
-        btnXacNhan.setOnClickListener {
+        btnThanhToan.setOnClickListener {
             if (!danhSachOrder.isEmpty()) {
                 val builder = AlertDialog.Builder(this)
-                builder.setTitle("Xác nhận ")
-                builder.setMessage("Bạn có chắc chắn muốn xác nhận danh sách order không?")
+                builder.setTitle("Thanh toán")
+                builder.setMessage("Bạn có chắc chắn muốn thanh toán không?")
 
                 builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
-                    Toast.makeText(this, "xác nhận thành công", Toast.LENGTH_SHORT).show()
                     val intentTT = Intent(this, ThanhToanActivity::class.java)
                     intentTT.putParcelableArrayListExtra(
                         "danhSachOrder",
                         ArrayList(danhSachOrder)
-                    ) // Danh sách Order
+                    )
                     startActivity(intentTT)
                     danhSachOrder.clear()
                     orderAdapter.notifyDataSetChanged()
                 }
-
                 builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
                 }
-
                 builder.show()
             } else {
                 Toast.makeText(
@@ -164,37 +156,29 @@ class DanhSachOrderActivity : AppCompatActivity() {
         }
 
         imgBtnThoat.setOnClickListener {
-            // Hiển thị hộp thoại xác nhận trước khi thoát
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Thoát")
             builder.setMessage("Bạn có chắc chắn muốn thoát danh sách order không?")
-
-            // Nếu người dùng chọn "Có", thực hiện thoát
             builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
-                Toast.makeText(this, "Thoát thành công", Toast.LENGTH_SHORT).show()
                 val intentDSVTB = Intent(this, DanhSachViTriBanActivity::class.java)
                 startActivity(intentDSVTB)
-                finish()
-            }
+                danhSachOrder.clear()
+                orderAdapter.notifyDataSetChanged()
 
-            // Nếu người dùng chọn "Không", không làm gì cả
+            }
             builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
-                // Không làm gì khi người dùng chọn "Không"
             }
-
-            builder.show()  // Hiển thị hộp thoại
+            builder.show()
         }
 
         imgBtnDanhSachCaPhe.setOnClickListener {
             val intentDSCP = Intent(this, DanhSachCaPheActivity::class.java)
             startActivity(intentDSCP)
-
         }
 
         imgBtnDanhSachTraSua.setOnClickListener {
             val intentDSTS = Intent(this, DanhSachTraSuaActivity::class.java)
             startActivity(intentDSTS)
-
         }
 
         imgBtnDanhSachSinhTo.setOnClickListener {
@@ -202,15 +186,13 @@ class DanhSachOrderActivity : AppCompatActivity() {
             startActivity(intentDSST)
         }
 
-
     }
 
     private fun setControl() {
-        // Thiết lập RecyclerView
         rvDanhSachOrder = findViewById(R.id.rvDanhSachOrder)
         rvDanhSachOrder.layoutManager = LinearLayoutManager(this)
 
-        btnXacNhan = findViewById(R.id.btnXacNhan)
+        btnThanhToan = findViewById(R.id.btnThanhToan)
         imgBtnThoat = findViewById(R.id.imgBtnThoat)
         imgBtnDanhSachCaPhe = findViewById(R.id.imgBtnDanhSachCaPhe)
         imgBtnDanhSachTraSua = findViewById(R.id.imgBtnDanhSachTraSua)

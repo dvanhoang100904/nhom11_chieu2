@@ -34,8 +34,6 @@ class SinhToAdapter(private val danhSachSinhTo: List<SinhTo>) :
         holder.tvTenSinhTo.text = sinhTo.ten
         holder.ivHinhAnhSinhTo.setImageResource(sinhTo.hinhAnh)
         holder.btnChiTietSinhTo.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Chi tiết ${sinhTo.ten}", Toast.LENGTH_SHORT)
-                .show()
             val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
                 putExtra("sinhto", sinhTo)
             }

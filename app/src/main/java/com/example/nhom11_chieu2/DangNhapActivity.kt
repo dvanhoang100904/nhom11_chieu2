@@ -17,10 +17,8 @@ class DangNhapActivity : AppCompatActivity() {
     private lateinit var btnDangNhap: Button
     private lateinit var edtMatKhau: EditText
     private lateinit var ivShowMatKhau: ImageView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         setContentView(R.layout.activity_dang_nhap)
         setControl()
@@ -45,7 +43,7 @@ class DangNhapActivity : AppCompatActivity() {
 
             // Thay đổi hình ảnh của ImageView dựa trên trạng thái
             ivShowMatKhau.setImageResource(
-                if (isPasswordVisible) R.drawable.imgeye_off else R.drawable.imgeye
+                if (isPasswordVisible) R.drawable.imgeyehidden else R.drawable.imgeyeview
             )
         }
 
@@ -73,10 +71,10 @@ class DangNhapActivity : AppCompatActivity() {
 
             if (userRole != null) {
                 // Lưu vai trò người dùng vào SharedPreferences
-                saveUserRoleToPreferences(userRole)
+                saveUserRole(userRole)
 
                 // Đăng nhập thành công
-                Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "chào mừng ${ten} đã đăng nhập", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, TrangChuActivity::class.java)
                 startActivity(intent)
             } else {
@@ -90,18 +88,20 @@ class DangNhapActivity : AppCompatActivity() {
         }
     }
 
-    private fun getUserRole(username: String, password: String): String? {
-        // Đây là ví dụ kiểm tra thông tin người dùng, bạn có thể thay bằng kiểm tra từ cơ sở dữ liệu
-        return if (username == "admin" && password == "123456") {
-            "quanly"
-        } else if (username == "daovanhoang" && password == "123456") {
+    private fun getUserRole(ten: String, matKhau: String): String? {
+        return if (ten == "daovanhoang" && matKhau == "123456") {
             "nhanvien"
+        } else if (ten == "phamducchuan" && matKhau == "123456") {
+            "quantri"
+        } else if (ten == "huynhngocdan" && matKhau == "123456") {
+            "quantri"
         } else {
-            null  // Không có người dùng phù hợp
+            null
+
         }
     }
 
-    private fun saveUserRoleToPreferences(role: String) {
+    private fun saveUserRole(role: String) {
         val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString("userRole", role)

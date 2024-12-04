@@ -6,13 +6,15 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/tvTieuDeChiTiet"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:layout_marginBottom="16dp"
         android:background="#F5F6CF"
         android:gravity="center"
-        android:text="Chi Tiết Đồ Uống"
-        android:textSize="24sp"
+        android:paddingTop="14dp"
+        android:text="Chi Tiết Đồ Uống "
+        android:textSize="22sp"
         android:textStyle="bold" />
 
     <LinearLayout

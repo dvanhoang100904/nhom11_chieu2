@@ -46,8 +46,6 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
         holder.tvSoLuongOrder.text = order.soLuong.toString()
 
         holder.ivHinhAnhOrder.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Chi tiết ${order.ten}", Toast.LENGTH_SHORT)
-                .show()
             val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
                 putExtra("order", order)
             }
@@ -55,8 +53,6 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
         }
 
         holder.tvTenOrder.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "Chi tiết ${order.ten}", Toast.LENGTH_SHORT)
-                .show()
             val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
                 putExtra("order", order)
             }
@@ -80,30 +76,24 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
         }
 
         holder.btnXoaOrder.setOnClickListener {
-            // Hiển thị hộp thoại xác nhận
             val builder = AlertDialog.Builder(holder.itemView.context)
             builder.setTitle("Xóa")
             builder.setMessage("Bạn có chắc chắn muốn xóa ${order.ten}?")
 
-            // Nếu người dùng chọn "Có", xóa item
             builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
                 danhSachOrder.removeAt(position)
                 notifyItemRemoved(position)
-                Toast.makeText(holder.itemView.context, "Đã xóa ${order.ten}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(holder.itemView.context, "Đã xóa ${order.ten}", Toast.LENGTH_SHORT)
+                    .show()
             }
-
-            // Nếu người dùng chọn "Không", không làm gì cả
             builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
-                // Không làm gì khi người dùng chọn "Không"
             }
-
-            builder.show()  // Hiển thị hộp thoại
+            builder.show()
         }
-
     }
 
     private fun formatGia(gia: Double): String {
         val decimalFormat = java.text.DecimalFormat("#,###")
-        return decimalFormat.format(gia) + " đ"
+        return decimalFormat.format(gia) + " VNĐ"
     }
 }

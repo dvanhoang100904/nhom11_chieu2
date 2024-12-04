@@ -10,7 +10,7 @@ data class Order(
     val hinhAnh: Int,
     val gia: Double,
     var soLuong: Int,
-    val moTa: String
+    val moTa: String,
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
@@ -18,7 +18,7 @@ data class Order(
         parcel.readInt(),
         parcel.readDouble(),
         parcel.readInt(),
-        parcel.readString() ?: ""
+        parcel.readString() ?: "",
     )
 
     override fun describeContents(): Int {

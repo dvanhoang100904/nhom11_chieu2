@@ -15,16 +15,15 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-
 class ThanhToanActivity : AppCompatActivity() {
     private var danhSachThanhToan = mutableListOf<ThanhToan>()
     private lateinit var rvDanhSachThanhToan: RecyclerView
     private lateinit var thanhToanAdapter: ThanhToanAdapter
     private lateinit var tvTongTien: TextView
     private lateinit var rgThanhToan: RadioGroup
-    private lateinit var btnThanhToan: Button
+    private lateinit var btnXacNhan: Button
     private var tongTien: Double = 0.0
-    private lateinit var imgBtnThoat: ImageView
+    private lateinit var imgBtnHuy: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_thanh_toan)
@@ -40,7 +39,6 @@ class ThanhToanActivity : AppCompatActivity() {
             }.toMutableList()
         }
 
-
         thanhToanAdapter = ThanhToanAdapter(danhSachThanhToan)
         rvDanhSachThanhToan.adapter = thanhToanAdapter
 
@@ -53,11 +51,10 @@ class ThanhToanActivity : AppCompatActivity() {
         val tongTienFormat = String.format("%,.0f", tongTien) // Định dạng có dấu phẩy
         tvTongTien.text = "Tổng tiền: $tongTienFormat VNĐ"
 
-
         // Xử lý sự kiện thanh toán khi người dùng nhấn nút
-        btnThanhToan.setOnClickListener {
+        btnXacNhan.setOnClickListener {
             if (!danhSachThanhToan.isEmpty()) {
-                xuLyThanhToan()
+                xacNhanThanhToan()
             } else {
                 Toast.makeText(
                     this, "Chưa có đồ uống nào được order, vui lòng order!", Toast.LENGTH_SHORT
@@ -66,39 +63,35 @@ class ThanhToanActivity : AppCompatActivity() {
 
         }
 
-        imgBtnThoat.setOnClickListener {
-            // Hiển thị hộp thoại xác nhận trước khi thoát
+        imgBtnHuy.setOnClickListener {
             val builder = AlertDialog.Builder(this)
-            builder.setTitle("Thoát")
-            builder.setMessage("Bạn có chắc chắn muốn thoát hóa đơn thanh toán không?")
-
-            // Nếu người dùng chọn "Có", thực hiện thoát
+            builder.setTitle("Hủy bỏ")
+            builder.setMessage("Bạn có chắc chắn muốn hủy bỏ thanh toán không?")
             builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
-                Toast.makeText(this, "Thoát thành công", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this, "Bạn đã hủy thanh toán, tiếp tục chọn bàn!", Toast.LENGTH_SHORT
+                ).show()
                 val intentDSVTB = Intent(this, DanhSachViTriBanActivity::class.java)
                 startActivity(intentDSVTB)
-                finish()
+                danhSachThanhToan.clear()
+                thanhToanAdapter.notifyDataSetChanged()
             }
-
-            // Nếu người dùng chọn "Không", không làm gì cả
             builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
-                // Không làm gì khi người dùng chọn "Không"
             }
-
-            builder.show()  // Hiển thị hộp thoại
+            builder.show()
         }
     }
 
-    private fun xuLyThanhToan() {
+    private fun xacNhanThanhToan() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Thanh toán")
-        builder.setMessage("Bạn có chắc chắn muốn thanh toán không?")
+        builder.setTitle("Xác nhận")
+        builder.setMessage("Bạn có chắc chắn muốn Xác nhận thanh toán không?")
 
         builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
             val phuongThucThanhToan = when (rgThanhToan.checkedRadioButtonId) {
                 R.id.rbTienMat -> "Tiền mặt"
+                R.id.rbChuyenKhoan -> "Chuyển khoản"
                 R.id.rbThe -> "Thẻ"
-                R.id.rbViDienTu -> "Ví điện tử"
                 else -> {
                     Toast.makeText(
                         this, "Vui lòng chọn phương thức thanh toán", Toast.LENGTH_SHORT
@@ -107,17 +100,15 @@ class ThanhToanActivity : AppCompatActivity() {
                 }
             }
 
-            // Xử lý thanh toán
             Toast.makeText(
                 this,
-                "Thanh toán thành công bằng $phuongThucThanhToan",
+                "Bạn đã thanh toán thành công bằng ${phuongThucThanhToan}, tiếp tục chọn bàn!",
                 Toast.LENGTH_SHORT
             ).show()
-
-            danhSachThanhToan.clear()
-            thanhToanAdapter.notifyDataSetChanged()
             val intentDSVTB = Intent(this, DanhSachViTriBanActivity::class.java)
             startActivity(intentDSVTB)
+            danhSachThanhToan.clear()
+            thanhToanAdapter.notifyDataSetChanged()
         }
 
         builder.setNegativeButton("Không") { hopThoai, nutDuocClick -> }
@@ -129,8 +120,8 @@ class ThanhToanActivity : AppCompatActivity() {
         rvDanhSachThanhToan.layoutManager = LinearLayoutManager(this)
         tvTongTien = findViewById(R.id.tvTongTien)
         rgThanhToan = findViewById(R.id.rgThanhToan)
-        btnThanhToan = findViewById(R.id.btnThanhToan)
-        imgBtnThoat = findViewById(R.id.imgBtnThoat)
+        btnXacNhan = findViewById(R.id.btnXacNhan)
+        imgBtnHuy = findViewById(R.id.imgBtnHuy)
 
     }
 }

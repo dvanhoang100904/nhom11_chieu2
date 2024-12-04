@@ -8,7 +8,6 @@ data class TraSua(
     val ten: String,
     val hinhAnh: Int,
     val gia: Double,
-    val soLuong: Int,
     val moTa: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -16,7 +15,6 @@ data class TraSua(
         parcel.readString() ?: "",
         parcel.readInt(),
         parcel.readDouble(),
-        parcel.readInt(),
         parcel.readString() ?: ""
     )
 
@@ -25,7 +23,6 @@ data class TraSua(
         parcel.writeString(ten)
         parcel.writeInt(hinhAnh)
         parcel.writeDouble(gia)
-        parcel.writeInt(soLuong)
         parcel.writeString(moTa)
     }
 

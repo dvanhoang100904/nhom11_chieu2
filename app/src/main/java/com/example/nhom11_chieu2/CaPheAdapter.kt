@@ -35,12 +35,6 @@ class CaPheAdapter(private val danhSachCaPhe: List<CaPhe>) :
         holder.ivHinhAnhCaPhe.setImageResource(caPhe.hinhAnh)
 
         holder.btnChiTietCaPhe.setOnClickListener {
-            Toast.makeText(
-                holder.itemView.context,
-                "Chi tiết ${caPhe.ten}",
-                Toast.LENGTH_SHORT
-            )
-                .show()
             val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
                 putExtra("caphe", caPhe)
             }

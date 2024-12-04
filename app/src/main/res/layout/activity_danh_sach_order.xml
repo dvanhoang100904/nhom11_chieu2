@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#f5f6cf"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="14dp">
 
         <ImageButton
             android:id="@+id/imgBtnThoat"
@@ -17,7 +18,7 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
-            android:background="@drawable/imgbtnthoat"></ImageButton>
+            android:background="@drawable/imgexit"></ImageButton>
 
         <TextView
             android:layout_width="match_parent"
@@ -25,7 +26,8 @@
             android:layout_marginRight="20dp"
             android:gravity="center"
             android:text="Danh Sách Order "
-            android:textSize="24sp"
+            android:textColor="#000"
+            android:textSize="22sp"
             android:textStyle="bold"></TextView>
     </LinearLayout>
 
@@ -46,11 +48,11 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnXacNhan"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:background="@drawable/background_xacnhan"
-            android:text="Xác nhận"
+            android:id="@+id/btnThanhToan"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:background="@drawable/background_thanhtoan"
+            android:text="Thanh Toán"
             android:textColor="#000"
             android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
     </LinearLayout>
@@ -68,7 +70,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:background="@drawable/imgbtn1"></ImageButton>
+            android:background="@drawable/imgcoffee"></ImageButton>
 
         <ImageButton
             android:id="@+id/imgBtnDanhSachTraSua"
@@ -77,7 +79,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:background="@drawable/imgbtn2"></ImageButton>
+            android:background="@drawable/imgmilktea"></ImageButton>
 
         <ImageButton
             android:id="@+id/imgBtnDanhSachSinhTo"
@@ -86,7 +88,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:background="@drawable/imgbtn3"></ImageButton>
+            android:background="@drawable/imgsmoothie"></ImageButton>
 
         <ImageButton
             android:id="@+id/imgBtnDanhSachOrder"
@@ -95,7 +97,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:background="@drawable/imgbtn4"></ImageButton>
+            android:background="@drawable/imgcounter"></ImageButton>
 
     </LinearLayout>
 
