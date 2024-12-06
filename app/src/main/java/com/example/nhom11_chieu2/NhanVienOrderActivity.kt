@@ -14,6 +14,7 @@ class NhanVienOrderActivity : AppCompatActivity() {
     private lateinit var imgBtnThoat: ImageButton
     private lateinit var btnChonBanOrder: Button
     private lateinit var btnChonOrder: Button
+    private lateinit var btnLuuTruThanhToan: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nhan_vien_order)
@@ -25,7 +26,7 @@ class NhanVienOrderActivity : AppCompatActivity() {
         imgBtnThoat.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Thoát")
-            builder.setMessage("Bạn có chắc chắn muốn thoát không?")
+            builder.setMessage("Bạn có chắc chắn muốn thoát vkhông?")
             builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
                 val intentThoat = Intent(this, TrangChuActivity::class.java)
                 startActivity(intentThoat)
@@ -34,6 +35,7 @@ class NhanVienOrderActivity : AppCompatActivity() {
             }
             builder.show()
         }
+
         btnChonBanOrder.setOnClickListener {
             val intentOB = Intent(this, DanhSachViTriBanActivity::class.java)
             startActivity(intentOB)
@@ -44,11 +46,18 @@ class NhanVienOrderActivity : AppCompatActivity() {
             startActivity(intentO)
         }
 
+        btnLuuTruThanhToan.setOnClickListener {
+            val intentLTTT = Intent(this, LuuTruThanhToanActivity::class.java)
+            startActivity(intentLTTT)
+        }
+
+
     }
 
     private fun setControl() {
         imgBtnThoat = findViewById(R.id.imgBtnThoat)
         btnChonBanOrder = findViewById(R.id.btnChonBanOrder)
         btnChonOrder = findViewById(R.id.btnChonOrder)
+        btnLuuTruThanhToan = findViewById(R.id.btnLuuTruThanhToan)
     }
 }

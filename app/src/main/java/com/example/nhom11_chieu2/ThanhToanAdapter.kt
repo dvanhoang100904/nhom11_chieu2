@@ -7,6 +7,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ThanhToanAdapter(private val danhSachThanhToan: List<ThanhToan>) :
     RecyclerView.Adapter<ThanhToanAdapter.ThanhToanViewHolder>() {
@@ -36,8 +39,16 @@ class ThanhToanAdapter(private val danhSachThanhToan: List<ThanhToan>) :
         holder.tvSoLuongThanhToan.text = "x${thanhToan.soLuong}"
     }
 
+
     private fun formatGia(gia: Double): String {
         val decimalFormat = java.text.DecimalFormat("#,###")
         return decimalFormat.format(gia) + " VNĐ"
     }
+
+    private fun formatNgay(dateStr: String): String {
+        val date = Date(dateStr.toLong())  // Chuyển từ mili giây sang Date
+        val format = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+        return format.format(date)
+    }
+
 }

@@ -3,48 +3,41 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#fff"
-    android:orientation="vertical">
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="10dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/ivHinhAnhThanhToan"
+        android:layout_width="50dp"
+        android:layout_height="56dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tvTenThanhToan"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:background="#fff"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="10dp">
+        android:layout_marginLeft="14dp"
+        android:textColor="#000"
+        android:text="Tên "
+        android:textSize="18sp" />
 
-        <ImageView
-            android:id="@+id/ivHinhAnhThanhToan"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:scaleType="centerCrop" />
+    <TextView
+        android:id="@+id/tvSoLuongThanhToan"
+        android:layout_width="50dp"
+        android:textColor="#000"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:text="x1"
+        android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/tvTenThanhToan"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="14dp"
-            android:text="Tên "
-            android:textSize="18sp" />
+    <TextView
+        android:id="@+id/tvGiaThanhToan"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:text="giá"
+        android:textColor="#000"
+        android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/tvSoLuongThanhToan"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="14dp"
-
-            android:text="x1"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/tvGiaThanhToan"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="14dp"
-
-            android:text="giá"
-            android:textColor="#000"
-            android:textSize="18sp" />
-
-    </LinearLayout>
 </LinearLayout>
