@@ -7,7 +7,7 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/ivHinhAnhTraSua"
+        android:id="@+id/ivHinhAnhDoUong"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginRight="16dp"
@@ -19,14 +19,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvTenTraSua"
+            android:id="@+id/tvTenDoUong"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tên trà sữa"
+            android:text="Tên "
             android:textSize="24sp"></TextView>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnChiTietTraSua"
+            android:id="@+id/btnChiTietDoUong"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginTop="16dp"
@@ -34,5 +34,4 @@
             android:text="Chi Tiết"
             android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
     </LinearLayout>
-
 </LinearLayout>

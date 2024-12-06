@@ -14,9 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class DanhSachOrderActivity : AppCompatActivity() {
-    companion object {
-        val danhSachOrder = mutableListOf<Order>()
-    }
     private lateinit var rvDanhSachOrder: RecyclerView
     private lateinit var orderAdapter: OrderAdapter
     private lateinit var btnThanhToan: Button
@@ -36,114 +33,22 @@ class DanhSachOrderActivity : AppCompatActivity() {
     }
 
     private fun setEvent() {
-        val caPhe = intent.getParcelableExtra<CaPhe>("caphe")
-        val traSua = intent.getParcelableExtra<TraSua>("trasua")
-        val sinhTo = intent.getParcelableExtra<SinhTo>("sinhto")
-        val order = intent.getParcelableExtra<Order>("order")
-        val doUong = caPhe ?: traSua ?: sinhTo ?: order
+        val databaseHelper = DatabaseHelper(this)
+        val getAllOrders = databaseHelper.getAllOrders()
 
-        if (doUong != null) {
-            when (doUong) {
-                is CaPhe -> {
-                    // Xử lý với CaPhe
-                    val kiemTraOrder = danhSachOrder.find { it.ten == doUong.ten }
-                    if (kiemTraOrder != null) {
-                        kiemTraOrder.soLuong++
-                    } else {
-                        danhSachOrder.add(
-                            Order(
-                                ma = doUong.ma,
-                                ten = doUong.ten,
-                                hinhAnh = doUong.hinhAnh,
-                                gia = doUong.gia,
-                                moTa = doUong.moTa,
-                                soLuong = 1,
-                            )
-                        )
-                    }
-                }
-
-                is TraSua -> {
-                    // Xử lý với TraSua
-                    val kiemTraOrder = danhSachOrder.find { it.ten == doUong.ten }
-                    if (kiemTraOrder != null) {
-                        kiemTraOrder.soLuong++
-                    } else {
-                        danhSachOrder.add(
-                            Order(
-                                ma = doUong.ma,
-                                ten = doUong.ten,
-                                hinhAnh = doUong.hinhAnh,
-                                gia = doUong.gia,
-                                moTa = doUong.moTa,
-                                soLuong = 1,
-                            )
-                        )
-                    }
-                }
-
-                is SinhTo -> {
-                    // Xử lý với SinhTo
-                    val kiemTraOrder = danhSachOrder.find { it.ten == doUong.ten }
-                    if (kiemTraOrder != null) {
-                        kiemTraOrder.soLuong++
-                    } else {
-                        danhSachOrder.add(
-                            Order(
-                                ma = doUong.ma,
-                                ten = doUong.ten,
-                                hinhAnh = doUong.hinhAnh,
-                                gia = doUong.gia,
-                                moTa = doUong.moTa,
-                                soLuong = 1,
-                            )
-                        )
-                    }
-                }
-
-                is Order -> {
-                    // Xử lý với Order
-                    val kiemTraOrder = danhSachOrder.find { it.ten == doUong.ten }
-                    if (kiemTraOrder != null) {
-                        kiemTraOrder.soLuong++
-                    } else {
-                        danhSachOrder.add(
-                            Order(
-                                ma = doUong.ma,
-                                ten = doUong.ten,
-                                hinhAnh = doUong.hinhAnh,
-                                gia = doUong.gia,
-                                moTa = doUong.moTa,
-                                soLuong = 1,
-                            )
-                        )
-                    }
-                }
-
-                else -> {
-                    Toast.makeText(this, "order không thành công", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-
-        orderAdapter = OrderAdapter(danhSachOrder)
+        orderAdapter = OrderAdapter(getAllOrders)
         rvDanhSachOrder.adapter = orderAdapter
 
         btnThanhToan.setOnClickListener {
-            if (!danhSachOrder.isEmpty()) {
+            if (!getAllOrders.isEmpty()) {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Thanh toán")
                 builder.setMessage("Bạn có chắc chắn muốn thanh toán không?")
 
                 builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
                     val intentTT = Intent(this, ThanhToanActivity::class.java)
-                    intentTT.putParcelableArrayListExtra(
-                        "danhSachOrder",
-                        ArrayList(danhSachOrder)
-                    )
                     startActivity(intentTT)
-                    danhSachOrder.clear()
-                    orderAdapter.notifyDataSetChanged()
+
                 }
                 builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
                 }
@@ -158,13 +63,12 @@ class DanhSachOrderActivity : AppCompatActivity() {
         imgBtnThoat.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Thoát")
-            builder.setMessage("Bạn có chắc chắn muốn thoát danh sách order không?")
+            builder.setMessage("Bạn có chắc chắn muốn thoát không?")
             builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
-                val intentDSVTB = Intent(this, DanhSachViTriBanActivity::class.java)
-                startActivity(intentDSVTB)
-                danhSachOrder.clear()
-                orderAdapter.notifyDataSetChanged()
-
+                val databaseHelper = DatabaseHelper(this)
+                databaseHelper.deleteAllOrders()
+                val intentThoat = Intent(this, NhanVienOrderActivity::class.java)
+                startActivity(intentThoat)
             }
             builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
             }
@@ -172,20 +76,20 @@ class DanhSachOrderActivity : AppCompatActivity() {
         }
 
         imgBtnDanhSachCaPhe.setOnClickListener {
-            val intentDSCP = Intent(this, DanhSachCaPheActivity::class.java)
-            startActivity(intentDSCP)
+            val intentDSOD = Intent(this, DanhSachDoUongActivity::class.java)
+            intentDSOD.putExtra("loaiDoUong", "Cà Phê")
+            startActivity(intentDSOD)
         }
-
         imgBtnDanhSachTraSua.setOnClickListener {
-            val intentDSTS = Intent(this, DanhSachTraSuaActivity::class.java)
-            startActivity(intentDSTS)
+            val intentDSOD = Intent(this, DanhSachDoUongActivity::class.java)
+            intentDSOD.putExtra("loaiDoUong", "Trà Sữa")
+            startActivity(intentDSOD)
         }
-
         imgBtnDanhSachSinhTo.setOnClickListener {
-            val intentDSST = Intent(this, DanhSachSinhToActivity::class.java)
-            startActivity(intentDSST)
+            val intentDSOD = Intent(this, DanhSachDoUongActivity::class.java)
+            intentDSOD.putExtra("loaiDoUong", "Sinh Tố")
+            startActivity(intentDSOD)
         }
-
     }
 
     private fun setControl() {

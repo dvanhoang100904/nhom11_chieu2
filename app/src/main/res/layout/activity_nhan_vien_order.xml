@@ -4,10 +4,36 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f5f6cf"
+        android:orientation="horizontal"
+        android:paddingTop="14dp">
+
+        <ImageButton
+            android:id="@+id/imgBtnThoat"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/imgexit"></ImageButton>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:text="Nhân Viên Order"
+            android:textColor="#000"
+            android:textSize="22sp"
+            android:textStyle="bold"></TextView>
+    </LinearLayout>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        android:background="@drawable/imgbanner"></ImageView>
+        android:background="@drawable/imgbannerorder"></ImageView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,17 +52,17 @@
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/imgemployes"></ImageView>
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/imgtable"></ImageView>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnChucNangNhanVien"
-                android:layout_width="260dp"
+                android:id="@+id/btnChonBanOrder"
+                android:layout_width="220dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
-                android:background="@drawable/background_nhanvien_quanly"
-                android:text="Chức Năng Nhân Viên"
+                android:layout_marginLeft="40dp"
+                android:background="@drawable/background_nhanvien_order"
+                android:text="Chọn Bàn Order"
                 android:textSize="18sp"
                 android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
         </LinearLayout>
@@ -50,46 +76,22 @@
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/imgadmin"></ImageView>
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/imgcounter"></ImageView>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnChucNangQuanTri"
-                android:layout_width="260dp"
+                android:id="@+id/btnChonOrder"
+                android:layout_width="220dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
-                android:background="@drawable/background_nhanvien_quanly"
-                android:text="Chức Năng Quản Trị"
+                android:layout_marginLeft="40dp"
+                android:background="@drawable/background_nhanvien_order"
+                android:text="Chọn Order"
                 android:textSize="18sp"
                 android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnDangXuat"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/background_dangnhap_dangxuat"
-            android:text="Đăng Xuất"
-            android:textColor="#fff"
-            android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
-
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#f5f6cf"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="34dp"
-            android:background="@drawable/imghome"></ImageView>
-    </LinearLayout>
 
 </LinearLayout>

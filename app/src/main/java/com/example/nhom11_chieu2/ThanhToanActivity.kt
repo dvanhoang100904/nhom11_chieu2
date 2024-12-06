@@ -33,11 +33,6 @@ class ThanhToanActivity : AppCompatActivity() {
     }
 
     private fun setEvent() {
-        intent.getParcelableArrayListExtra<Order>("danhSachOrder")?.let { danhSachOrder ->
-            danhSachThanhToan = danhSachOrder.map { order ->
-                ThanhToan(order.ma, order.ten, order.hinhAnh, order.gia, order.soLuong, order.moTa)
-            }.toMutableList()
-        }
 
         thanhToanAdapter = ThanhToanAdapter(danhSachThanhToan)
         rvDanhSachThanhToan.adapter = thanhToanAdapter
@@ -63,23 +58,7 @@ class ThanhToanActivity : AppCompatActivity() {
 
         }
 
-        imgBtnHuy.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Hủy bỏ")
-            builder.setMessage("Bạn có chắc chắn muốn hủy bỏ thanh toán không?")
-            builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
-                Toast.makeText(
-                    this, "Bạn đã hủy thanh toán, tiếp tục chọn bàn!", Toast.LENGTH_SHORT
-                ).show()
-                val intentDSVTB = Intent(this, DanhSachViTriBanActivity::class.java)
-                startActivity(intentDSVTB)
-                danhSachThanhToan.clear()
-                thanhToanAdapter.notifyDataSetChanged()
-            }
-            builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
-            }
-            builder.show()
-        }
+        imgBtnHuy.setOnClickListener { finish() }
     }
 
     private fun xacNhanThanhToan() {
