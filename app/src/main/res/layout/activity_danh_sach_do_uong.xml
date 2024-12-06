@@ -24,17 +24,18 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tvLoaiDoUong"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Danh Sách Đồ Uống Cà Phê"
+        android:text="Danh Sách Đồ Uống (Theo Loại)"
         android:textSize="22sp"
         android:textStyle="bold"></TextView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDanhSachCaPhe"
+        android:id="@+id/rvDanhSachDoUong"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="10dp"

@@ -9,7 +9,7 @@
         android:id="@+id/ivHinhAnhViTriBan"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:background="@drawable/imgvitriban"></ImageView>
+        android:background="@drawable/imgtable"></ImageView>
 
     <TextView
         android:id="@+id/tvTenViTriBan"

@@ -31,59 +31,69 @@ class ChiTietActivity : AppCompatActivity() {
     }
 
     private fun setEvent() {
-        val caPhe: CaPhe? = intent.getParcelableExtra("caphe")
-        val traSua: TraSua? = intent.getParcelableExtra("trasua")
-        val sinhTo: SinhTo? = intent.getParcelableExtra("sinhto")
-        val order: Order? = intent.getParcelableExtra<Order>("order")
-
-        if (caPhe != null) {
-            tvTieuDeChiTiet.text = "Chi Tiết ${caPhe.ten}"
-            tvTenChiTiet.text = caPhe.ten
-            ivHinhAnhChiTiet.setImageResource(caPhe.hinhAnh)
-            tvGiaChiTiet.text = formatGia(caPhe.gia)
-            tvMoTaChiTiet.text = caPhe.moTa
-        } else if (traSua != null) {
-            tvTieuDeChiTiet.text = "Chi Tiết ${traSua.ten}"
-            tvTenChiTiet.text = traSua.ten
-            ivHinhAnhChiTiet.setImageResource(traSua.hinhAnh)
-            tvGiaChiTiet.text = formatGia(traSua.gia)
-            tvMoTaChiTiet.text = traSua.moTa
-        } else if (sinhTo != null) {
-            tvTieuDeChiTiet.text = "Chi Tiết ${sinhTo.ten}"
-            tvTenChiTiet.text = sinhTo.ten
-            ivHinhAnhChiTiet.setImageResource(sinhTo.hinhAnh)
-            tvGiaChiTiet.text = formatGia(sinhTo.gia)
-            tvMoTaChiTiet.text = sinhTo.moTa
-        } else if (order != null) {
-            tvTieuDeChiTiet.text = "Chi Tiết ${order.ten}"
-            tvTenChiTiet.text = order.ten
-            ivHinhAnhChiTiet.setImageResource(order.hinhAnh)
-            tvGiaChiTiet.text = formatGia(order.gia)
-            tvMoTaChiTiet.text = order.moTa
+        val maDoUong = intent.getIntExtra("ma", -1) // Lấy mã đồ uống
+        if (maDoUong != -1) {
+            // Lấy chi tiết từ cơ sở dữ liệu
+            val databaseHelper = DatabaseHelper(this)
+            val doUong = databaseHelper.getDoUongByMa(maDoUong)
+            if (doUong != null) {
+                // Hiển thị thông tin lên giao diện
+                tvTieuDeChiTiet.text = "Chi Tiết ${doUong.ten}"
+                tvTenChiTiet.text = doUong.ten
+                ivHinhAnhChiTiet.setImageResource(doUong.hinhAnh)
+                tvGiaChiTiet.text = formatGia(doUong.gia)
+                tvMoTaChiTiet.text = doUong.moTa
+            } else {
+                Toast.makeText(this, "Không tìm thấy thông tin đồ uống.", Toast.LENGTH_SHORT).show()
+                finish() // Đóng activity nếu không tìm thấy
+            }
         } else {
-            Toast.makeText(this, "Chưa có đồ uống nào", Toast.LENGTH_SHORT).show()
+            finish()
         }
 
         btnQuayLai.setOnClickListener { finish() }
 
         btnOrder.setOnClickListener {
-            val doUong = order ?: caPhe ?: traSua ?: sinhTo
+            val maDoUong = intent.getIntExtra("ma", -1)
+            if (maDoUong != -1) {
+                val databaseHelper = DatabaseHelper(this)
+                val doUong = databaseHelper.getDoUongByMa(maDoUong)
+                if (doUong != null) {
+                    val kiemTraOrders = databaseHelper.getOrdersByMaDoUong(doUong.ma)
+                    if (kiemTraOrders != null) {
+                        // Nếu sản phẩm đã có trong giỏ hàng, tăng số lượng lên
+                        kiemTraOrders.soLuong++
+                        databaseHelper.updateSoLuongOrderByMaDoUong(
+                            kiemTraOrders.maDoUong,
+                            kiemTraOrders.soLuong
+                        )
+                        Toast.makeText(this, "Order ${doUong.ten} thành công ", Toast.LENGTH_SHORT)
+                            .show()
+                        val intentOrder = Intent(this, DanhSachOrderActivity::class.java)
+                        startActivity(intentOrder)
+                    } else {
+                        // Nếu chưa có, tạo mới
+                        val order = Order(
+                            ma = doUong.ma,
+                            ten = doUong.ten,
+                            hinhAnh = doUong.hinhAnh,
+                            gia = doUong.gia,
+                            soLuong = 1,
+                            moTa = doUong.moTa,
+                            maDoUong = doUong.ma
+                        )
+                        // Thêm vào cơ sở dữ liệu
+                        databaseHelper.addOrder(order)
 
-            if (doUong != null) {
-                val intentOrder = Intent(this, DanhSachOrderActivity::class.java).apply {
-                    when (doUong) {
-                        is CaPhe -> putExtra("caphe", doUong)
-                        is TraSua -> putExtra("trasua", doUong)
-                        is SinhTo -> putExtra("sinhto", doUong)
-                        is Order -> putExtra("order", doUong)
+                        Toast.makeText(this, "Order ${doUong.ten} thành công ", Toast.LENGTH_SHORT)
+                            .show()
+                        val intentOrder = Intent(this, DanhSachOrderActivity::class.java)
+                        startActivity(intentOrder)
                     }
                 }
-                startActivity(intentOrder)
-                Toast.makeText(this, "Order thành công", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Chưa có đồ uống nào", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
     private fun formatGia(gia: Double): String {

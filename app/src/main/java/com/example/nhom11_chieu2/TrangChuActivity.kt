@@ -28,7 +28,7 @@ class TrangChuActivity : AppCompatActivity() {
     private fun setEvent() {
         btnChucNangNhanVien.setOnClickListener {
             if (userRole == "nhanvien") {
-                val intentCNNV = Intent(this, DanhSachViTriBanActivity::class.java)
+                val intentCNNV = Intent(this, NhanVienOrderActivity::class.java)
                 startActivity(intentCNNV)
             } else {
                 Toast.makeText(

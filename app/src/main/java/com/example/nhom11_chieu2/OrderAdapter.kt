@@ -47,14 +47,14 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
 
         holder.ivHinhAnhOrder.setOnClickListener {
             val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
-                putExtra("order", order)
+                putExtra("ma", order.maDoUong)
             }
             holder.itemView.context.startActivity(intentChiTiet)
         }
 
         holder.tvTenOrder.setOnClickListener {
             val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
-                putExtra("order", order)
+                putExtra("ma", order.maDoUong)
             }
             holder.itemView.context.startActivity(intentChiTiet)
         }
@@ -62,12 +62,16 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
         holder.btnTangOrder.setOnClickListener {
             order.soLuong++
             holder.tvSoLuongOrder.text = order.soLuong.toString()
+            val databaseHelper = DatabaseHelper(holder.itemView.context)
+            databaseHelper.updateSoLuongOrderByMaDoUong(order.maDoUong, order.soLuong)
         }
 
         holder.btnGiamOrder.setOnClickListener {
             if (order.soLuong > 1) {
                 order.soLuong--
                 holder.tvSoLuongOrder.text = order.soLuong.toString()
+                val databaseHelper = DatabaseHelper(holder.itemView.context)
+                databaseHelper.updateSoLuongOrderByMaDoUong(order.maDoUong, order.soLuong)
             } else {
                 Toast.makeText(
                     holder.itemView.context, "Số lượng không được nhỏ hơn 1", Toast.LENGTH_SHORT
@@ -81,8 +85,14 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
             builder.setMessage("Bạn có chắc chắn muốn xóa ${order.ten}?")
 
             builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
+                // Xóa sản phẩm khỏi cơ sở dữ liệu
+                val databaseHelper = DatabaseHelper(holder.itemView.context)
+                databaseHelper.deleteOrderByMa(order.ma)
+
+                // Xóa sản phẩm khỏi danh sách trong RecyclerView
                 danhSachOrder.removeAt(position)
                 notifyItemRemoved(position)
+
                 Toast.makeText(holder.itemView.context, "Đã xóa ${order.ten}", Toast.LENGTH_SHORT)
                     .show()
             }

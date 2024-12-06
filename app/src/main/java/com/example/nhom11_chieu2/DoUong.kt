@@ -1,10 +1,10 @@
 package com.example.nhom11_chieu2
 
-data class ThanhToan(
+data class DoUong(
     val ma: Int,
     val ten: String,
     val hinhAnh: Int,
     val gia: Double,
-    var soLuong: Int,
-    val moTa: String
+    val moTa: String,
+    val loai: String
 )

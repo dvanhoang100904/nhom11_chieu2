@@ -91,8 +91,6 @@ class DangNhapActivity : AppCompatActivity() {
     private fun getUserRole(ten: String, matKhau: String): String? {
         return if (ten == "daovanhoang" && matKhau == "123456") {
             "nhanvien"
-        } else if (ten == "phamducchuan" && matKhau == "123456") {
-            "quantri"
         } else if (ten == "huynhngocdan" && matKhau == "123456") {
             "quantri"
         } else {
