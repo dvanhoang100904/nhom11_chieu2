@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f5f6cf"
+        android:orientation="horizontal"
+        android:paddingTop="14dp">
+
+        <ImageButton
+            android:id="@+id/imgBtnThoat"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/imgexit"></ImageButton>
+
+        <TextView
+            android:layout_width="340dp"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:text="Lưu Trữ Thanh Toán "
+            android:textColor="#000"
+            android:textSize="22sp"
+            android:textStyle="bold"></TextView>
+
+        <ImageButton
+            android:id="@+id/imgBtnXoaLuuTru"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/imgbtnluutru"></ImageButton>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvLuuTruThanhToan"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:background="#fff"></androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

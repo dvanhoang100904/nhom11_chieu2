@@ -40,6 +40,19 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
             )"""
         db?.execSQL(createTableOrdersQuery)
 
+        val createTableThanhToanQuery = """
+            CREATE TABLE ThanhToan(
+                ma INTEGER PRIMARY KEY AUTOINCREMENT,
+                ten TEXT,
+                hinhAnh INTEGER,
+                gia REAL,
+                soLuong INTEGER,
+                moTa TEXT,
+                ngayThanhToan TEXT DEFAULT (strftime('%Y-%m-%d %H:%M:%S', 'now'))
+            )"""
+        db?.execSQL(createTableThanhToanQuery)
+
+
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -47,6 +60,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
             db?.execSQL("DROP TABLE IF EXISTS ViTriBan")
             db?.execSQL("DROP TABLE IF EXISTS DoUong")
             db?.execSQL("DROP TABLE IF EXISTS Orders")
+            db?.execSQL("DROP TABLE IF EXISTS ThanhToan")
             onCreate(db)
         }
     }
@@ -250,6 +264,63 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         db.execSQL("DELETE FROM Orders") // Xóa tất cả bản ghi trong bảng Orders
         db.close()
     }
+
+    fun getAllThanhToan(): List<ThanhToan> {
+        val danhSachThanhToan = mutableListOf<ThanhToan>()
+        val db = readableDatabase
+        val sql = "SELECT * FROM ThanhToan"
+        val cursor = db.rawQuery(sql, null)
+        cursor.use {
+            while (it.moveToNext()) {
+                val maColumnIndex = it.getColumnIndex("ma")
+                val tenColumnIndex = it.getColumnIndex("ten")
+                val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
+                val giaColumnIndex = it.getColumnIndex("gia")
+                val soLuongColumnIndex = it.getColumnIndex("soLuong")
+                val moTaColumnIndex = it.getColumnIndex("moTa")
+                val ngayThanhToanColumnIndex = it.getColumnIndex("ngayThanhToan")
+
+                danhSachThanhToan.add(
+                    ThanhToan(
+                        it.getInt(maColumnIndex),
+                        it.getString(tenColumnIndex),
+                        it.getInt(hinhAnhColumnIndex),
+                        it.getDouble(giaColumnIndex),
+                        it.getInt(soLuongColumnIndex),
+                        it.getString(moTaColumnIndex),
+                        it.getString(ngayThanhToanColumnIndex) ?: ""
+                    )
+                )
+            }
+        }
+        db.close()
+        return danhSachThanhToan
+    }
+
+
+    fun addThanhToan(thanhToan: ThanhToan) {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put("ten", thanhToan.ten)
+            put("hinhAnh", thanhToan.hinhAnh)
+            put("gia", thanhToan.gia)
+            put("soLuong", thanhToan.soLuong)
+            put("moTa", thanhToan.moTa)
+            put("ngayThanhToan", thanhToan.ngayThanhToan)
+        }
+        db.insertWithOnConflict("ThanhToan", null, values, SQLiteDatabase.CONFLICT_IGNORE)
+        db.close()
+    }
+
+    fun deleteAllThanhToan() {
+        val db = writableDatabase
+        db.execSQL("DELETE FROM ThanhToan") // Xóa tất cả bản ghi trong bảng Orders
+        db.close()
+    }
+
+
+
+
 
 
 

@@ -44,11 +44,28 @@ class DanhSachOrderActivity : AppCompatActivity() {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Thanh toán")
                 builder.setMessage("Bạn có chắc chắn muốn thanh toán không?")
-
                 builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
-                    val intentTT = Intent(this, ThanhToanActivity::class.java)
-                    startActivity(intentTT)
+                    // Chuyển đổi danh sách Order thành danh sách ThanhToan
+                    val danhSachThanhToan = getAllOrders.map { order ->
+                        ThanhToan(
+                            ma = order.ma,
+                            ten = order.ten,
+                            hinhAnh = order.hinhAnh,
+                            gia = order.gia,
+                            soLuong = order.soLuong,
+                            moTa = order.moTa,
+                            ngayThanhToan = System.currentTimeMillis()
+                                .toString() // Hoặc dùng một ngày thanh toán cụ thể
+                        )
+                    }
 
+                    // Truyền danh sách đơn hàng qua Intent
+                    val intentTT = Intent(this, ThanhToanActivity::class.java)
+                    intentTT.putParcelableArrayListExtra(
+                        "danhSachThanhToan",
+                        ArrayList(danhSachThanhToan)
+                    ) // Truyền danh sách đơn hàng
+                    startActivity(intentTT)
                 }
                 builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
                 }
