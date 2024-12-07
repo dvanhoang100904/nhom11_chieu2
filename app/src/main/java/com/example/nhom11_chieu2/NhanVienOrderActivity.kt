@@ -2,13 +2,12 @@ package com.example.nhom11_chieu2
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
-import android.widget.ImageButton
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.nhom11_chieu2.model.DatabaseHelper
+import com.example.nhom11_chieu2.model.NhanVien
 
 class NhanVienOrderActivity : AppCompatActivity() {
     private lateinit var btnChonBanOrder: Button
@@ -41,7 +40,7 @@ class NhanVienOrderActivity : AppCompatActivity() {
         btnDangXuat.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Đăng xuất")
-            builder.setMessage("Bạn có chắc chắn muốn đăng xuất không vkhông?")
+            builder.setMessage("Bạn có chắc chắn muốn đăng xuất không")
             builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
                 val intentDX = Intent(this, DangNhapActivity::class.java)
                 startActivity(intentDX)
@@ -52,6 +51,40 @@ class NhanVienOrderActivity : AppCompatActivity() {
             builder.show()
         }
 
+        val databaseHelper = DatabaseHelper(this)
+        val kiemTraNhanVien = databaseHelper.getAllNhanVien()
+        if (kiemTraNhanVien.isEmpty()) {
+            val danhSachNhanVien = getDanhSachNhanVien()
+            for (nhanVien in danhSachNhanVien) {
+                databaseHelper.addNhanVien(nhanVien)
+            }
+            Log.d("db", "Danh sách nhân viên: ${databaseHelper.getAllNhanVien().size}")
+        }
+
+    }
+
+
+    private fun getDanhSachNhanVien(): List<NhanVien> {
+        return listOf(
+            NhanVien(
+                1,
+                "Đào Văn Hoàng",
+                "Nhân Viên",
+                "daovanhoang11@gmail.com",
+                "daovanhoang11",
+                "123456",
+                50
+            ),
+            NhanVien(
+                2,
+                "Huỳnh Ngọc Dân",
+                "Quản Trị",
+                "huynhngodan11@gmail.com",
+                "huynhngocdan11",
+                "123456",
+                100
+            ),
+        )
     }
 
 

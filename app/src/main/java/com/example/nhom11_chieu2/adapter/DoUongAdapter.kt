@@ -1,4 +1,4 @@
-package com.example.nhom11_chieu2
+package com.example.nhom11_chieu2.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,6 +8,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nhom11_chieu2.ChiTietActivity
+import com.example.nhom11_chieu2.R
+import com.example.nhom11_chieu2.model.DoUong
 
 class DoUongAdapter(private var danhSachDoUong: List<DoUong>) :
     RecyclerView.Adapter<DoUongAdapter.DoUongViewHolder>() {

@@ -1,4 +1,4 @@
-package com.example.nhom11_chieu2
+package com.example.nhom11_chieu2.model
 
 data class NhanVien(
     val ma: Int,

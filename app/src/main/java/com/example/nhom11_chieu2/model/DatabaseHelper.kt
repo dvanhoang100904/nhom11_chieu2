@@ -1,10 +1,9 @@
-package com.example.nhom11_chieu2
+package com.example.nhom11_chieu2.model
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import java.security.MessageDigest
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuanCoffe", null, 3) {
     override fun onCreate(db: SQLiteDatabase?) {

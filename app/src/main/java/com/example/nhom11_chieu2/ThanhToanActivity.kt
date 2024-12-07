@@ -7,13 +7,13 @@ import android.widget.ImageView
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nhom11_chieu2.adapter.ThanhToanAdapter
+import com.example.nhom11_chieu2.model.DatabaseHelper
+import com.example.nhom11_chieu2.model.ThanhToan
 
 class ThanhToanActivity : AppCompatActivity() {
     private lateinit var rvDanhSachThanhToan: RecyclerView

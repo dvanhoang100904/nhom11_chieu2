@@ -1,4 +1,4 @@
-package com.example.nhom11_chieu2
+package com.example.nhom11_chieu2.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -10,6 +10,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nhom11_chieu2.ChiTietActivity
+import com.example.nhom11_chieu2.model.DatabaseHelper
+import com.example.nhom11_chieu2.R
+import com.example.nhom11_chieu2.model.Order
 
 class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
     RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {

@@ -1,18 +1,17 @@
-package com.example.nhom11_chieu2
+package com.example.nhom11_chieu2.model
 
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Order(
+data class ThanhToan(
     val ma: Int,
     val ten: String,
     val hinhAnh: Int,
     val gia: Double,
     var soLuong: Int,
     val moTa: String,
-    val maDoUong: Int,
-
-    ) : Parcelable {
+    val ngayThanhToan: String = System.currentTimeMillis().toString()
+): Parcelable{
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString() ?: "",
@@ -20,7 +19,7 @@ data class Order(
         parcel.readDouble(),
         parcel.readInt(),
         parcel.readString() ?: "",
-        parcel.readInt()
+        parcel.readString() ?: ""
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -30,19 +29,19 @@ data class Order(
         parcel.writeDouble(gia)
         parcel.writeInt(soLuong)
         parcel.writeString(moTa)
-        parcel.writeInt(maDoUong)
+        parcel.writeString(ngayThanhToan)
     }
 
     override fun describeContents(): Int {
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Order> {
-        override fun createFromParcel(parcel: Parcel): Order {
-            return Order(parcel)
+    companion object CREATOR : Parcelable.Creator<ThanhToan> {
+        override fun createFromParcel(parcel: Parcel): ThanhToan {
+            return ThanhToan(parcel)
         }
 
-        override fun newArray(size: Int): Array<Order?> {
+        override fun newArray(size: Int): Array<ThanhToan?> {
             return arrayOfNulls(size)
         }
     }
