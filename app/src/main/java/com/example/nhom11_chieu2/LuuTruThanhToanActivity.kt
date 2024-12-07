@@ -32,13 +32,10 @@ class LuuTruThanhToanActivity : AppCompatActivity() {
     private fun setEvent() {
         val databaseHelper = DatabaseHelper(this)
         val getAllThanhToan = databaseHelper.getAllThanhToan()
-        Log.d("LuuTru", "Số lượng thanh toán: ${getAllThanhToan.size}")
+//        Log.d("LuuTru", "Số lượng thanh toán: ${getAllThanhToan.size}")
 
         luuTruAdapter = LuuTruAdapter(getAllThanhToan)
         rvLuuTruThanhToan.adapter = luuTruAdapter
-        // Lấy tất cả từ cơ sở dữ liệu
-        val getAllDoUong = databaseHelper.getAllDoUong()
-        // Khởi tạo adapter với danh sách đồ uống lấy từ cơ sở dữ liệu
 
         imgBtnThoat.setOnClickListener {
             val builder = AlertDialog.Builder(this)
@@ -71,7 +68,6 @@ class LuuTruThanhToanActivity : AppCompatActivity() {
                 ).show()
             }
         }
-
     }
 
     private fun setControl() {

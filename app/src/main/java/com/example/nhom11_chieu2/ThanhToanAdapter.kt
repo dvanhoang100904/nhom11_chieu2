@@ -39,7 +39,6 @@ class ThanhToanAdapter(private val danhSachThanhToan: List<ThanhToan>) :
         holder.tvSoLuongThanhToan.text = "x${thanhToan.soLuong}"
     }
 
-
     private fun formatGia(gia: Double): String {
         val decimalFormat = java.text.DecimalFormat("#,###")
         return decimalFormat.format(gia) + " VNĐ"

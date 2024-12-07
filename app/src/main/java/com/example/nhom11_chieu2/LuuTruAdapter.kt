@@ -40,7 +40,7 @@ class LuuTruAdapter(private var danhSachLuuTru: List<ThanhToan>) :
         holder.tvLuuTen.text = "Tên: ${thanhToan.ten}"
         holder.ivLuuHinhAnh.setImageResource(thanhToan.hinhAnh)
         holder.tvLuuGia.text = "Giá: ${formatGia(thanhToan.gia)}"
-        holder.tvLuuSoLuong.text = "Số lượng: ${thanhToan.soLuong}"
+        holder.tvLuuSoLuong.text = "Số lượng: x${thanhToan.soLuong}"
         holder.tvLuuNgay.text = "Ngày thanh toán: ${formatNgay(thanhToan.ngayThanhToan)}"
     }
 

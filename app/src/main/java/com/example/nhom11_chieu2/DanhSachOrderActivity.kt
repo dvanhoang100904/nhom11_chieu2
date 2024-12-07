@@ -25,9 +25,7 @@ class DanhSachOrderActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_danh_sach_order)
-        // Ánh xạ view
         setControl()
-        // Xử lý sự kiện
         setEvent()
 
     }
@@ -41,35 +39,27 @@ class DanhSachOrderActivity : AppCompatActivity() {
 
         btnThanhToan.setOnClickListener {
             if (!getAllOrders.isEmpty()) {
-                val builder = AlertDialog.Builder(this)
-                builder.setTitle("Thanh toán")
-                builder.setMessage("Bạn có chắc chắn muốn thanh toán không?")
-                builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
-                    // Chuyển đổi danh sách Order thành danh sách ThanhToan
-                    val danhSachThanhToan = getAllOrders.map { order ->
-                        ThanhToan(
-                            ma = order.ma,
-                            ten = order.ten,
-                            hinhAnh = order.hinhAnh,
-                            gia = order.gia,
-                            soLuong = order.soLuong,
-                            moTa = order.moTa,
-                            ngayThanhToan = System.currentTimeMillis()
-                                .toString() // Hoặc dùng một ngày thanh toán cụ thể
-                        )
-                    }
+                // Chuyển đổi danh sách Order thành danh sách ThanhToan
+                val danhSachThanhToan = getAllOrders.map { order ->
+                    ThanhToan(
+                        ma = order.ma,
+                        ten = order.ten,
+                        hinhAnh = order.hinhAnh,
+                        gia = order.gia,
+                        soLuong = order.soLuong,
+                        moTa = order.moTa,
+                        ngayThanhToan = System.currentTimeMillis()
+                            .toString()
+                    )
+                }
 
-                    // Truyền danh sách đơn hàng qua Intent
-                    val intentTT = Intent(this, ThanhToanActivity::class.java)
-                    intentTT.putParcelableArrayListExtra(
-                        "danhSachThanhToan",
-                        ArrayList(danhSachThanhToan)
-                    ) // Truyền danh sách đơn hàng
-                    startActivity(intentTT)
-                }
-                builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
-                }
-                builder.show()
+                val intentTT = Intent(this, ThanhToanActivity::class.java)
+                intentTT.putParcelableArrayListExtra(
+                    "danhSachThanhToan",
+                    ArrayList(danhSachThanhToan)
+                )
+                startActivity(intentTT)
+
             } else {
                 Toast.makeText(
                     this, "Chưa có đồ uống nào được order, vui lòng order!", Toast.LENGTH_SHORT
@@ -82,8 +72,6 @@ class DanhSachOrderActivity : AppCompatActivity() {
             builder.setTitle("Thoát")
             builder.setMessage("Bạn có chắc chắn muốn thoát không?")
             builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
-                val databaseHelper = DatabaseHelper(this)
-                databaseHelper.deleteAllOrders()
                 val intentThoat = Intent(this, NhanVienOrderActivity::class.java)
                 startActivity(intentThoat)
             }
@@ -97,11 +85,13 @@ class DanhSachOrderActivity : AppCompatActivity() {
             intentDSOD.putExtra("loaiDoUong", "Cà Phê")
             startActivity(intentDSOD)
         }
+
         imgBtnDanhSachTraSua.setOnClickListener {
             val intentDSOD = Intent(this, DanhSachDoUongActivity::class.java)
             intentDSOD.putExtra("loaiDoUong", "Trà Sữa")
             startActivity(intentDSOD)
         }
+
         imgBtnDanhSachSinhTo.setOnClickListener {
             val intentDSOD = Intent(this, DanhSachDoUongActivity::class.java)
             intentDSOD.putExtra("loaiDoUong", "Sinh Tố")
