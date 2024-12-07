@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="30dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,11 +14,11 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imgBtnHuy"
+            android:id="@+id/imgBtnCancle"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/imgcancle"></ImageButton>
 
         <TextView
@@ -27,8 +27,8 @@
             android:layout_marginRight="20dp"
             android:gravity="center"
             android:text="Danh Sách Thanh Toán "
-            android:textSize="24sp"
             android:textColor="#000"
+            android:textSize="24sp"
             android:textStyle="bold"></TextView>
     </LinearLayout>
 
@@ -97,7 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:layout_marginBottom="30dp"
-        android:background="@drawable/background_xacnhan"
+        android:background="@drawable/background_xulychung"
         android:text="Xác Nhận"
         android:textSize="16sp"
         android:textStyle="bold" />

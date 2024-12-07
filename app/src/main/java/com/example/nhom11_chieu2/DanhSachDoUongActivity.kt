@@ -189,7 +189,7 @@ class DanhSachDoUongActivity : AppCompatActivity() {
             DoUong(
                 14,
                 "Trà sữa khoai môn",
-                R.drawable.imgtrasua6,
+                R.drawable.imgtrasua8,
                 45000.0,
                 "Trà sữa khoai môn hương vị khoai môn béo ngậy, kết hợp với trà sữa ngọt thanh, tạo nên một thức uống độc đáo và thơm ngon.",
                 "Trà sữa"

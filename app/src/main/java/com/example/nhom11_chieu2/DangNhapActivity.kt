@@ -19,7 +19,6 @@ class DangNhapActivity : AppCompatActivity() {
     private lateinit var ivShowMatKhau: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_dang_nhap)
         setControl()
         setEvent()
@@ -66,44 +65,26 @@ class DangNhapActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Kiểm tra thông tin đăng nhập (Ví dụ: Kiểm tra với tên và mật khẩu đã lưu trong SharedPreferences)
-            val userRole = getUserRole(ten, matKhau)  // Giả sử có phương thức này kiểm tra
+            if (!ten.matches(Regex("[a-zA-Z0-9._-]+"))) {
+                Toast.makeText(this, "Tên đăng nhập không hợp lệ!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-            if (userRole != null) {
-                // Lưu vai trò người dùng vào SharedPreferences
-                saveUserRole(userRole)
-
-                // Đăng nhập thành công
-                Toast.makeText(this, "chào mừng ${ten} đã đăng nhập", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, TrangChuActivity::class.java)
-                startActivity(intent)
+            val databaseHelper = DatabaseHelper(this)
+            val quyen = databaseHelper.dangNhap(ten, matKhau)
+            if (quyen != null) {
+                if (quyen == 50) {
+                    val intent = Intent(this, NhanVienOrderActivity::class.java)
+                    startActivity(intent)
+                } else if (quyen == 100) {
+                    val intent = Intent(this, QuanTriActivity::class.java)
+                    startActivity(intent)
+                }
             } else {
-                // Đăng nhập thất bại
-                Toast.makeText(
-                    this,
-                    "Tên đăng nhập hoặc mật khẩu không chính xác",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this, "Tên đăng nhập hoặc mật khẩu không đúng!", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
-    }
-
-    private fun getUserRole(ten: String, matKhau: String): String? {
-        return if (ten == "daovanhoang" && matKhau == "123456") {
-            "nhanvien"
-        } else if (ten == "huynhngocdan" && matKhau == "123456") {
-            "quantri"
-        } else {
-            null
-
-        }
-    }
-
-    private fun saveUserRole(role: String) {
-        val sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("userRole", role)
-        editor.apply()
     }
 
     private fun setControl() {

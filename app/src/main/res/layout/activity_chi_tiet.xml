@@ -68,7 +68,7 @@
             android:layout_height="30dp"
             android:layout_marginRight="230dp"
             android:layout_weight="1"
-            android:background="@drawable/background_quaylai"
+            android:background="@drawable/background_xulychung"
             android:text="Quay Lại"
             android:textColor="#000"
             android:textStyle="bold" />
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_weight="1"
-            android:background="@drawable/background_order"
+            android:background="@drawable/background_xulychung"
             android:text="Order"
             android:textColor="#000"
             android:textStyle="bold" />

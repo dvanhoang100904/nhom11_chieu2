@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import java.security.MessageDigest
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuanCoffe", null, 3) {
     override fun onCreate(db: SQLiteDatabase?) {
@@ -52,6 +53,17 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
             )"""
         db?.execSQL(createTableThanhToanQuery)
 
+        val createTableNhanVienQuery = """
+            CREATE TABLE NhanVien(
+                ma INTEGER PRIMARY KEY AUTOINCREMENT,
+                hoTen TEXT,
+                chucVu TEXT,
+                email TEXT,
+                tenDangNhap TEXT UNIQUE,
+                matKhau TEXT,
+                quyen INTEGER
+            )"""
+        db?.execSQL(createTableNhanVienQuery)
 
     }
 
@@ -61,6 +73,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
             db?.execSQL("DROP TABLE IF EXISTS DoUong")
             db?.execSQL("DROP TABLE IF EXISTS Orders")
             db?.execSQL("DROP TABLE IF EXISTS ThanhToan")
+            db?.execSQL("DROP TABLE IF EXISTS NhanVien")
             onCreate(db)
         }
     }
@@ -90,11 +103,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
 
     fun addViTriBan(viTriBan: ViTriBan) {
         val db = writableDatabase
-
-        // Kiểm tra tên có rỗng không
-        if (viTriBan.ten.isNullOrEmpty()) {
-            return
-        }
 
         // Dùng phương thức insertWithOnConflict để tránh chèn trùng lặp
         val values = ContentValues().apply {
@@ -297,7 +305,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         return danhSachThanhToan
     }
 
-
     fun addThanhToan(thanhToan: ThanhToan) {
         val db = writableDatabase
         val values = ContentValues().apply {
@@ -318,10 +325,63 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         db.close()
     }
 
+    fun dangNhap(tenDangNhap: String, matKhau: String): Int? {
+        val db = readableDatabase
+        val sql = "SELECT quyen FROM NhanVien WHERE tenDangNhap = ? AND matKhau = ?"
+        val cursor = db.rawQuery(sql, arrayOf(tenDangNhap, matKhau))
+        var quyen: Int? = null
+        if (cursor.moveToFirst()) {
+            quyen = cursor.getInt(cursor.getColumnIndexOrThrow("quyen"))
+        }
+        cursor.close()
+        db.close()
+        return quyen
+    }
 
+    fun addNhanVien(nhanVien: NhanVien) {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put("hoTen", nhanVien.hoTen)
+            put("chucVu", nhanVien.chucVu)
+            put("email", nhanVien.email)
+            put("tenDangNhap", nhanVien.tenDangNhap)
+            put("matKhau", nhanVien.matKhau)
+            put("quyen", nhanVien.quyen)
+        }
+        db.insertWithOnConflict("NhanVien", null, values, SQLiteDatabase.CONFLICT_IGNORE)
+        db.close()
+    }
 
-
-
-
+    fun getAllNhanVien(): List<NhanVien> {
+        val danhSachNhanVien = mutableListOf<NhanVien>()
+        val db = readableDatabase
+        val sql = "SELECT * FROM NhanVien"
+        val cursor = db.rawQuery(sql, null)
+        cursor.use {
+            while (it.moveToNext()) {
+                val maColumnIndex = it.getColumnIndex("ma")
+                val hoTenColumnIndex = it.getColumnIndex("hoTen")
+                val chucVuColumnIndex = it.getColumnIndex("chucVu")
+                val emailColumnIndex = it.getColumnIndex("email")
+                val tenDangNhapColumnIndex = it.getColumnIndex("tenDangNhap")
+                val matKhauColumnIndex = it.getColumnIndex("matKhau")
+                val quyenColumnIndex = it.getColumnIndex("quyen")
+                danhSachNhanVien.add(
+                    NhanVien(
+                        it.getInt(maColumnIndex),
+                        it.getString(hoTenColumnIndex),
+                        it.getString(chucVuColumnIndex),
+                        it.getString(emailColumnIndex),
+                        it.getString(tenDangNhapColumnIndex),
+                        it.getString(matKhauColumnIndex),
+                        it.getInt(quyenColumnIndex)
+                    )
+                )
+            }
+        }
+        db.close()
+        return danhSachNhanVien
+    }
 
 }
+

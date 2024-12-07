@@ -17,12 +17,13 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="14dp"
             android:background="@drawable/imgexit"></ImageButton>
 
         <TextView
-            android:layout_width="340dp"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="Lưu Trữ Thanh Toán "
             android:textColor="#000"
@@ -34,6 +35,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
+            android:layout_marginRight="14dp"
             android:background="@drawable/imgbtnluutru"></ImageButton>
     </LinearLayout>
 

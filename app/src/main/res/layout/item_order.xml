@@ -82,7 +82,7 @@
         android:layout_height="30dp"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:background="@drawable/background_xoa"
+        android:background="@drawable/background_xulychung"
         android:text="Xóa"
         android:textColor="#000"
         android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>

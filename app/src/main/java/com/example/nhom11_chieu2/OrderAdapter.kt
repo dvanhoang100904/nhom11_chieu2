@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
     RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
     class OrderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        // Khai báo các view trong item
         val tvTenOrder: TextView = view.findViewById(R.id.tvTenOrder)
         val ivHinhAnhOrder: ImageView = view.findViewById(R.id.ivHinhAnhOrder)
         val tvGiaOrder: TextView = view.findViewById(R.id.tvGiaOrder)
@@ -25,19 +24,16 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
 
     }
 
-    // Tạo ViewHolder để liên kết layout của mỗi item
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
         val itemView =
             LayoutInflater.from(parent.context).inflate(R.layout.item_order, parent, false)
         return OrderViewHolder(itemView)
     }
 
-    // Trả về số lượng items trong danh sách
     override fun getItemCount(): Int {
         return danhSachOrder.size
     }
 
-    // Liên kết dữ liệu vào ViewHolder
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         val order = danhSachOrder[position]
         holder.tvTenOrder.text = order.ten
@@ -85,11 +81,10 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
             builder.setMessage("Bạn có chắc chắn muốn xóa ${order.ten}?")
 
             builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
-                // Xóa sản phẩm khỏi cơ sở dữ liệu
+
                 val databaseHelper = DatabaseHelper(holder.itemView.context)
                 databaseHelper.deleteOrderByMa(order.ma)
 
-                // Xóa sản phẩm khỏi danh sách trong RecyclerView
                 danhSachOrder.removeAt(position)
                 notifyItemRemoved(position)
 

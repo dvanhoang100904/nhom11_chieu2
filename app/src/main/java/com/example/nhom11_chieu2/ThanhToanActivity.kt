@@ -22,7 +22,7 @@ class ThanhToanActivity : AppCompatActivity() {
     private lateinit var rgThanhToan: RadioGroup
     private lateinit var btnXacNhan: Button
     private var tongTien: Double = 0.0
-    private lateinit var imgBtnHuy: ImageView
+    private lateinit var imgBtnCancle: ImageView
     private var danhSachThanhToan: ArrayList<ThanhToan> = arrayListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,21 +33,16 @@ class ThanhToanActivity : AppCompatActivity() {
     }
 
     private fun setEvent() {
-
-        // Nhận dữ liệu danh sách đơn hàng từ Intent
         danhSachThanhToan =
             intent.getParcelableArrayListExtra<ThanhToan>("danhSachThanhToan") ?: arrayListOf()
-
 
         thanhToanAdapter = ThanhToanAdapter(danhSachThanhToan)
         rvDanhSachThanhToan.adapter = thanhToanAdapter
 
-        // Tính tổng tiền
         tongTien = danhSachThanhToan.sumOf { it.gia * it.soLuong }
         val tongTienFormat = String.format("%,.0f", tongTien) // Định dạng có dấu phẩy
         tvTongTien.text = "Tổng tiền: $tongTienFormat VNĐ"
 
-        // Xử lý sự kiện thanh toán khi người dùng nhấn nút
         btnXacNhan.setOnClickListener {
             if (!danhSachThanhToan.isEmpty()) {
                 xacNhanThanhToan()
@@ -57,25 +52,17 @@ class ThanhToanActivity : AppCompatActivity() {
                 ).show()
             }
         }
-        imgBtnHuy.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Hủy bỏ")
-            builder.setMessage("Bạn có chắc chắn muốn hủy bỏ không?")
-            builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
-                finish()
-            }
-            builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
-            }
-            builder.show()
+
+        imgBtnCancle.setOnClickListener {
+            finish()
         }
     }
 
     private fun xacNhanThanhToan() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Xác nhận")
-        builder.setMessage("Bạn có chắc chắn muốn Xác nhận thanh toán không?")
+        builder.setMessage("Bạn có chắc chắn muốn thanh toán không?")
         builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
-
             val phuongThucThanhToan = when (rgThanhToan.checkedRadioButtonId) {
                 R.id.rbTienMat -> "Tiền mặt"
                 R.id.rbChuyenKhoan -> "Chuyển khoản"
@@ -111,7 +98,7 @@ class ThanhToanActivity : AppCompatActivity() {
 
             databaseHelper.deleteAllOrders()
 
-            val intentNVOD= Intent(this, NhanVienOrderActivity::class.java)
+            val intentNVOD = Intent(this, NhanVienOrderActivity::class.java)
             startActivity(intentNVOD)
         }
         builder.setNegativeButton("Không") { hopThoai, nutDuocClick -> }
@@ -124,7 +111,7 @@ class ThanhToanActivity : AppCompatActivity() {
         tvTongTien = findViewById(R.id.tvTongTien)
         rgThanhToan = findViewById(R.id.rgThanhToan)
         btnXacNhan = findViewById(R.id.btnXacNhan)
-        imgBtnHuy = findViewById(R.id.imgBtnHuy)
+        imgBtnCancle = findViewById(R.id.imgBtnCancle)
 
     }
 }
