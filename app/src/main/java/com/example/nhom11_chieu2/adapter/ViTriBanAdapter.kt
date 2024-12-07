@@ -1,4 +1,4 @@
-package com.example.nhom11_chieu2
+package com.example.nhom11_chieu2.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nhom11_chieu2.DanhSachOrderActivity
+import com.example.nhom11_chieu2.R
+import com.example.nhom11_chieu2.model.ViTriBan
 
 class ViTriBanAdapter(private val danhSachViTriBan: List<ViTriBan>) :
     RecyclerView.Adapter<ViTriBanAdapter.ViTriBanViewHolder>() {

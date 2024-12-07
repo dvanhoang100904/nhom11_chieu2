@@ -1,12 +1,13 @@
-package com.example.nhom11_chieu2
+package com.example.nhom11_chieu2.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nhom11_chieu2.R
+import com.example.nhom11_chieu2.model.ThanhToan
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

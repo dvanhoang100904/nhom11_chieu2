@@ -7,6 +7,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nhom11_chieu2.adapter.ViTriBanAdapter
+import com.example.nhom11_chieu2.model.DatabaseHelper
+import com.example.nhom11_chieu2.model.ViTriBan
 
 class DanhSachViTriBanActivity : AppCompatActivity() {
     private lateinit var rvDanhSachViTriBan: RecyclerView
@@ -23,7 +26,6 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
 
     private fun setEvent() {
         val databaseHelper = DatabaseHelper(this)
-
         val kiemTraViTriBan = databaseHelper.getAllViTriBan()
         if (kiemTraViTriBan.isEmpty()) {
             val danhSachViTriBan = getDanhSachViTriBan()

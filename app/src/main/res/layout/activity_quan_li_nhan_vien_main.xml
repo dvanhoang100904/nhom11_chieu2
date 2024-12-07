@@ -1,0 +1,53 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E0E0E0"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/img_exit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            android:contentDescription="Exit Button"
+            android:src="@drawable/imgexit" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/searchNhanVien"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/timkiem"
+        android:drawableStart="@drawable/ic_nhanvien"
+        android:drawablePadding="8dp"
+        android:hint="Tìm kiếm nhân viên"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:padding="12dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:id="@+id/themNhanVien"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:contentDescription="Add Employee"
+        android:src="@drawable/add" />
+</LinearLayout>

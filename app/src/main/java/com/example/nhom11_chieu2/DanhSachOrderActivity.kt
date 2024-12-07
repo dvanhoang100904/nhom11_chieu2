@@ -5,13 +5,13 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nhom11_chieu2.adapter.OrderAdapter
+import com.example.nhom11_chieu2.model.DatabaseHelper
+import com.example.nhom11_chieu2.model.ThanhToan
 
 class DanhSachOrderActivity : AppCompatActivity() {
     private lateinit var rvDanhSachOrder: RecyclerView

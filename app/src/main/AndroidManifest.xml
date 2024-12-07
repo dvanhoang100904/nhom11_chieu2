@@ -12,7 +12,42 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nhom11_chieu2"
         tools:targetApi="31">
-
+        <activity
+            android:name=".QuanTri.ImagePickerActivity"
+            android:exported="true" />
+        <activity
+            android:name=".QuanTri.ChiTietDoUongMainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".QuanTri.ThemDoUong_MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".QuanTri.SuaDoUong_MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".QuanTri.QuanTriDoUong_MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".QuanTri.SuaTheLoai_MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".QuanTri.ThemTheLoai_MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".QuanTri.SuaNhanVien_MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".QuanTri.ThemNhanVien_MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".QuanTri.QuanLiMenu_MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".QuanTri.QuanLiNhanVien_MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".QuanTri.QuanTriActivity"
+            android:exported="true" />
         <activity
             android:name=".LuuTruThanhToanActivity"
             android:exported="true" />
@@ -35,16 +70,11 @@
             android:name=".NhanVienOrderActivity"
             android:exported="true" />
         <activity
-            android:name=".NhanVienActivity"
-            android:exported="true" />
-        <activity
-            android:name=".QuanTriActivity"
-            android:exported="true" />
-        <activity
             android:name=".DangNhapActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -1,4 +1,4 @@
-package com.example.nhom11_chieu2
+package com.example.nhom11_chieu2.model
 
 data class DoUong(
     val ma: Int,

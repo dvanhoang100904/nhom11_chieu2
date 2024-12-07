@@ -1,0 +1,119 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F7F7"
+    android:orientation="vertical">
+
+    <!-- Phần trên cùng -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#BEC0AD"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/img_exit"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="Thoát"
+            android:src="@drawable/imgexit" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:text="Cập Nhât Đồ Uống"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Nội dung chỉnh sửa -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:gravity="center_horizontal"
+        android:padding="12dp"
+        android:text="Cập Nhât Đồ Uống"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <EditText
+            android:id="@+id/et_suatheLoai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_background"
+            android:hint="Thể Loại"
+            android:padding="10dp"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_suatenDoUong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Tên Đồ Uống"
+            android:padding="10dp"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_suagiaSuaDoUong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Giá"
+            android:padding="10dp"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_suamoTa"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Mô Tả"
+            android:padding="10dp"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/img_suauploadCapNhat"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:contentDescription="Upload Ảnh" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_updateupload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_background"
+            android:text="Upload Ảnh"
+            android:textColor="#FFFFFF" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_capNhatDoUong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_background"
+            android:text="Cập Nhật"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+</LinearLayout>
