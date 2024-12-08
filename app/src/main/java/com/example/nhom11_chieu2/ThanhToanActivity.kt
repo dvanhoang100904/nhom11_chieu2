@@ -77,11 +77,10 @@ class ThanhToanActivity : AppCompatActivity() {
 
             Toast.makeText(
                 this,
-                "Bạn đã thanh toán thành công bằng ${phuongThucThanhToan}, tiếp tục chọn bàn!",
+                "Bạn đã thanh toán thành công bằng ${phuongThucThanhToan}",
                 Toast.LENGTH_SHORT
             ).show()
 
-            // Lưu thông tin thanh toán vào cơ sở dữ liệu
             val databaseHelper = DatabaseHelper(this)
             for (order in danhSachThanhToan) {
                 val thanhToan = ThanhToan(

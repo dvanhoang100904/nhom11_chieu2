@@ -2,6 +2,7 @@ package com.example.nhom11_chieu2
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -27,7 +28,6 @@ class LuuTruThanhToanActivity : AppCompatActivity() {
     private fun setEvent() {
         val databaseHelper = DatabaseHelper(this)
         val getAllThanhToan = databaseHelper.getAllThanhToan()
-//        Log.d("LuuTru", "Số lượng thanh toán: ${getAllThanhToan.size}")
 
         luuTruAdapter = LuuTruAdapter(getAllThanhToan)
         rvLuuTruThanhToan.adapter = luuTruAdapter

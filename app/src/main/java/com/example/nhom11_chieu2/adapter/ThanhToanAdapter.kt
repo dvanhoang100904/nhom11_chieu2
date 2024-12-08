@@ -45,10 +45,4 @@ class ThanhToanAdapter(private val danhSachThanhToan: List<ThanhToan>) :
         return decimalFormat.format(gia) + " VNĐ"
     }
 
-    private fun formatNgay(dateStr: String): String {
-        val date = Date(dateStr.toLong())  // Chuyển từ mili giây sang Date
-        val format = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
-        return format.format(date)
-    }
-
 }
