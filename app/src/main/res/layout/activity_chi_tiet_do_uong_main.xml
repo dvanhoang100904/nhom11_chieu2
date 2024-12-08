@@ -45,7 +45,7 @@
         <ImageView
             android:id="@+id/img_drink_detail"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="400dp"
             android:layout_marginBottom="16dp"
             android:contentDescription="Ảnh Đồ Uống"
             android:scaleType="centerCrop" />
