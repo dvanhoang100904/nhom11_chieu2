@@ -52,8 +52,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
             )"""
         db?.execSQL(sqlCreateTableThanhToan)
 
-        val sqlCreateTableNhanVien = """
-            CREATE TABLE NhanVien(
+        val sqlCreateTableNguoiDung = """
+            CREATE TABLE NguoiDung(
                 ma INTEGER PRIMARY KEY AUTOINCREMENT,
                 hoTen TEXT,
                 chucVu TEXT,
@@ -62,7 +62,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
                 matKhau TEXT,
                 quyen INTEGER
             )"""
-        db?.execSQL(sqlCreateTableNhanVien)
+        db?.execSQL(sqlCreateTableNguoiDung)
 
     }
 
@@ -324,24 +324,24 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         db.close()
     }
 
-    fun addNhanVien(nhanVien: NhanVien) {
+    fun addNguoiDung(nguoiDung: NguoiDung) {
         val db = writableDatabase
         val cv = ContentValues().apply {
-            put("hoTen", nhanVien.hoTen)
-            put("chucVu", nhanVien.chucVu)
-            put("email", nhanVien.email)
-            put("tenDangNhap", nhanVien.tenDangNhap)
-            put("matKhau", nhanVien.matKhau)
-            put("quyen", nhanVien.quyen)
+            put("hoTen", nguoiDung.hoTen)
+            put("chucVu", nguoiDung.chucVu)
+            put("email", nguoiDung.email)
+            put("tenDangNhap", nguoiDung.tenDangNhap)
+            put("matKhau", nguoiDung.matKhau)
+            put("quyen", nguoiDung.quyen)
         }
-        db.insertWithOnConflict("NhanVien", null, cv, SQLiteDatabase.CONFLICT_IGNORE)
+        db.insertWithOnConflict("NguoiDung", null, cv, SQLiteDatabase.CONFLICT_IGNORE)
         db.close()
     }
 
-    fun getAllNhanVien(): List<NhanVien> {
-        val danhSachNhanVien = mutableListOf<NhanVien>()
+    fun getAllNguoiDung(): List<NguoiDung> {
+        val danhSachNguoiDung = mutableListOf<NguoiDung>()
         val db = readableDatabase
-        val sql = "SELECT * FROM NhanVien"
+        val sql = "SELECT * FROM NguoiDung"
         val cursor = db.rawQuery(sql, null)
         cursor.use {
             while (it.moveToNext()) {
@@ -352,8 +352,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
                 val tenDangNhapColumnIndex = it.getColumnIndex("tenDangNhap")
                 val matKhauColumnIndex = it.getColumnIndex("matKhau")
                 val quyenColumnIndex = it.getColumnIndex("quyen")
-                danhSachNhanVien.add(
-                    NhanVien(
+                danhSachNguoiDung.add(
+                    NguoiDung(
                         it.getInt(maColumnIndex),
                         it.getString(hoTenColumnIndex),
                         it.getString(chucVuColumnIndex),
@@ -366,12 +366,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
             }
         }
         db.close()
-        return danhSachNhanVien
+        return danhSachNguoiDung
     }
 
     fun dangNhap(tenDangNhap: String, matKhau: String): Int? {
         val db = readableDatabase
-        val sql = "SELECT quyen FROM NhanVien WHERE tenDangNhap = ? AND matKhau = ?"
+        val sql = "SELECT quyen FROM NguoiDung WHERE tenDangNhap = ? AND matKhau = ?"
         val cursor = db.rawQuery(sql, arrayOf(tenDangNhap, matKhau))
         var quyen: Int? = null
         cursor.use {

@@ -1,6 +1,6 @@
 package com.example.nhom11_chieu2.model
 
-data class NhanVien(
+data class NguoiDung(
     val ma: Int,
     val hoTen: String,
     val chucVu: String,
