@@ -2,6 +2,7 @@ package com.example.nhom11_chieu2
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -30,50 +31,49 @@ class DanhSachDoUongActivity : AppCompatActivity() {
     private fun setEvent() {
         val databaseHelper = DatabaseHelper(this)
 
-//        // Kiểm tra nếu các đã tồn tại trong cơ sở dữ liệu trước khi thêm
-//        val kiemTraDoUong = databaseHelper.getAllDoUong()
-//        if (kiemTraDoUong.isEmpty()) {
-//            // Tạo danh sách nếu cơ sở dữ liệu chưa có dữ liệu
-//            val danhSachDoUong = getDanhSachDoUong()
-//            for (doUong in danhSachDoUong) {
-//                databaseHelper.addDoUong(doUong)
-//            }
-//        }
+        val kiemTraDoUong = databaseHelper.getAllDoUong()
+        if (kiemTraDoUong.isEmpty()) {
+            val danhSachDoUong = getDanhSachDoUong()
+            for (doUong in danhSachDoUong) {
+                databaseHelper.addDoUong(doUong)
+            }
+            Log.d("db", "Số lượng đồ uống: ${databaseHelper.getAllDoUong().size}")
+        }
 
-        // Lấy tất cả từ cơ sở dữ liệu
         val getAllDoUong = databaseHelper.getAllDoUong()
-        // Khởi tạo adapter với danh sách đồ uống lấy từ cơ sở dữ liệu
+
         doUongAdapter = DoUongAdapter(getAllDoUong)
         rvDanhSachDoUong.adapter = doUongAdapter
 
-        // Cập nhật danh sách đồ uống theo loại khi nhấn nút
         imgBtnDanhSachCaPhe.setOnClickListener {
             val caPheDanhSach = getAllDoUong.filter { it.loai == "Cà phê" }
             doUongAdapter.capNhatDanhSach(caPheDanhSach)
             tvLoaiDoUong.text = "Danh Sách Đồ Uống Cà Phê"
         }
+
         imgBtnDanhSachTraSua.setOnClickListener {
             val traSuaDanhSach = getAllDoUong.filter { it.loai == "Trà sữa" }
             doUongAdapter.capNhatDanhSach(traSuaDanhSach)
             tvLoaiDoUong.text = "Danh Sách Đồ Uống Trà Sữa"
         }
+
         imgBtnDanhSachSinhTo.setOnClickListener {
             val sinhToDanhSach = getAllDoUong.filter { it.loai == "Sinh tố" }
             doUongAdapter.capNhatDanhSach(sinhToDanhSach)
             tvLoaiDoUong.text = "Danh Sách Đồ Uống Sinh Tố"
         }
+
         imgBtnDanhSachOrder.setOnClickListener {
             val intentDSOD = Intent(this, DanhSachOrderActivity::class.java)
             startActivity(intentDSOD)
         }
 
-        // Nhận loại đồ uống từ Intent và cập nhật danh sách
         val loaiDoUong = intent.getStringExtra("loaiDoUong")
         val danhSachDoUong = when (loaiDoUong) {
             "Cà Phê" -> getAllDoUong.filter { it.loai == "Cà phê" }
             "Trà Sữa" -> getAllDoUong.filter { it.loai == "Trà sữa" }
             "Sinh Tố" -> getAllDoUong.filter { it.loai == "Sinh tố" }
-            else -> getAllDoUong // Nếu không có loại nào khớp, hiển thị toàn bộ
+            else -> getAllDoUong
         }
         doUongAdapter.capNhatDanhSach(danhSachDoUong)
         tvLoaiDoUong.text = "Danh Sách Đồ Uống ${loaiDoUong ?: ""} "

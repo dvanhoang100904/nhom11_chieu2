@@ -2,6 +2,7 @@ package com.example.nhom11_chieu2
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -26,14 +27,14 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
 
     private fun setEvent() {
         val databaseHelper = DatabaseHelper(this)
-//        val kiemTraViTriBan = databaseHelper.getAllViTriBan()
-//        if (kiemTraViTriBan.isEmpty()) {
-//            val danhSachViTriBan = getDanhSachViTriBan()
-//
-//            for (viTriBan in danhSachViTriBan) {
-//                databaseHelper.addViTriBan(viTriBan)
-//            }
-//        }
+        val kiemTraViTriBan = databaseHelper.getAllViTriBan()
+        if (kiemTraViTriBan.isEmpty()) {
+            val danhSachViTriBan = getDanhSachViTriBan()
+            for (viTriBan in danhSachViTriBan) {
+                databaseHelper.addViTriBan(viTriBan)
+            }
+            Log.d("db", "Số lượng bàn: ${databaseHelper.getAllViTriBan().size}")
+        }
 
         val getAllViTriBan = databaseHelper.getAllViTriBan()
 

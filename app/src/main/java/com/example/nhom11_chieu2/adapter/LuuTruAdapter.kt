@@ -51,7 +51,6 @@ class LuuTruAdapter(private var danhSachLuuTru: List<ThanhToan>) :
         notifyDataSetChanged()
     }
 
-
     private fun formatGia(gia: Double): String {
         val decimalFormat = java.text.DecimalFormat("#,###")
         return decimalFormat.format(gia) + " VNĐ"

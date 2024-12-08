@@ -87,16 +87,15 @@ class DangNhapActivity : AppCompatActivity() {
             }
         }
 
-
         val databaseHelper = DatabaseHelper(this)
-//        val kiemTraNhanVien = databaseHelper.getAllNhanVien()
-//        if (kiemTraNhanVien.isEmpty()) {
-//            val danhSachNhanVien = getDanhSachNhanVien()
-//            for (nhanVien in danhSachNhanVien) {
-//                databaseHelper.addNhanVien(nhanVien)
-//            }
-//            Log.d("db", "Danh sách nhân viên: ${databaseHelper.getAllNhanVien().size}")
-//        }
+        val kiemTraNhanVien = databaseHelper.getAllNhanVien()
+        if (kiemTraNhanVien.isEmpty()) {
+            val danhSachNhanVien = getDanhSachNhanVien()
+            for (nhanVien in danhSachNhanVien) {
+                databaseHelper.addNhanVien(nhanVien)
+            }
+            Log.d("db", "Số lượng nhân viên: ${databaseHelper.getAllNhanVien().size}")
+        }
     }
 
     private fun getDanhSachNhanVien(): List<NhanVien> {
