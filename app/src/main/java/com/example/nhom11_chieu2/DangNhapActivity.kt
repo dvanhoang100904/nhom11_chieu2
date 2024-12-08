@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nhom11_chieu2.QuanTri.QuanTriActivity
 import com.example.nhom11_chieu2.model.DatabaseHelper
-import com.example.nhom11_chieu2.model.NhanVien
+import com.example.nhom11_chieu2.model.NguoiDung
 
 class DangNhapActivity : AppCompatActivity() {
     private lateinit var edtTen: EditText
@@ -75,11 +75,11 @@ class DangNhapActivity : AppCompatActivity() {
             val quyen = databaseHelper.dangNhap(ten, matKhau)
             if (quyen != null) {
                 if (quyen == 50) {
-                    val intent = Intent(this, NhanVienOrderActivity::class.java)
-                    startActivity(intent)
+                    val intentNVOD = Intent(this, NhanVienOrderActivity::class.java)
+                    startActivity(intentNVOD)
                 } else if (quyen == 100) {
-                    val intent = Intent(this, QuanTriActivity::class.java)
-                    startActivity(intent)
+                    val intentQT = Intent(this, QuanTriActivity::class.java)
+                    startActivity(intentQT)
                 }
             } else {
                 Toast.makeText(this, "Tên đăng nhập hoặc mật khẩu không đúng!", Toast.LENGTH_SHORT)
@@ -88,28 +88,28 @@ class DangNhapActivity : AppCompatActivity() {
         }
 
         val databaseHelper = DatabaseHelper(this)
-        val kiemTraNhanVien = databaseHelper.getAllNhanVien()
+        val kiemTraNhanVien = databaseHelper.getAllNguoiDung()
         if (kiemTraNhanVien.isEmpty()) {
-            val danhSachNhanVien = getDanhSachNhanVien()
-            for (nhanVien in danhSachNhanVien) {
-                databaseHelper.addNhanVien(nhanVien)
+            val danhSachNguoiDung = getDanhSachNguoiDung()
+            for (nguoiDung in danhSachNguoiDung) {
+                databaseHelper.addNguoiDung(nguoiDung)
             }
-            Log.d("db", "Số lượng nhân viên: ${databaseHelper.getAllNhanVien().size}")
+            Log.d("db", "Số lượng người dùng: ${databaseHelper.getAllNguoiDung().size}")
         }
     }
 
-    private fun getDanhSachNhanVien(): List<NhanVien> {
+    private fun getDanhSachNguoiDung(): List<NguoiDung> {
         return listOf(
-            NhanVien(
+            NguoiDung(
                 1,
                 "Đào Văn Hoàng",
-                "Nhân Viên",
+                "Nhân Viên Order",
                 "daovanhoang11@gmail.com",
                 "daovanhoang11",
                 "123456",
                 50
             ),
-            NhanVien(
+            NguoiDung(
                 2,
                 "Huỳnh Ngọc Dân",
                 "Quản Trị",
@@ -117,7 +117,8 @@ class DangNhapActivity : AppCompatActivity() {
                 "huynhngocdan11",
                 "123456",
                 100
-            ),
+            )
+
         )
     }
 

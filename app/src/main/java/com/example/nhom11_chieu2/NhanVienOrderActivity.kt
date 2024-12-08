@@ -2,12 +2,9 @@ package com.example.nhom11_chieu2
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.nhom11_chieu2.model.DatabaseHelper
-import com.example.nhom11_chieu2.model.NhanVien
 
 class NhanVienOrderActivity : AppCompatActivity() {
     private lateinit var btnChonBanOrder: Button
