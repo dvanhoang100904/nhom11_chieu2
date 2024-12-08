@@ -30,15 +30,15 @@ class DanhSachDoUongActivity : AppCompatActivity() {
     private fun setEvent() {
         val databaseHelper = DatabaseHelper(this)
 
-        // Kiểm tra nếu các đã tồn tại trong cơ sở dữ liệu trước khi thêm
-        val kiemTraDoUong = databaseHelper.getAllDoUong()
-        if (kiemTraDoUong.isEmpty()) {
-            // Tạo danh sách nếu cơ sở dữ liệu chưa có dữ liệu
-            val danhSachDoUong = getDanhSachDoUong()
-            for (doUong in danhSachDoUong) {
-                databaseHelper.addDoUong(doUong)
-            }
-        }
+//        // Kiểm tra nếu các đã tồn tại trong cơ sở dữ liệu trước khi thêm
+//        val kiemTraDoUong = databaseHelper.getAllDoUong()
+//        if (kiemTraDoUong.isEmpty()) {
+//            // Tạo danh sách nếu cơ sở dữ liệu chưa có dữ liệu
+//            val danhSachDoUong = getDanhSachDoUong()
+//            for (doUong in danhSachDoUong) {
+//                databaseHelper.addDoUong(doUong)
+//            }
+//        }
 
         // Lấy tất cả từ cơ sở dữ liệu
         val getAllDoUong = databaseHelper.getAllDoUong()

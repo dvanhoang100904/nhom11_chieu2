@@ -26,14 +26,14 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
 
     private fun setEvent() {
         val databaseHelper = DatabaseHelper(this)
-        val kiemTraViTriBan = databaseHelper.getAllViTriBan()
-        if (kiemTraViTriBan.isEmpty()) {
-            val danhSachViTriBan = getDanhSachViTriBan()
-
-            for (viTriBan in danhSachViTriBan) {
-                databaseHelper.addViTriBan(viTriBan)
-            }
-        }
+//        val kiemTraViTriBan = databaseHelper.getAllViTriBan()
+//        if (kiemTraViTriBan.isEmpty()) {
+//            val danhSachViTriBan = getDanhSachViTriBan()
+//
+//            for (viTriBan in danhSachViTriBan) {
+//                databaseHelper.addViTriBan(viTriBan)
+//            }
+//        }
 
         val getAllViTriBan = databaseHelper.getAllViTriBan()
 

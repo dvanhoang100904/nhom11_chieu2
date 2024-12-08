@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="20dp"
-            android:text="Danh sách loại đồ uống"
+            android:text="Danh sách thể loại"
             android:textSize="20sp"
             android:textStyle="bold"></TextView>
 

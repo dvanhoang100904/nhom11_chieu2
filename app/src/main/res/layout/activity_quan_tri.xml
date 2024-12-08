@@ -17,13 +17,13 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginLeft="14dp"
-            android:background="@drawable/imgquantri"></ImageView>
+            android:background="@drawable/imghome"></ImageView>
 
         <TextView
             android:id="@+id/header_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
+            android:layout_marginRight="34dp"
             android:gravity="center"
             android:padding="16dp"
             android:text="Quản Trị"

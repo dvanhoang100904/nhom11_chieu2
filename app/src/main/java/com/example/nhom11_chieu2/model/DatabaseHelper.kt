@@ -76,7 +76,17 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
             onCreate(db)
         }
     }
+    fun addViTriBan(viTriBan: ViTriBan) {
+        val db = writableDatabase
+        // Dùng phương thức insertWithOnConflict để tránh chèn trùng lặp
+        val values = ContentValues().apply {
+            put("ten", viTriBan.ten)
+            put("hinhAnh", viTriBan.hinhAnh)
+        }
+        db.insertWithOnConflict("ViTriBan", null, values, SQLiteDatabase.CONFLICT_IGNORE)
 
+        db.close()
+    }
     fun getAllViTriBan(): List<ViTriBan> {
         val danhSachViTriBan = mutableListOf<ViTriBan>()
         val db = readableDatabase
@@ -100,19 +110,18 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         return danhSachViTriBan
     }
 
-    fun addViTriBan(viTriBan: ViTriBan) {
+    fun addDoUong(doUong: DoUong) {
         val db = writableDatabase
-
-        // Dùng phương thức insertWithOnConflict để tránh chèn trùng lặp
         val values = ContentValues().apply {
-            put("ten", viTriBan.ten)
-            put("hinhAnh", viTriBan.hinhAnh)
+            put("ten", doUong.ten)
+            put("hinhAnh", doUong.hinhAnh)
+            put("gia", doUong.gia)
+            put("moTa", doUong.moTa)
+            put("loai", doUong.loai)
         }
-        db.insertWithOnConflict("ViTriBan", null, values, SQLiteDatabase.CONFLICT_IGNORE)
-
+        db.insertWithOnConflict("DoUong", null, values, SQLiteDatabase.CONFLICT_IGNORE)
         db.close()
     }
-
     fun getAllDoUong(): List<DoUong> {
         val danhSachDoUong = mutableListOf<DoUong>()
         val db = readableDatabase
@@ -141,20 +150,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         db.close()
         return danhSachDoUong
     }
-
-    fun addDoUong(doUong: DoUong) {
-        val db = writableDatabase
-        val values = ContentValues().apply {
-            put("ten", doUong.ten)
-            put("hinhAnh", doUong.hinhAnh)
-            put("gia", doUong.gia)
-            put("moTa", doUong.moTa)
-            put("loai", doUong.loai)
-        }
-        db.insertWithOnConflict("DoUong", null, values, SQLiteDatabase.CONFLICT_IGNORE)
-        db.close()
-    }
-
     fun getDoUongByMa(ma: Int): DoUong? {
         val db = readableDatabase
         val sql = "SELECT * FROM DoUong WHERE ma = ?"
@@ -188,7 +183,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
             it.insertWithOnConflict("Orders", null, values, SQLiteDatabase.CONFLICT_IGNORE)
         }
     }
-
     fun getAllOrders(): MutableList<Order> {
         val danhSachOrder = mutableListOf<Order>()
         val db = readableDatabase
@@ -219,7 +213,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         db.close()
         return danhSachOrder
     }
-
     fun getOrdersByMaDoUong(maDoUong: Int): Order? {
         val db = readableDatabase
         val sql = "SELECT * FROM Orders WHERE maDoUong = ?"
@@ -248,14 +241,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         db.close()
         return order
     }
-
     fun deleteOrderByMa(ma: Int) {
         val db = writableDatabase
         val sql = "ma = ?"
         db.delete("orders", sql, arrayOf(ma.toString()))
         db.close()
     }
-
     fun updateSoLuongOrderByMaDoUong(maDoUong: Int, soLuongMoi: Int) {
         val db = writableDatabase
         val values = ContentValues().apply {
@@ -265,13 +256,25 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         db.update("Orders", values, sql, arrayOf(maDoUong.toString()))
         db.close()
     }
-
     fun deleteAllOrders() {
         val db = writableDatabase
         db.execSQL("DELETE FROM Orders") // Xóa tất cả bản ghi trong bảng Orders
         db.close()
     }
 
+    fun addThanhToan(thanhToan: ThanhToan) {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put("ten", thanhToan.ten)
+            put("hinhAnh", thanhToan.hinhAnh)
+            put("gia", thanhToan.gia)
+            put("soLuong", thanhToan.soLuong)
+            put("moTa", thanhToan.moTa)
+            put("ngayThanhToan", thanhToan.ngayThanhToan)
+        }
+        db.insertWithOnConflict("ThanhToan", null, values, SQLiteDatabase.CONFLICT_IGNORE)
+        db.close()
+    }
     fun getAllThanhToan(): List<ThanhToan> {
         val danhSachThanhToan = mutableListOf<ThanhToan>()
         val db = readableDatabase
@@ -303,38 +306,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         db.close()
         return danhSachThanhToan
     }
-
-    fun addThanhToan(thanhToan: ThanhToan) {
-        val db = writableDatabase
-        val values = ContentValues().apply {
-            put("ten", thanhToan.ten)
-            put("hinhAnh", thanhToan.hinhAnh)
-            put("gia", thanhToan.gia)
-            put("soLuong", thanhToan.soLuong)
-            put("moTa", thanhToan.moTa)
-            put("ngayThanhToan", thanhToan.ngayThanhToan)
-        }
-        db.insertWithOnConflict("ThanhToan", null, values, SQLiteDatabase.CONFLICT_IGNORE)
-        db.close()
-    }
-
     fun deleteAllThanhToan() {
         val db = writableDatabase
         db.execSQL("DELETE FROM ThanhToan") // Xóa tất cả bản ghi trong bảng Orders
         db.close()
-    }
-
-    fun dangNhap(tenDangNhap: String, matKhau: String): Int? {
-        val db = readableDatabase
-        val sql = "SELECT quyen FROM NhanVien WHERE tenDangNhap = ? AND matKhau = ?"
-        val cursor = db.rawQuery(sql, arrayOf(tenDangNhap, matKhau))
-        var quyen: Int? = null
-        if (cursor.moveToFirst()) {
-            quyen = cursor.getInt(cursor.getColumnIndexOrThrow("quyen"))
-        }
-        cursor.close()
-        db.close()
-        return quyen
     }
 
     fun addNhanVien(nhanVien: NhanVien) {
@@ -350,7 +325,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         db.insertWithOnConflict("NhanVien", null, values, SQLiteDatabase.CONFLICT_IGNORE)
         db.close()
     }
-
     fun getAllNhanVien(): List<NhanVien> {
         val danhSachNhanVien = mutableListOf<NhanVien>()
         val db = readableDatabase
@@ -381,6 +355,17 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         db.close()
         return danhSachNhanVien
     }
-
+    fun dangNhap(tenDangNhap: String, matKhau: String): Int? {
+        val db = readableDatabase
+        val sql = "SELECT quyen FROM NhanVien WHERE tenDangNhap = ? AND matKhau = ?"
+        val cursor = db.rawQuery(sql, arrayOf(tenDangNhap, matKhau))
+        var quyen: Int? = null
+        if (cursor.moveToFirst()) {
+            quyen = cursor.getInt(cursor.getColumnIndexOrThrow("quyen"))
+        }
+        cursor.close()
+        db.close()
+        return quyen
+    }
 }
 

@@ -50,43 +50,7 @@ class NhanVienOrderActivity : AppCompatActivity() {
             }
             builder.show()
         }
-
-        val databaseHelper = DatabaseHelper(this)
-        val kiemTraNhanVien = databaseHelper.getAllNhanVien()
-        if (kiemTraNhanVien.isEmpty()) {
-            val danhSachNhanVien = getDanhSachNhanVien()
-            for (nhanVien in danhSachNhanVien) {
-                databaseHelper.addNhanVien(nhanVien)
-            }
-            Log.d("db", "Danh sách nhân viên: ${databaseHelper.getAllNhanVien().size}")
-        }
-
     }
-
-
-    private fun getDanhSachNhanVien(): List<NhanVien> {
-        return listOf(
-            NhanVien(
-                1,
-                "Đào Văn Hoàng",
-                "Nhân Viên",
-                "daovanhoang11@gmail.com",
-                "daovanhoang11",
-                "123456",
-                50
-            ),
-            NhanVien(
-                2,
-                "Huỳnh Ngọc Dân",
-                "Quản Trị",
-                "huynhngodan11@gmail.com",
-                "huynhngocdan11",
-                "123456",
-                100
-            ),
-        )
-    }
-
 
     private fun setControl() {
         btnChonBanOrder = findViewById(R.id.btnChonBanOrder)

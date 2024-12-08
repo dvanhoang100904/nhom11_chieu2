@@ -3,6 +3,7 @@ package com.example.nhom11_chieu2
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nhom11_chieu2.QuanTri.QuanTriActivity
 import com.example.nhom11_chieu2.model.DatabaseHelper
+import com.example.nhom11_chieu2.model.NhanVien
 
 class DangNhapActivity : AppCompatActivity() {
     private lateinit var edtTen: EditText
@@ -84,6 +86,40 @@ class DangNhapActivity : AppCompatActivity() {
                     .show()
             }
         }
+
+
+        val databaseHelper = DatabaseHelper(this)
+//        val kiemTraNhanVien = databaseHelper.getAllNhanVien()
+//        if (kiemTraNhanVien.isEmpty()) {
+//            val danhSachNhanVien = getDanhSachNhanVien()
+//            for (nhanVien in danhSachNhanVien) {
+//                databaseHelper.addNhanVien(nhanVien)
+//            }
+//            Log.d("db", "Danh sách nhân viên: ${databaseHelper.getAllNhanVien().size}")
+//        }
+    }
+
+    private fun getDanhSachNhanVien(): List<NhanVien> {
+        return listOf(
+            NhanVien(
+                1,
+                "Đào Văn Hoàng",
+                "Nhân Viên",
+                "daovanhoang11@gmail.com",
+                "daovanhoang11",
+                "123456",
+                50
+            ),
+            NhanVien(
+                2,
+                "Huỳnh Ngọc Dân",
+                "Quản Trị",
+                "huynhngodan11@gmail.com",
+                "huynhngocdan11",
+                "123456",
+                100
+            ),
+        )
     }
 
     private fun setControl() {
