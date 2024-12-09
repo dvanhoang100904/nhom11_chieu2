@@ -42,8 +42,8 @@ class DoUongAdapter(private var danhSachDoUong: List<DoUong>) :
             holder.itemView.context.startActivity(intentChiTiet)
         }
     }
-    fun capNhatDanhSach(newList: List<DoUong>) {
-        danhSachDoUong = newList
+    fun capNhatDanhSach(danhSachMoi: List<DoUong>) {
+        danhSachDoUong = danhSachMoi
         notifyDataSetChanged()
     }
 }

@@ -59,7 +59,6 @@ class DanhSachOrderActivity : AppCompatActivity() {
                     ArrayList(danhSachThanhToan)
                 )
                 startActivity(intentTT)
-
             } else {
                 Toast.makeText(
                     this, "Chưa có đồ uống nào được order, vui lòng order!", Toast.LENGTH_SHORT
