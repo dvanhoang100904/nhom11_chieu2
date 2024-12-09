@@ -4,6 +4,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
+import java.text.Normalizer
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuanCoffe", null, 3) {
     override fun onCreate(db: SQLiteDatabase?) {
@@ -72,7 +74,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
             db?.execSQL("DROP TABLE IF EXISTS DoUong")
             db?.execSQL("DROP TABLE IF EXISTS Orders")
             db?.execSQL("DROP TABLE IF EXISTS ThanhToan")
-            db?.execSQL("DROP TABLE IF EXISTS NhanVien")
+            db?.execSQL("DROP TABLE IF EXISTS NguoiDung")
             onCreate(db)
         }
     }
@@ -174,6 +176,38 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         }
         db.close()
         return doUong
+    }
+
+    fun searchDoUong(key: String): List<DoUong> {
+        val danhSachDoUong = mutableListOf<DoUong>()
+        val db = readableDatabase
+        val sql = """
+        SELECT * FROM DoUong 
+        WHERE ten LIKE ? OR loai LIKE ?
+        """
+        val cursor = db.rawQuery(sql, arrayOf("%$key%", "%$key%"))
+        cursor.use {
+            while (it.moveToNext()) {
+                val maColumnIndex = it.getColumnIndex("ma")
+                val tenColumnIndex = it.getColumnIndex("ten")
+                val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
+                val giaColumnIndex = it.getColumnIndex("gia")
+                val moTaColumnIndex = it.getColumnIndex("moTa")
+                val loaiColumnIndex = it.getColumnIndex("loai")
+                danhSachDoUong.add(
+                    DoUong(
+                        it.getInt(maColumnIndex),
+                        it.getString(tenColumnIndex),
+                        it.getInt(hinhAnhColumnIndex),
+                        it.getDouble(giaColumnIndex),
+                        it.getString(moTaColumnIndex),
+                        it.getString(loaiColumnIndex)
+                    )
+                )
+            }
+        }
+        db.close()
+        return danhSachDoUong
     }
 
     fun addOrder(order: Order) {

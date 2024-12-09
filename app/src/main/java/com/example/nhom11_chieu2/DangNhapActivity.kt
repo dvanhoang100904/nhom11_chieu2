@@ -118,7 +118,6 @@ class DangNhapActivity : AppCompatActivity() {
                 "123456",
                 100
             )
-
         )
     }
 
