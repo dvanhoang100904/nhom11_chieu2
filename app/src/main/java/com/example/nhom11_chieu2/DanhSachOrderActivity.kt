@@ -36,6 +36,7 @@ class DanhSachOrderActivity : AppCompatActivity() {
 
         orderAdapter = OrderAdapter(getAllOrders)
         rvDanhSachOrder.adapter = orderAdapter
+        rvDanhSachOrder.layoutManager = LinearLayoutManager(this)
 
         btnThanhToan.setOnClickListener {
             if (!getAllOrders.isEmpty()) {
@@ -100,8 +101,6 @@ class DanhSachOrderActivity : AppCompatActivity() {
 
     private fun setControl() {
         rvDanhSachOrder = findViewById(R.id.rvDanhSachOrder)
-        rvDanhSachOrder.layoutManager = LinearLayoutManager(this)
-
         btnThanhToan = findViewById(R.id.btnThanhToan)
         imgBtnThoat = findViewById(R.id.imgBtnThoat)
         imgBtnDanhSachCaPhe = findViewById(R.id.imgBtnDanhSachCaPhe)

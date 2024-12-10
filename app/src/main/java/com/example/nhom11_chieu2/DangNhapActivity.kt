@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nhom11_chieu2.QuanTri.QuanTriActivity
 import com.example.nhom11_chieu2.model.DatabaseHelper
-import com.example.nhom11_chieu2.model.NguoiDung
+import com.example.nhom11_chieu2.model.NhanVien
 
 class DangNhapActivity : AppCompatActivity() {
     private lateinit var edtTen: EditText
@@ -88,36 +88,68 @@ class DangNhapActivity : AppCompatActivity() {
         }
 
         val databaseHelper = DatabaseHelper(this)
-        val kiemTraNhanVien = databaseHelper.getAllNguoiDung()
+        val kiemTraNhanVien = databaseHelper.getAllNhanVien()
         if (kiemTraNhanVien.isEmpty()) {
-            val danhSachNguoiDung = getDanhSachNguoiDung()
-            for (nguoiDung in danhSachNguoiDung) {
-                databaseHelper.addNguoiDung(nguoiDung)
+            val danhSachNhanVien = getDanhSachNhanVien()
+            for (nhanVien in danhSachNhanVien) {
+                databaseHelper.addNhanVien(nhanVien)
             }
-            Log.d("db", "Số lượng người dùng: ${databaseHelper.getAllNguoiDung().size}")
+            Log.d("db", "Số lượng nhân viên: ${databaseHelper.getAllNhanVien().size}")
         }
     }
 
-    private fun getDanhSachNguoiDung(): List<NguoiDung> {
+    private fun getDanhSachNhanVien(): List<NhanVien> {
         return listOf(
-            NguoiDung(
+            NhanVien(
                 1,
                 "Đào Văn Hoàng",
+                R.drawable.imgemployeecoffe4,
                 "Nhân Viên Order",
                 "daovanhoang11@gmail.com",
                 "daovanhoang11",
                 "123456",
                 50
             ),
-            NguoiDung(
+            NhanVien(
                 2,
                 "Huỳnh Ngọc Dân",
+                R.drawable.imgemployeecoffe1,
                 "Quản Trị",
-                "huynhngodan11@gmail.com",
+                "huynhngodan@gmail.com",
                 "huynhngocdan11",
                 "123456",
                 100
-            )
+            ),
+            NhanVien(
+                3,
+                "Nguyễn Đức Chuẩn",
+                R.drawable.imgemployeecoffe5,
+                "Nhân Viên",
+                "nguyenducchuan@gmail.com",
+                "nguyenducchuan11",
+                "123456",
+                50
+            ),
+            NhanVien(
+                4,
+                "Bùi Tín Thành",
+                R.drawable.imgemployeecoffe6,
+                "Nhân Viên",
+                "buitinthanh@gmail.com",
+                "buitinthanh11",
+                "123456",
+                50
+            ),
+            NhanVien(
+                5,
+                "Nguyễn Thị Minh Thu",
+                R.drawable.imgemployeecoffe2,
+                "Nhân Viên",
+                "nguyenthiminhthu11@gmail.com",
+                "nguyenthiminhthu11",
+                "123456",
+                50
+            ),
         )
     }
 

@@ -38,6 +38,7 @@ class ThanhToanActivity : AppCompatActivity() {
 
         thanhToanAdapter = ThanhToanAdapter(danhSachThanhToan)
         rvDanhSachThanhToan.adapter = thanhToanAdapter
+        rvDanhSachThanhToan.layoutManager = LinearLayoutManager(this)
 
         tongTien = danhSachThanhToan.sumOf { it.gia * it.soLuong }
         val tongTienFormat = String.format("%,.0f", tongTien) // Định dạng có dấu phẩy
@@ -106,7 +107,6 @@ class ThanhToanActivity : AppCompatActivity() {
 
     private fun setControl() {
         rvDanhSachThanhToan = findViewById(R.id.rvDanhSachThanhToan)
-        rvDanhSachThanhToan.layoutManager = LinearLayoutManager(this)
         tvTongTien = findViewById(R.id.tvTongTien)
         rgThanhToan = findViewById(R.id.rgThanhToan)
         btnXacNhan = findViewById(R.id.btnXacNhan)

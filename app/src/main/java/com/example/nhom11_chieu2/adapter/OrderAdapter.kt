@@ -17,21 +17,21 @@ import com.example.nhom11_chieu2.model.Order
 
 class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
     RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
-    class OrderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvTenOrder: TextView = view.findViewById(R.id.tvTenOrder)
-        val ivHinhAnhOrder: ImageView = view.findViewById(R.id.ivHinhAnhOrder)
-        val tvGiaOrder: TextView = view.findViewById(R.id.tvGiaOrder)
-        val tvSoLuongOrder: TextView = view.findViewById(R.id.tvSoLuongOrder)
-        val btnTangOrder: Button = view.findViewById(R.id.btnTangOrder)
-        val btnGiamOrder: Button = view.findViewById(R.id.btnGiamOrder)
-        val btnXoaOrder: Button = view.findViewById(R.id.btnXoaOrder)
+    class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tvTenOrder: TextView = itemView.findViewById(R.id.tvTenOrder)
+        val ivHinhAnhOrder: ImageView = itemView.findViewById(R.id.ivHinhAnhOrder)
+        val tvGiaOrder: TextView = itemView.findViewById(R.id.tvGiaOrder)
+        val tvSoLuongOrder: TextView = itemView.findViewById(R.id.tvSoLuongOrder)
+        val btnTangOrder: Button = itemView.findViewById(R.id.btnTangOrder)
+        val btnGiamOrder: Button = itemView.findViewById(R.id.btnGiamOrder)
+        val btnXoaOrder: Button = itemView.findViewById(R.id.btnXoaOrder)
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
-        val itemView =
+        val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_order, parent, false)
-        return OrderViewHolder(itemView)
+        return OrderViewHolder(view)
     }
 
     override fun getItemCount(): Int {

@@ -48,11 +48,11 @@ class DanhSachDoUongActivity : AppCompatActivity() {
         val getAllDoUong = databaseHelper.getAllDoUong()
         doUongAdapter = DoUongAdapter(getAllDoUong)
         rvDanhSachDoUong.adapter = doUongAdapter
+        rvDanhSachDoUong.layoutManager = LinearLayoutManager(this)
 
         svTimKiem.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                // Xử lý khi người dùng submit tìm kiếm
                 query?.let {
                     val locDanhSach = databaseHelper.searchDoUong(it)
                     doUongAdapter.capNhatDanhSach(locDanhSach)
@@ -280,8 +280,6 @@ class DanhSachDoUongActivity : AppCompatActivity() {
 
     private fun setControl() {
         rvDanhSachDoUong = findViewById(R.id.rvDanhSachDoUong)
-        rvDanhSachDoUong.layoutManager = LinearLayoutManager(this)
-
         tvLoaiDoUong = findViewById(R.id.tvLoaiDoUong)
         svTimKiem = findViewById(R.id.svTimKiem)
         imgBtnDanhSachCaPhe = findViewById(R.id.imgBtnDanhSachCaPhe)

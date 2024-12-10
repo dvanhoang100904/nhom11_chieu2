@@ -1,40 +1,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#fff"
     android:orientation="vertical">
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
+        android:background="#f5f6cf"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingTop="14dp">
+        android:padding="18dp">
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="14dp"
-            android:background="@drawable/imghome"></ImageView>
+        <ImageButton
+            android:id="@+id/imgBtnBack"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="4dp"
+            android:background="@drawable/imgquantri" />
 
         <TextView
-            android:id="@+id/header_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="34dp"
-            android:gravity="center"
-            android:padding="16dp"
+            android:layout_marginLeft="10dp"
             android:text="Quản Trị"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textSize="20sp"
+            android:textStyle="bold"></TextView>
     </LinearLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:background="@drawable/imgbanner"></ImageView>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,55 +43,86 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnQuanLiNhanVien"
-            android:layout_width="340dp"
-            android:layout_height="64dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="40dp"
-            android:background="@drawable/button_background"
-            android:drawableLeft="@drawable/ic_nhanvien"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:padding="14dp"
-            android:text="Quản Lí Nhân Viên"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnQuanLiMenu"
-            android:layout_width="340dp"
-            android:layout_height="64dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/button_background"
-            android:drawableLeft="@drawable/menu"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:padding="14dp"
-            android:text="Quản Lí Menu"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnDangXuat"
-            android:layout_width="140dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/background_dangnhap_dangxuat"
-            android:text="ĐĂNG XUẤT"
-            android:textColor="#fff"
-            android:textSize="16sp"
-            android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/imgemployes"></ImageView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnQTNhanVien"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/background_nhanvien_quanly"
+                android:text="Nhân Viên"
+                android:textSize="18sp"
+                android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/imgdrink"></ImageView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnQTDoUong"
+               android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/background_nhanvien_quanly"
+                android:text="Đồ Uống"
+                android:textSize="18sp"
+                android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/imglogout"></ImageView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDangXuat"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/background_dangnhap_dangxuat"
+                android:text="ĐĂNG XUẤT"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:textStyle="bold"></androidx.appcompat.widget.AppCompatButton>
+        </LinearLayout>
+
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F5F5F5"
+        android:background="#f5f6cf"
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="10dp">
@@ -104,11 +134,11 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/imgBtnQTNhanVien"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:contentDescription="Footer Nhân Viên"
-                android:src="@drawable/footernhanvien" />
+                android:background="@drawable/imgemployes" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -125,17 +155,17 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/imgBtnQTDoUong"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:contentDescription="Footer Menu"
-                android:src="@drawable/menu" />
+                android:background="@drawable/imgdrink" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Menu"
+                android:text="Đồ Uống"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>

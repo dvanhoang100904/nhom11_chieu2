@@ -40,6 +40,7 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
 
         viTriBanAdapter = ViTriBanAdapter(getAllViTriBan)
         rvDanhSachViTriBan.adapter = viTriBanAdapter
+        rvDanhSachViTriBan.layoutManager = GridLayoutManager(this, 4)
 
         imgBtnThoat.setOnClickListener {
             val builder = AlertDialog.Builder(this)
@@ -191,8 +192,6 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
 
     private fun setControl() {
         rvDanhSachViTriBan = findViewById(R.id.rvDanhSachViTriBan)
-        rvDanhSachViTriBan.layoutManager = GridLayoutManager(this, 4)
-
         imgBtnThoat = findViewById(R.id.imgBtnThoat)
 
     }

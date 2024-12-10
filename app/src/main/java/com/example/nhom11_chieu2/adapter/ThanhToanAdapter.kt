@@ -14,18 +14,18 @@ import java.util.Locale
 
 class ThanhToanAdapter(private val danhSachThanhToan: List<ThanhToan>) :
     RecyclerView.Adapter<ThanhToanAdapter.ThanhToanViewHolder>() {
-    class ThanhToanViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvTenThanhToan: TextView = view.findViewById(R.id.tvTenThanhToan)
-        val ivHinhAnhThanhToan: ImageView = view.findViewById(R.id.ivHinhAnhThanhToan)
-        val tvGiaThanhToan: TextView = view.findViewById(R.id.tvGiaThanhToan)
-        val tvSoLuongThanhToan: TextView = view.findViewById(R.id.tvSoLuongThanhToan)
+    class ThanhToanViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tvTenThanhToan: TextView = itemView.findViewById(R.id.tvTenThanhToan)
+        val ivHinhAnhThanhToan: ImageView = itemView.findViewById(R.id.ivHinhAnhThanhToan)
+        val tvGiaThanhToan: TextView = itemView.findViewById(R.id.tvGiaThanhToan)
+        val tvSoLuongThanhToan: TextView = itemView.findViewById(R.id.tvSoLuongThanhToan)
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThanhToanViewHolder {
-        val itemView =
+        val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_thanhtoan, parent, false)
-        return ThanhToanViewHolder(itemView)
+        return ThanhToanViewHolder(view)
     }
 
     override fun getItemCount(): Int {

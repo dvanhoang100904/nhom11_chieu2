@@ -13,16 +13,16 @@ import com.example.nhom11_chieu2.model.ViTriBan
 
 class ViTriBanAdapter(private val danhSachViTriBan: List<ViTriBan>) :
     RecyclerView.Adapter<ViTriBanAdapter.ViTriBanViewHolder>() {
-    class ViTriBanViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val ivHinhAnhViTriBan = view.findViewById<ImageView>(R.id.ivHinhAnhViTriBan)
-        val tvTenViTriBan = view.findViewById<TextView>(R.id.tvTenViTriBan)
+    class ViTriBanViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val ivHinhAnhViTriBan = itemView.findViewById<ImageView>(R.id.ivHinhAnhViTriBan)
+        val tvTenViTriBan = itemView.findViewById<TextView>(R.id.tvTenViTriBan)
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViTriBanViewHolder {
-        val itemView =
+        val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_vi_tri_ban, parent, false)
-        return ViTriBanViewHolder(itemView)
+        return ViTriBanViewHolder(view)
     }
 
     override fun getItemCount(): Int {
