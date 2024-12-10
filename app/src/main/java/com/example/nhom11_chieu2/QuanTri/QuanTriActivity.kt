@@ -3,14 +3,17 @@ package com.example.nhom11_chieu2.QuanTri
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nhom11_chieu2.DangNhapActivity
 import com.example.nhom11_chieu2.R
 
 class QuanTriActivity : AppCompatActivity() {
-    private lateinit var btnQuanLiNhanVien: Button
-    private lateinit var btnQuanLiMenu: Button
+    private lateinit var imgBtnQTNhanVien: ImageButton
+    private lateinit var imgBtnQTDoUong: ImageButton
+    private lateinit var btnQTNhanVien: Button
+    private lateinit var btnQTDoUong: Button
     private lateinit var btnDangXuat: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,22 +22,27 @@ class QuanTriActivity : AppCompatActivity() {
         setEvent()
     }
 
-    private fun setControl() {
-        btnQuanLiNhanVien = findViewById(R.id.btnQuanLiNhanVien)
-        btnQuanLiMenu = findViewById(R.id.btnQuanLiMenu)
-        btnDangXuat = findViewById(R.id.btnDangXuat)
-
-    }
-
     private fun setEvent() {
-        btnQuanLiNhanVien.setOnClickListener {
-            val intent = Intent(this, QuanLiNhanVien_MainActivity::class.java)
+        imgBtnQTNhanVien.setOnClickListener {
+            val intent = Intent(this, QuanTriNhanVienActivity::class.java)
             startActivity(intent)
         }
-        btnQuanLiMenu.setOnClickListener {
-            val intent = Intent(this, QuanLiMenu_MainActivity::class.java)
+
+        imgBtnQTDoUong.setOnClickListener {
+            val intent = Intent(this, QuanTriDoUongActivity::class.java)
             startActivity(intent)
         }
+
+        btnQTNhanVien.setOnClickListener {
+            val intent = Intent(this, QuanTriDoUongActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnQTDoUong.setOnClickListener {
+            val intent = Intent(this, QuanTriNhanVienActivity::class.java)
+            startActivity(intent)
+        }
+
         btnDangXuat.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Đăng xuất")
@@ -48,5 +56,14 @@ class QuanTriActivity : AppCompatActivity() {
             }
             builder.show()
         }
+    }
+
+    private fun setControl() {
+        imgBtnQTNhanVien = findViewById(R.id.imgBtnQTNhanVien)
+        imgBtnQTDoUong = findViewById(R.id.imgBtnQTDoUong)
+        btnQTNhanVien = findViewById(R.id.btnQTNhanVien)
+        btnQTDoUong = findViewById(R.id.btnQTDoUong)
+        btnDangXuat = findViewById(R.id.btnDangXuat)
+
     }
 }

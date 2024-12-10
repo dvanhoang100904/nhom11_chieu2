@@ -2,11 +2,11 @@
     <solid android:color="#FFFFFF" />
     <stroke
         android:width="2dp"
-        android:color="#4CAF50" />
+        android:color="#B5B12F" />
     <corners android:radius="8dp" />
     <padding
+        android:bottom="10dp"
         android:left="10dp"
-        android:top="10dp"
         android:right="10dp"
-        android:bottom="10dp" />
+        android:top="10dp" />
 </shape>

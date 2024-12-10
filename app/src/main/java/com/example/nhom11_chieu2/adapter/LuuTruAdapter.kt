@@ -15,21 +15,21 @@ import java.util.Locale
 
 class LuuTruAdapter(private var danhSachLuuTru: List<ThanhToan>) :
     RecyclerView.Adapter<LuuTruAdapter.LuuTruViewHolder>() {
-    class LuuTruViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvLuuMa: TextView = view.findViewById(R.id.tvLuuMa)
-        val tvLuuTen: TextView = view.findViewById(R.id.tvLuuTen)
-        val ivLuuHinhAnh: ImageView = view.findViewById(R.id.ivLuuHinhAnh)
-        val tvLuuGia: TextView = view.findViewById(R.id.tvLuuGia)
-        val tvLuuSoLuong: TextView = view.findViewById(R.id.tvLuuSoLuong)
-        val tvLuuNgay: TextView = view.findViewById(R.id.tvLuuNgay)
+    class LuuTruViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tvLuuMa: TextView = itemView.findViewById(R.id.tvLuuMa)
+        val tvLuuTen: TextView = itemView.findViewById(R.id.tvLuuTen)
+        val ivLuuHinhAnh: ImageView = itemView.findViewById(R.id.ivLuuHinhAnh)
+        val tvLuuGia: TextView = itemView.findViewById(R.id.tvLuuGia)
+        val tvLuuSoLuong: TextView = itemView.findViewById(R.id.tvLuuSoLuong)
+        val tvLuuNgay: TextView = itemView.findViewById(R.id.tvLuuNgay)
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LuuTruViewHolder {
-        val itemView =
+        val view =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_luutru_thanhtoan, parent, false)
-        return LuuTruViewHolder(itemView)
+        return LuuTruViewHolder(view)
     }
 
     override fun getItemCount(): Int {

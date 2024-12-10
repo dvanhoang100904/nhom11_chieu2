@@ -4,8 +4,6 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
-import java.text.Normalizer
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuanCoffe", null, 3) {
     override fun onCreate(db: SQLiteDatabase?) {
@@ -54,17 +52,18 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
             )"""
         db?.execSQL(sqlCreateTableThanhToan)
 
-        val sqlCreateTableNguoiDung = """
-            CREATE TABLE NguoiDung(
+        val sqlCreateTableNhanVien = """
+            CREATE TABLE NhanVien(
                 ma INTEGER PRIMARY KEY AUTOINCREMENT,
                 hoTen TEXT,
+                hinhAnh INTEGER,
                 chucVu TEXT,
                 email TEXT,
                 tenDangNhap TEXT UNIQUE,
                 matKhau TEXT,
                 quyen INTEGER
             )"""
-        db?.execSQL(sqlCreateTableNguoiDung)
+        db?.execSQL(sqlCreateTableNhanVien)
 
     }
 
@@ -125,7 +124,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         db.close()
     }
 
-    fun getAllDoUong(): List<DoUong> {
+    fun getAllDoUong(): MutableList<DoUong> {
         val danhSachDoUong = mutableListOf<DoUong>()
         val db = readableDatabase
         val sql = "SELECT * FROM DoUong"
@@ -181,10 +180,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
     fun searchDoUong(key: String): List<DoUong> {
         val danhSachDoUong = mutableListOf<DoUong>()
         val db = readableDatabase
-        val sql = """
-        SELECT * FROM DoUong 
-        WHERE ten LIKE ? OR loai LIKE ?
-        """
+        val sql = "SELECT * FROM DoUong WHERE ten LIKE ? OR loai LIKE ? "
         val cursor = db.rawQuery(sql, arrayOf("%$key%", "%$key%"))
         cursor.use {
             while (it.moveToNext()) {
@@ -208,6 +204,63 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         }
         db.close()
         return danhSachDoUong
+    }
+
+    fun searchDoUongQT(key: String): MutableList<DoUong> {
+        val danhSachDoUong = mutableListOf<DoUong>()
+        val db = readableDatabase
+        val sql = "SELECT * FROM DoUong WHERE ten LIKE ? OR loai LIKE ? "
+        val cursor = db.rawQuery(sql, arrayOf("%$key%", "%$key%"))
+        cursor.use {
+            while (it.moveToNext()) {
+                val maColumnIndex = it.getColumnIndex("ma")
+                val tenColumnIndex = it.getColumnIndex("ten")
+                val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
+                val giaColumnIndex = it.getColumnIndex("gia")
+                val moTaColumnIndex = it.getColumnIndex("moTa")
+                val loaiColumnIndex = it.getColumnIndex("loai")
+                danhSachDoUong.add(
+                    DoUong(
+                        it.getInt(maColumnIndex),
+                        it.getString(tenColumnIndex),
+                        it.getInt(hinhAnhColumnIndex),
+                        it.getDouble(giaColumnIndex),
+                        it.getString(moTaColumnIndex),
+                        it.getString(loaiColumnIndex)
+                    )
+                )
+            }
+        }
+        db.close()
+        return danhSachDoUong
+    }
+
+    fun deleteDoUongByMa(ma: Int) {
+        val db = writableDatabase
+        val sql = "ma = ?"
+        db.delete("DoUong", sql, arrayOf(ma.toString()))
+        db.close()
+    }
+
+    fun updateDoUongByMa(
+        ma: Int,
+        ten: String,
+        hinhAnh: Int,
+        gia: Double,
+        moTa: String,
+        loai: String
+    ) {
+        val db = writableDatabase
+        val cv = ContentValues().apply {
+            put("ten", ten)
+            put("hinhAnh", hinhAnh)
+            put("gia", gia)
+            put("moTa", moTa)
+            put("loai", loai)
+        }
+        val sql = "ma = ?"
+        db.update("DoUong", cv, sql, arrayOf(ma.toString()))
+        db.close()
     }
 
     fun addOrder(order: Order) {
@@ -358,38 +411,41 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         db.close()
     }
 
-    fun addNguoiDung(nguoiDung: NguoiDung) {
+    fun addNhanVien(nhanVien: NhanVien) {
         val db = writableDatabase
         val cv = ContentValues().apply {
-            put("hoTen", nguoiDung.hoTen)
-            put("chucVu", nguoiDung.chucVu)
-            put("email", nguoiDung.email)
-            put("tenDangNhap", nguoiDung.tenDangNhap)
-            put("matKhau", nguoiDung.matKhau)
-            put("quyen", nguoiDung.quyen)
+            put("hoTen", nhanVien.hoTen)
+            put("chucVu", nhanVien.chucVu)
+            put("hinhAnh", nhanVien.hinhAnh)
+            put("email", nhanVien.email)
+            put("tenDangNhap", nhanVien.tenDangNhap)
+            put("matKhau", nhanVien.matKhau)
+            put("quyen", nhanVien.quyen)
         }
-        db.insertWithOnConflict("NguoiDung", null, cv, SQLiteDatabase.CONFLICT_IGNORE)
+        db.insertWithOnConflict("NhanVien", null, cv, SQLiteDatabase.CONFLICT_IGNORE)
         db.close()
     }
 
-    fun getAllNguoiDung(): List<NguoiDung> {
-        val danhSachNguoiDung = mutableListOf<NguoiDung>()
+    fun getAllNhanVien(): MutableList<NhanVien> {
+        val danhSachNhanVien = mutableListOf<NhanVien>()
         val db = readableDatabase
-        val sql = "SELECT * FROM NguoiDung"
+        val sql = "SELECT * FROM NhanVien"
         val cursor = db.rawQuery(sql, null)
         cursor.use {
             while (it.moveToNext()) {
                 val maColumnIndex = it.getColumnIndex("ma")
                 val hoTenColumnIndex = it.getColumnIndex("hoTen")
+                val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
                 val chucVuColumnIndex = it.getColumnIndex("chucVu")
                 val emailColumnIndex = it.getColumnIndex("email")
                 val tenDangNhapColumnIndex = it.getColumnIndex("tenDangNhap")
                 val matKhauColumnIndex = it.getColumnIndex("matKhau")
                 val quyenColumnIndex = it.getColumnIndex("quyen")
-                danhSachNguoiDung.add(
-                    NguoiDung(
+                danhSachNhanVien.add(
+                    NhanVien(
                         it.getInt(maColumnIndex),
                         it.getString(hoTenColumnIndex),
+                        it.getInt(hinhAnhColumnIndex),
                         it.getString(chucVuColumnIndex),
                         it.getString(emailColumnIndex),
                         it.getString(tenDangNhapColumnIndex),
@@ -400,12 +456,49 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
             }
         }
         db.close()
-        return danhSachNguoiDung
+        return danhSachNhanVien
+    }
+
+    fun getNhanViengByMa(ma: Int): NhanVien? {
+        val db = readableDatabase
+        val sql = "SELECT * FROM NhanVien WHERE ma =?"
+        val cursor = db.rawQuery(sql, arrayOf(ma.toString()))
+        var nhanVien: NhanVien? = null
+        cursor.use {
+            val hoTenColumnIndex = it.getColumnIndex("hoTen")
+            val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
+            val chucVuColumnIndex = it.getColumnIndex("chucVu")
+            val emailColumnIndex = it.getColumnIndex("email")
+            val tenDangNhapColumnIndex = it.getColumnIndex("tenDangNhap")
+            val matKhauColumnIndex = it.getColumnIndex("matKhau")
+            val quyenColumnIndex = it.getColumnIndex("quyen")
+            if (it.moveToFirst()) {
+                val hoTen = it.getString(hoTenColumnIndex)
+                val hinhAnh = it.getInt(hinhAnhColumnIndex)
+                val chucVu = it.getString(chucVuColumnIndex)
+                val email = it.getString(emailColumnIndex)
+                val tenDangNhap = it.getString(tenDangNhapColumnIndex)
+                val matKhau = it.getString(matKhauColumnIndex)
+                val quyen = it.getInt(quyenColumnIndex)
+                nhanVien =
+                    NhanVien(ma, hoTen, hinhAnh, chucVu, email, tenDangNhap, matKhau, quyen)
+            }
+        }
+        db.close()
+        return nhanVien
+    }
+
+    fun deleteNhanVienByMa(ma: Int) {
+        val db = writableDatabase
+        val sql = "ma = ?"
+        db.delete("NhanVien", sql, arrayOf(ma.toString()))
+        db.close()
+
     }
 
     fun dangNhap(tenDangNhap: String, matKhau: String): Int? {
         val db = readableDatabase
-        val sql = "SELECT quyen FROM NguoiDung WHERE tenDangNhap = ? AND matKhau = ?"
+        val sql = "SELECT quyen FROM NhanVien WHERE tenDangNhap = ? AND matKhau = ?"
         val cursor = db.rawQuery(sql, arrayOf(tenDangNhap, matKhau))
         var quyen: Int? = null
         cursor.use {
@@ -417,5 +510,68 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         db.close()
         return quyen
     }
+
+    fun updateNhanVienByMa(
+        ma: Int,
+        hoTen: String,
+        hinhAnh: Int,
+        chucVu: String,
+        email: String,
+        tenDangNhap: String,
+        matKhau: String,
+        quyen: Int
+    ) {
+        val db = writableDatabase
+        val cv = ContentValues().apply {
+            put("hoTen", hoTen)
+            put("hinhAnh", hinhAnh)
+            put("chucVu", chucVu)
+            put("email", email)
+            put("tenDangNhap", tenDangNhap)
+            put("matKhau", matKhau)
+            put("quyen", quyen)
+        }
+        val sql = "ma = ?"
+        db.update("NhanVien", cv, sql, arrayOf(ma.toString()))
+        db.close()
+
+    }
+
+    fun searchNhanVien(key: String): MutableList<NhanVien> {
+        val danhSachNhanVien = mutableListOf<NhanVien>()
+        val db = readableDatabase
+        val sql = "SELECT * FROM NhanVien WHERE hoTen LIKE ? OR chucVu LIKE ?"
+        val cursor = db.rawQuery(sql, arrayOf("%$key%", "%$key%"))
+        cursor.use {
+            while (it.moveToNext()) {
+                val maColumnIndex = it.getColumnIndex("ma")
+                val hoTenColumnIndex = it.getColumnIndex("hoTen")
+                val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
+                val chucVuColumnIndex = it.getColumnIndex("chucVu")
+                val emailColumnIndex = it.getColumnIndex("email")
+                val tenDangNhapColumnIndex = it.getColumnIndex("tenDangNhap")
+                val matKhauColumnIndex = it.getColumnIndex("matKhau")
+                val quyenColumnIndex = it.getColumnIndex("quyen")
+                danhSachNhanVien.add(
+                    NhanVien(
+                        it.getInt(maColumnIndex),
+                        it.getString(hoTenColumnIndex),
+                        it.getInt(hinhAnhColumnIndex),
+                        it.getString(chucVuColumnIndex),
+                        it.getString(emailColumnIndex),
+                        it.getString(tenDangNhapColumnIndex),
+                        it.getString(matKhauColumnIndex),
+                        it.getInt(quyenColumnIndex)
+                    )
+                )
+            }
+        }
+        db.close()
+        return danhSachNhanVien
+    }
 }
+
+
+
+
 

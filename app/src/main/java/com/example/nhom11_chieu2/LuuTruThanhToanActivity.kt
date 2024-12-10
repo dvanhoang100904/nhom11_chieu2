@@ -31,6 +31,7 @@ class LuuTruThanhToanActivity : AppCompatActivity() {
 
         luuTruAdapter = LuuTruAdapter(getAllThanhToan)
         rvLuuTruThanhToan.adapter = luuTruAdapter
+        rvLuuTruThanhToan.layoutManager = LinearLayoutManager(this)
 
         imgBtnThoat.setOnClickListener {
             val builder = AlertDialog.Builder(this)
@@ -67,7 +68,6 @@ class LuuTruThanhToanActivity : AppCompatActivity() {
 
     private fun setControl() {
         rvLuuTruThanhToan = findViewById(R.id.rvLuuTruThanhToan)
-        rvLuuTruThanhToan.layoutManager = LinearLayoutManager(this)
         imgBtnThoat = findViewById(R.id.imgBtnThoat)
         imgBtnXoaLuuTru = findViewById(R.id.imgBtnXoaLuuTru)
     }

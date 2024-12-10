@@ -22,9 +22,9 @@ class DoUongAdapter(private var danhSachDoUong: List<DoUong>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DoUongViewHolder {
-        val itemView =
+        val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_do_uong, parent, false)
-        return DoUongViewHolder(itemView)
+        return DoUongViewHolder(view)
     }
 
     override fun getItemCount(): Int {
