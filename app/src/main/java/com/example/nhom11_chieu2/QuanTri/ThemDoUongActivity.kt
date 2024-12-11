@@ -32,7 +32,6 @@ class ThemDoUongActivity : AppCompatActivity() {
     private var hinhAnhChonUpload = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_them_do_uong)
         setControl()
         setEvent()
@@ -44,9 +43,15 @@ class ThemDoUongActivity : AppCompatActivity() {
         imagePickerLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
-                    hinhAnhChonUpload = result.data?.getIntExtra("hinhAnhUpload", -1) ?: -1
+                    hinhAnhChonUpload = result.data?.getIntExtra("hinhAnhChonUpload", -1) ?: -1
                     if (hinhAnhChonUpload != -1) {
                         ivHinhAnh.setImageResource(hinhAnhChonUpload)
+                    } else {
+                        Toast.makeText(
+                            this,
+                            "Không thể tải ảnh, vui lòng thử lại",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
@@ -56,7 +61,7 @@ class ThemDoUongActivity : AppCompatActivity() {
             imagePickerLauncher.launch(intent)
         }
 
-        val hinhAnhUpload = intent.getIntExtra("hinhAnhUpload", -1)
+        val hinhAnhUpload = intent.getIntExtra("hinhAnhChonUpload", -1)
         if (hinhAnhUpload != -1) {
             ivHinhAnh.setImageResource(hinhAnhUpload)
             hinhAnhChonUpload = hinhAnhUpload
@@ -69,7 +74,7 @@ class ThemDoUongActivity : AppCompatActivity() {
             val loai = edtLoai.text.toString().trim()
             val hinhAnh = hinhAnhChonUpload
 
-            if (ten.isEmpty() || gia.isEmpty() || moTa.isEmpty() || loai.isEmpty()) {
+            if (ten.isEmpty() || gia.isEmpty() || moTa.isEmpty() || loai.isEmpty() || hinhAnh == -1) {
                 Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }

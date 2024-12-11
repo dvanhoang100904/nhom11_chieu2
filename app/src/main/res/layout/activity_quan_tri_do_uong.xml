@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Home"
+                android:text="Quản Trị"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -95,7 +95,7 @@
                 android:id="@+id/imgBtnQTNhanVien"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:background="@drawable/imguser" />
+                android:background="@drawable/imgemployes" />
 
             <TextView
                 android:layout_width="wrap_content"

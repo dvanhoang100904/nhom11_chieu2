@@ -37,7 +37,7 @@ class QuanTriNhanVienActivity : AppCompatActivity() {
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
-                    val locDanhSach = databaseHelper.searchNhanVien(it)
+                    val locDanhSach = databaseHelper.searchQTNhanVien(it)
                     quanTriNhanVienAdapter.updateDanhSach(locDanhSach)
                 }
                 return true
@@ -45,7 +45,7 @@ class QuanTriNhanVienActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 newText?.let {
-                    val locDanhSach = databaseHelper.searchNhanVien(it)
+                    val locDanhSach = databaseHelper.searchQTNhanVien(it)
                     quanTriNhanVienAdapter.updateDanhSach(locDanhSach)
                 }
                 return true

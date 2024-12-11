@@ -10,7 +10,7 @@ import com.example.nhom11_chieu2.R
 class UpLoadAdapter(private val hinhAnh: List<Int>, private val onImageClick: (Int) -> Unit) :
     RecyclerView.Adapter<UpLoadAdapter.UploadViewHolder>() {
     class UploadViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val ivUpLoadHinhAnh: ImageView = itemView.findViewById(R.id.ivUpLoadHinhAnh)
+        val ivHinhAnhUpload: ImageView = itemView.findViewById(R.id.ivHinhAnhUpload)
 
     }
 
@@ -26,9 +26,8 @@ class UpLoadAdapter(private val hinhAnh: List<Int>, private val onImageClick: (I
 
     override fun onBindViewHolder(holder: UploadViewHolder, position: Int) {
         val hinhAnh = hinhAnh[position]
-        holder.ivUpLoadHinhAnh.setImageResource(hinhAnh)
-
-        holder.ivUpLoadHinhAnh.setOnClickListener {
+        holder.ivHinhAnhUpload.setImageResource(hinhAnh)
+        holder.ivHinhAnhUpload.setOnClickListener {
             onImageClick(hinhAnh)
         }
     }

@@ -43,9 +43,15 @@ class ThemNhanVienActivity : AppCompatActivity() {
         imagePickerLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
-                    hinhAnhChonUpload = result.data?.getIntExtra("hinhAnhUpload", -1) ?: -1
+                    hinhAnhChonUpload = result.data?.getIntExtra("hinhAnhChonUpload", -1) ?: -1
                     if (hinhAnhChonUpload != -1) {
                         ivHinhAnh.setImageResource(hinhAnhChonUpload)
+                    } else {
+                        Toast.makeText(
+                            this,
+                            "Không thể tải ảnh, vui lòng thử lại",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
@@ -55,7 +61,7 @@ class ThemNhanVienActivity : AppCompatActivity() {
             imagePickerLauncher.launch(intent)
         }
 
-        val hinhAnhUpload = intent.getIntExtra("hinhAnhUpload", -1)
+        val hinhAnhUpload = intent.getIntExtra("hinhAnhChonUpload", -1)
         if (hinhAnhUpload != -1) {
             ivHinhAnh.setImageResource(hinhAnhUpload)
             hinhAnhChonUpload = hinhAnhUpload
@@ -71,7 +77,7 @@ class ThemNhanVienActivity : AppCompatActivity() {
             val hinhAnh = hinhAnhChonUpload
 
             if (hoTen.isEmpty() || chucVu.isEmpty() || email.isEmpty() ||
-                tenDangNhap.isEmpty() || matKhau.isEmpty() || quyen.isEmpty()
+                tenDangNhap.isEmpty() || matKhau.isEmpty() || quyen.isEmpty() || hinhAnh == -1
             ) {
                 Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener

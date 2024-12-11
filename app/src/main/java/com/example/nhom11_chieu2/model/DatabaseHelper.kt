@@ -73,7 +73,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
             db?.execSQL("DROP TABLE IF EXISTS DoUong")
             db?.execSQL("DROP TABLE IF EXISTS Orders")
             db?.execSQL("DROP TABLE IF EXISTS ThanhToan")
-            db?.execSQL("DROP TABLE IF EXISTS NguoiDung")
+            db?.execSQL("DROP TABLE IF EXISTS NhanVien")
             onCreate(db)
         }
     }
@@ -206,7 +206,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         return danhSachDoUong
     }
 
-    fun searchDoUongQT(key: String): MutableList<DoUong> {
+    fun searchQTDoUong(key: String): MutableList<DoUong> {
         val danhSachDoUong = mutableListOf<DoUong>()
         val db = readableDatabase
         val sql = "SELECT * FROM DoUong WHERE ten LIKE ? OR loai LIKE ? "
@@ -537,7 +537,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
 
     }
 
-    fun searchNhanVien(key: String): MutableList<NhanVien> {
+    fun searchQTNhanVien(key: String): MutableList<NhanVien> {
         val danhSachNhanVien = mutableListOf<NhanVien>()
         val db = readableDatabase
         val sql = "SELECT * FROM NhanVien WHERE hoTen LIKE ? OR chucVu LIKE ?"

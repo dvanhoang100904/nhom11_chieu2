@@ -20,7 +20,7 @@ class UpLoadHinhAnhActivity : AppCompatActivity() {
     private lateinit var ivHinhAnhChonUpload: ImageView
     private lateinit var btnQuayLai: Button
     private lateinit var btnDongY: Button
-    private var hinhAnhChon: Int? = null
+    private var hinhAnhChonUpload: Int? = null
 
     private val hinhAnh = listOf(
         R.drawable.imgcaphe1,
@@ -47,9 +47,9 @@ class UpLoadHinhAnhActivity : AppCompatActivity() {
     }
 
     private fun setEvent() {
-        val uploadAdapter = UpLoadAdapter(hinhAnh) { hinhAnhChon ->
-            ivHinhAnhChonUpload.setImageResource(hinhAnhChon)
-            this.hinhAnhChon = hinhAnhChon
+        val uploadAdapter = UpLoadAdapter(hinhAnh) { hinhAnhChonUpload ->
+            ivHinhAnhChonUpload.setImageResource(hinhAnhChonUpload)
+            this.hinhAnhChonUpload = hinhAnhChonUpload
         }
         rvUpLoadHinhAnh.adapter = uploadAdapter
 
@@ -57,7 +57,7 @@ class UpLoadHinhAnhActivity : AppCompatActivity() {
 
         btnDongY.setOnClickListener {
             val resultIntent = Intent()
-            resultIntent.putExtra("hinhAnhUpload", hinhAnhChon)
+            resultIntent.putExtra("hinhAnhChonUpload", hinhAnhChonUpload)
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
         }

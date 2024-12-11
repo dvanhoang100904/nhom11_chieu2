@@ -57,9 +57,15 @@ class SuaNhanVienActivity : AppCompatActivity() {
         imagePickerLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
-                    hinhAnhChonUpload = result.data?.getIntExtra("hinhAnhUpload", -1) ?: -1
+                    hinhAnhChonUpload = result.data?.getIntExtra("hinhAnhChonUpload", -1) ?: -1
                     if (hinhAnhChonUpload != -1) {
                         ivHinhAnh.setImageResource(hinhAnhChonUpload)
+                    } else {
+                        Toast.makeText(
+                            this,
+                            "Không thể tải ảnh, vui lòng thử lại",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
@@ -69,7 +75,7 @@ class SuaNhanVienActivity : AppCompatActivity() {
             imagePickerLauncher.launch(intent)
         }
 
-        val hinhAnhUpload = intent.getIntExtra("hinhAnhUpload", -1)
+        val hinhAnhUpload = intent.getIntExtra("hinhAnhChonUpload", -1)
         if (hinhAnhUpload != -1) {
             ivHinhAnh.setImageResource(hinhAnhUpload)
             hinhAnhChonUpload = hinhAnhUpload
@@ -82,10 +88,10 @@ class SuaNhanVienActivity : AppCompatActivity() {
             val tenDangNhapMoi = edtTenDangNhap.text.toString().trim()
             val matKhauMoi = edtMatKhau.text.toString().trim()
             val quyenMoi = edtQuyen.text.toString().trim()
-            val hinhAnhMoi = hinhAnhChonUpload
+            val hinhAnhMoi = if (hinhAnhChonUpload != -1) hinhAnhChonUpload else hinhAnh
 
             if (hoTenMoi.isEmpty() || chucVuMoi.isEmpty() || emailMoi.isEmpty() ||
-                tenDangNhapMoi.isEmpty() || matKhauMoi.isEmpty() || quyenMoi == null
+                tenDangNhapMoi.isEmpty() || matKhauMoi.isEmpty() || quyenMoi == null || hinhAnhMoi == -1
             ) {
                 Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -96,12 +102,11 @@ class SuaNhanVienActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val quyenInt = quyenMoi.toIntOrNull()
-            if (quyenInt == null) {
+            val quyenMoiInt = quyenMoi.toIntOrNull()
+            if (quyenMoiInt == null) {
                 Toast.makeText(this, "Quyền phải là một số hợp lệ", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-
 
             val databaseHelper = DatabaseHelper(this)
             val ma = intent.getIntExtra("ma", -1)
@@ -114,7 +119,7 @@ class SuaNhanVienActivity : AppCompatActivity() {
                     email = emailMoi,
                     tenDangNhap = tenDangNhapMoi,
                     matKhau = matKhauMoi,
-                    quyen = quyenInt
+                    quyen = quyenMoiInt
                 )
                 Toast.makeText(this, "Cập nhật $hoTenMoi thành công!", Toast.LENGTH_SHORT).show()
                 val intentCNNV = Intent(this, QuanTriNhanVienActivity::class.java)

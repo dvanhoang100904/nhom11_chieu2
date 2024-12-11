@@ -53,12 +53,11 @@ class DanhSachOrderActivity : AppCompatActivity() {
                             .toString()
                     )
                 }
-
-                val intentTT = Intent(this, ThanhToanActivity::class.java)
-                intentTT.putParcelableArrayListExtra(
-                    "danhSachThanhToan",
-                    ArrayList(danhSachThanhToan)
-                )
+                val intentTT = Intent(this, ThanhToanActivity::class.java).apply {
+                    putParcelableArrayListExtra(
+                        "danhSachThanhToan", ArrayList(danhSachThanhToan)
+                    )
+                }
                 startActivity(intentTT)
             } else {
                 Toast.makeText(
