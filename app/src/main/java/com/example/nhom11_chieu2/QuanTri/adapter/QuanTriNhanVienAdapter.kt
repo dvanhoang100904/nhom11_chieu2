@@ -88,6 +88,7 @@ class QuanTriNhanVienAdapter(private var danhSachQTNhanVien: MutableList<NhanVie
         }
 
     }
+
     fun updateDanhSach(danhSachMoi: MutableList<NhanVien>) {
         danhSachQTNhanVien.clear()
         danhSachQTNhanVien.addAll(danhSachMoi)

@@ -54,9 +54,15 @@ class SuaDoUongActivity : AppCompatActivity() {
         imagePickerLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
-                    hinhAnhChonUpload = result.data?.getIntExtra("hinhAnhUpload", -1) ?: -1
+                    hinhAnhChonUpload = result.data?.getIntExtra("hinhAnhChonUpload", -1) ?: -1
                     if (hinhAnhChonUpload != -1) {
                         ivHinhAnh.setImageResource(hinhAnhChonUpload)
+                    } else {
+                        Toast.makeText(
+                            this,
+                            "Không thể tải ảnh, vui lòng thử lại",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
@@ -66,26 +72,26 @@ class SuaDoUongActivity : AppCompatActivity() {
             imagePickerLauncher.launch(intent)
         }
 
-        val hinhAnhUpload = intent.getIntExtra("hinhAnhUpload", -1)
+        val hinhAnhUpload = intent.getIntExtra("hinhAnhChonUpload", -1)
         if (hinhAnhUpload != -1) {
             ivHinhAnh.setImageResource(hinhAnhUpload)
             hinhAnhChonUpload = hinhAnhUpload
         }
-
 
         btnLuuDoUong.setOnClickListener {
             val tenMoi = edtTen.text.toString().trim()
             val giaMoi = edtGia.text.toString().trim()
             val moTaMoi = edtMoTa.text.toString().trim()
             val loaiMoi = edtLoai.text.toString().trim()
-            val hinhAnhMoi = hinhAnhUpload
-            if (tenMoi.isEmpty() || giaMoi.isEmpty() || moTaMoi.isEmpty() || loaiMoi.isEmpty()) {
+            val hinhAnhMoi = if (hinhAnhChonUpload != -1) hinhAnhChonUpload else hinhAnh
+
+            if (tenMoi.isEmpty() || giaMoi.isEmpty() || moTaMoi.isEmpty() || loaiMoi.isEmpty() || hinhAnhMoi == -1) {
                 Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            val giaDouBle = giaMoi.toDoubleOrNull()
-            if (giaDouBle == null) {
+            val giaMoiDouble = giaMoi.toDoubleOrNull()
+            if (giaMoiDouble == null) {
                 Toast.makeText(this, "Giá phải là một số hợp lệ", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -97,7 +103,7 @@ class SuaDoUongActivity : AppCompatActivity() {
                     ma = ma,
                     ten = tenMoi,
                     hinhAnh = hinhAnhMoi,
-                    gia = giaDouBle,
+                    gia = giaMoiDouble,
                     moTa = moTaMoi,
                     loai = loaiMoi,
                 )
@@ -107,8 +113,6 @@ class SuaDoUongActivity : AppCompatActivity() {
             }
         }
     }
-
-
 
     private fun setControl() {
         imgBtnBack = findViewById(R.id.imgBtnBack)

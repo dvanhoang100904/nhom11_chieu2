@@ -23,7 +23,6 @@ class ChiTietQuanTriNhanVienActivity : AppCompatActivity() {
     private lateinit var imgBtnBack: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_chi_tiet_quan_tri_nhan_vien)
         setControl()
         setEvent()

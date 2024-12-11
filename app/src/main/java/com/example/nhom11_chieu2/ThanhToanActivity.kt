@@ -95,9 +95,7 @@ class ThanhToanActivity : AppCompatActivity() {
                 )
                 databaseHelper.addThanhToan(thanhToan)
             }
-
             databaseHelper.deleteAllOrders()
-
             val intentNVOD = Intent(this, NhanVienOrderActivity::class.java)
             startActivity(intentNVOD)
         }

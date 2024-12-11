@@ -65,6 +65,7 @@ class QuanTriDoUongAdapter(private var danhSachQTDoUong: MutableList<DoUong>) :
                 }
             holder.itemView.context.startActivity(intentSDU)
         }
+
         holder.imgBtnXoaDoUong.setOnClickListener {
             val builder = AlertDialog.Builder(holder.itemView.context)
             builder.setTitle("Xóa")
@@ -85,6 +86,7 @@ class QuanTriDoUongAdapter(private var danhSachQTDoUong: MutableList<DoUong>) :
             builder.show()
         }
     }
+
     fun updateDanhSach(danhSachMoi: MutableList<DoUong>) {
         danhSachQTDoUong.clear()
         danhSachQTDoUong.addAll(danhSachMoi)
