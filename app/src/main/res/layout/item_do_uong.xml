@@ -23,7 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tên "
-            android:textSize="24sp"></TextView>
+            android:layout_marginTop="10dp"
+            android:textSize="22sp"></TextView>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnChiTietDoUong"

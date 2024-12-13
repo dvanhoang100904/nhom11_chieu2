@@ -38,7 +38,10 @@ class ThemNhanVienActivity : AppCompatActivity() {
     }
 
     private fun setEvent() {
-        imgBtnBack.setOnClickListener { finish() }
+        imgBtnBack.setOnClickListener {
+            val intent = Intent(this, QuanTriNhanVienActivity::class.java)
+            startActivity(intent)
+        }
 
         imagePickerLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -105,11 +108,16 @@ class ThemNhanVienActivity : AppCompatActivity() {
                 quyen = quyenInt
             )
             val databaseHelper = DatabaseHelper(this)
-            val kq = databaseHelper.addNhanVien(nhanVien)
-            Log.d("kq", "kq: $kq")
+            databaseHelper.addNhanVien(nhanVien)
             Toast.makeText(this, "thêm $hoTen thành công", Toast.LENGTH_SHORT).show()
-            val intentTNV = Intent(this, QuanTriNhanVienActivity::class.java)
-            startActivity(intentTNV)
+            edtHoTen.setText("")
+            edtChucVu.setText("")
+            edtEmail.setText("")
+            edtTenDangNhap.setText("")
+            edtMatKhau.setText("")
+            edtQuyen.setText("")
+            ivHinhAnh.setImageResource(0)
+            edtHoTen.requestFocus()
 
         }
     }

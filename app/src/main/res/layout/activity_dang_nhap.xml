@@ -3,62 +3,70 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="20dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:text="Đăng Nhập"
-        android:textColor="#000"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/edtTen"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/background_ten_matkhau"
-        android:hint="Tên đăng nhập"
-        android:inputType="text"
-        android:paddingLeft="20dp"
-        android:textSize="16sp" />
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="Đăng Nhập"
+            android:textColor="#000"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/edtMatKhau"
+            android:id="@+id/edtTen"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/background_ten_matkhau"
-            android:hint="Mật khẩu"
-            android:inputType="textPassword"
+            android:hint="Tên đăng nhập"
+            android:inputType="text"
             android:paddingLeft="20dp"
             android:textSize="16sp" />
 
-        <ImageView
-            android:id="@+id/ivShowMatKhau"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/imgeyeview" />
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnDangNhap"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/background_dangnhap_dangxuat"
-        android:text="Đăng Nhập"
-        android:textColor="#fff"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+            <EditText
+                android:id="@+id/edtMatKhau"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/background_ten_matkhau"
+                android:hint="Mật khẩu"
+                android:inputType="textPassword"
+                android:paddingLeft="20dp"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/ivShowMatKhau"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/imgeyeview" />
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnDangNhap"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/background_dangnhap_dangxuat"
+            android:text="Đăng Nhập"
+            android:textColor="#fff"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        >
+    </LinearLayout>
 </LinearLayout>

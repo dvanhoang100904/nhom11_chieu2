@@ -92,8 +92,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         val danhSachViTriBan = mutableListOf<ViTriBan>()
         val db = readableDatabase
         val sql = "SELECT * FROM ViTriBan"
-        val cursor = db.rawQuery(sql, null)
-        cursor.use {
+        val rs = db.rawQuery(sql, null)
+        rs.use {
             while (it.moveToNext()) {
                 val maColumnIndex = it.getColumnIndex("ma")
                 val tenColumnIndex = it.getColumnIndex("ten")
@@ -128,8 +128,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         val danhSachDoUong = mutableListOf<DoUong>()
         val db = readableDatabase
         val sql = "SELECT * FROM DoUong"
-        val cursor = db.rawQuery(sql, null)
-        cursor.use {
+        val rs = db.rawQuery(sql, null)
+        rs.use {
             while (it.moveToNext()) {
                 val maColumnIndex = it.getColumnIndex("ma")
                 val tenColumnIndex = it.getColumnIndex("ten")
@@ -156,9 +156,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
     fun getDoUongByMa(ma: Int): DoUong? {
         val db = readableDatabase
         val sql = "SELECT * FROM DoUong WHERE ma = ?"
-        val cursor = db.rawQuery(sql, arrayOf(ma.toString()))
+        val rs = db.rawQuery(sql, arrayOf(ma.toString()))
         var doUong: DoUong? = null
-        cursor.use {
+        rs.use {
             val tenColumnIndex = it.getColumnIndex("ten")
             val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
             val giaColumnIndex = it.getColumnIndex("gia")
@@ -181,8 +181,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         val danhSachDoUong = mutableListOf<DoUong>()
         val db = readableDatabase
         val sql = "SELECT * FROM DoUong WHERE ten LIKE ? OR loai LIKE ? "
-        val cursor = db.rawQuery(sql, arrayOf("%$key%", "%$key%"))
-        cursor.use {
+        val rs = db.rawQuery(sql, arrayOf("%$key%", "%$key%"))
+        rs.use {
             while (it.moveToNext()) {
                 val maColumnIndex = it.getColumnIndex("ma")
                 val tenColumnIndex = it.getColumnIndex("ten")
@@ -210,8 +210,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         val danhSachDoUong = mutableListOf<DoUong>()
         val db = readableDatabase
         val sql = "SELECT * FROM DoUong WHERE ten LIKE ? OR loai LIKE ? "
-        val cursor = db.rawQuery(sql, arrayOf("%$key%", "%$key%"))
-        cursor.use {
+        val rs = db.rawQuery(sql, arrayOf("%$key%", "%$key%"))
+        rs.use {
             while (it.moveToNext()) {
                 val maColumnIndex = it.getColumnIndex("ma")
                 val tenColumnIndex = it.getColumnIndex("ten")
@@ -280,8 +280,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         val danhSachOrder = mutableListOf<Order>()
         val db = readableDatabase
         val sql = "SELECT * FROM Orders"
-        val cursor = db.rawQuery(sql, null)
-        cursor.use {
+        val rs = db.rawQuery(sql, null)
+        rs.use {
             while (it.moveToNext()) {
                 val maColumnIndex = it.getColumnIndex("ma")
                 val tenColumnIndex = it.getColumnIndex("ten")
@@ -310,9 +310,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
     fun getOrdersByMaDoUong(maDoUong: Int): Order? {
         val db = readableDatabase
         val sql = "SELECT * FROM Orders WHERE maDoUong = ?"
-        val cursor = db.rawQuery(sql, arrayOf(maDoUong.toString()))
+        val rs = db.rawQuery(sql, arrayOf(maDoUong.toString()))
         var order: Order? = null
-        cursor.use {
+        rs.use {
             val maColumnIndex = it.getColumnIndex("ma")
             val tenColumnIndex = it.getColumnIndex("ten")
             val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
@@ -355,7 +355,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
 
     fun deleteAllOrders() {
         val db = writableDatabase
-        db.execSQL("DELETE FROM Orders") // Xóa tất cả bản ghi trong bảng Orders
+        db.execSQL("DELETE FROM Orders")
         db.close()
     }
 
@@ -377,8 +377,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         val danhSachThanhToan = mutableListOf<ThanhToan>()
         val db = readableDatabase
         val sql = "SELECT * FROM ThanhToan"
-        val cursor = db.rawQuery(sql, null)
-        cursor.use {
+        val rs = db.rawQuery(sql, null)
+        rs.use {
             while (it.moveToNext()) {
                 val maColumnIndex = it.getColumnIndex("ma")
                 val tenColumnIndex = it.getColumnIndex("ten")
@@ -430,8 +430,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         val danhSachNhanVien = mutableListOf<NhanVien>()
         val db = readableDatabase
         val sql = "SELECT * FROM NhanVien"
-        val cursor = db.rawQuery(sql, null)
-        cursor.use {
+        val rs = db.rawQuery(sql, null)
+        rs.use {
             while (it.moveToNext()) {
                 val maColumnIndex = it.getColumnIndex("ma")
                 val hoTenColumnIndex = it.getColumnIndex("hoTen")
@@ -462,9 +462,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
     fun getNhanViengByMa(ma: Int): NhanVien? {
         val db = readableDatabase
         val sql = "SELECT * FROM NhanVien WHERE ma =?"
-        val cursor = db.rawQuery(sql, arrayOf(ma.toString()))
+        val rs = db.rawQuery(sql, arrayOf(ma.toString()))
         var nhanVien: NhanVien? = null
-        cursor.use {
+        rs.use {
             val hoTenColumnIndex = it.getColumnIndex("hoTen")
             val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
             val chucVuColumnIndex = it.getColumnIndex("chucVu")
@@ -499,9 +499,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
     fun dangNhap(tenDangNhap: String, matKhau: String): Int? {
         val db = readableDatabase
         val sql = "SELECT quyen FROM NhanVien WHERE tenDangNhap = ? AND matKhau = ?"
-        val cursor = db.rawQuery(sql, arrayOf(tenDangNhap, matKhau))
+        val rs = db.rawQuery(sql, arrayOf(tenDangNhap, matKhau))
         var quyen: Int? = null
-        cursor.use {
+        rs.use {
             val quyenColumnIndex = it.getColumnIndex("quyen")
             if (it.moveToFirst()) {
                 quyen = it.getInt(quyenColumnIndex)
@@ -541,8 +541,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         val danhSachNhanVien = mutableListOf<NhanVien>()
         val db = readableDatabase
         val sql = "SELECT * FROM NhanVien WHERE hoTen LIKE ? OR chucVu LIKE ?"
-        val cursor = db.rawQuery(sql, arrayOf("%$key%", "%$key%"))
-        cursor.use {
+        val rs = db.rawQuery(sql, arrayOf("%$key%", "%$key%"))
+        rs.use {
             while (it.moveToNext()) {
                 val maColumnIndex = it.getColumnIndex("ma")
                 val hoTenColumnIndex = it.getColumnIndex("hoTen")
