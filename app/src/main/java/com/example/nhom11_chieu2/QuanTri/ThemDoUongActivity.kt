@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
+
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -38,7 +39,10 @@ class ThemDoUongActivity : AppCompatActivity() {
     }
 
     private fun setEvent() {
-        imgBtnBack.setOnClickListener { finish() }
+        imgBtnBack.setOnClickListener {
+            val intent = Intent(this, QuanTriDoUongActivity::class.java)
+            startActivity(intent)
+        }
 
         imagePickerLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -93,11 +97,14 @@ class ThemDoUongActivity : AppCompatActivity() {
                 hinhAnh = hinhAnh
             )
             val databaseHelper = DatabaseHelper(this)
-            val kq = databaseHelper.addDoUong(doUong)
-            Log.d("kq", "kq: $kq")
+            databaseHelper.addDoUong(doUong)
             Toast.makeText(this, "thêm $ten thành công", Toast.LENGTH_SHORT).show()
-            val intentTDU = Intent(this, QuanTriDoUongActivity::class.java)
-            startActivity(intentTDU)
+            edtTen.setText("")
+            edtGia.setText("")
+            edtMoTa.setText("")
+            edtLoai.setText("")
+            ivHinhAnh.setImageResource(0)
+            edtTen.requestFocus()
 
         }
     }
@@ -112,4 +119,5 @@ class ThemDoUongActivity : AppCompatActivity() {
         btnThemDoUong = findViewById(R.id.btnThemDoUong)
         btnUploadHinhAnh = findViewById(R.id.btnUploadHinhAnh)
     }
+
 }

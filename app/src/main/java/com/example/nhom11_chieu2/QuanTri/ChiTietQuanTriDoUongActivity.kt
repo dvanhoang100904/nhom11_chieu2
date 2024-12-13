@@ -50,7 +50,7 @@ class ChiTietQuanTriDoUongActivity : AppCompatActivity() {
     }
 
     private fun formatGia(gia: Double): String {
-        val decimalFormat = java.text.DecimalFormat("#,###") // Định dạng hàng nghìn
+        val decimalFormat = java.text.DecimalFormat("#,###")
         return decimalFormat.format(gia) + " VNĐ"
     }
 

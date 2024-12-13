@@ -62,9 +62,7 @@ class SuaNhanVienActivity : AppCompatActivity() {
                         ivHinhAnh.setImageResource(hinhAnhChonUpload)
                     } else {
                         Toast.makeText(
-                            this,
-                            "Không thể tải ảnh, vui lòng thử lại",
-                            Toast.LENGTH_SHORT
+                            this, "Không thể tải ảnh, vui lòng thử lại", Toast.LENGTH_SHORT
                         ).show()
                     }
                 }
@@ -90,9 +88,7 @@ class SuaNhanVienActivity : AppCompatActivity() {
             val quyenMoi = edtQuyen.text.toString().trim()
             val hinhAnhMoi = if (hinhAnhChonUpload != -1) hinhAnhChonUpload else hinhAnh
 
-            if (hoTenMoi.isEmpty() || chucVuMoi.isEmpty() || emailMoi.isEmpty() ||
-                tenDangNhapMoi.isEmpty() || matKhauMoi.isEmpty() || quyenMoi == null || hinhAnhMoi == -1
-            ) {
+            if (hoTenMoi.isEmpty() || chucVuMoi.isEmpty() || emailMoi.isEmpty() || tenDangNhapMoi.isEmpty() || matKhauMoi.isEmpty() || quyenMoi == null || hinhAnhMoi == -1) {
                 Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -122,8 +118,8 @@ class SuaNhanVienActivity : AppCompatActivity() {
                     quyen = quyenMoiInt
                 )
                 Toast.makeText(this, "Cập nhật $hoTenMoi thành công!", Toast.LENGTH_SHORT).show()
-                val intentCNNV = Intent(this, QuanTriNhanVienActivity::class.java)
-                startActivity(intentCNNV)
+                val intent = Intent(this, QuanTriNhanVienActivity::class.java)
+                startActivity(intent)
             }
         }
     }

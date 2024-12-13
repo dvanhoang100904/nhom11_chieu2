@@ -22,8 +22,9 @@
             android:id="@+id/tvTenQTDoUong"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="Tên "
-            android:textSize="24sp"></TextView>
+            android:textSize="22sp"></TextView>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnChiTietQTDoUong"

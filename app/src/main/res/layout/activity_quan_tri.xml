@@ -10,7 +10,9 @@
         android:background="#f5f6cf"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="18dp">
+        android:paddingLeft="20dp"
+        android:paddingBottom="20dp"
+        android:paddingTop="36dp">
 
         <ImageButton
             android:id="@+id/imgBtnBack"
@@ -81,7 +83,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnQTDoUong"
-               android:layout_width="260dp"
+                android:layout_width="260dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="30dp"

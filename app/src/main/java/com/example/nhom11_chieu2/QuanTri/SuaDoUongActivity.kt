@@ -108,8 +108,8 @@ class SuaDoUongActivity : AppCompatActivity() {
                     loai = loaiMoi,
                 )
                 Toast.makeText(this, "Cập nhật $tenMoi thành công!", Toast.LENGTH_SHORT).show()
-                val intentCNDU = Intent(this, QuanTriDoUongActivity::class.java)
-                startActivity(intentCNDU)
+                val intent = Intent(this, QuanTriDoUongActivity::class.java)
+                startActivity(intent)
             }
         }
     }
