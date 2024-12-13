@@ -10,10 +10,7 @@
         android:layout_height="wrap_content"
         android:background="#f5f6cf"
         android:orientation="horizontal"
-        android:paddingLeft="16dp"
-        android:paddingTop="42dp"
-        android:paddingRight="16dp"
-        android:paddingBottom="16dp">
+        android:padding="18dp">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/svTimKiem"
@@ -57,7 +54,7 @@
         <ImageButton
             android:id="@+id/imgBtnDanhSachCaPhe"
             android:layout_width="30dp"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
@@ -66,7 +63,7 @@
         <ImageButton
             android:id="@+id/imgBtnDanhSachTraSua"
             android:layout_width="30dp"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
@@ -75,7 +72,7 @@
         <ImageButton
             android:id="@+id/imgBtnDanhSachSinhTo"
             android:layout_width="30dp"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
@@ -84,7 +81,7 @@
         <ImageButton
             android:id="@+id/imgBtnDanhSachOrder"
             android:layout_width="30dp"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"

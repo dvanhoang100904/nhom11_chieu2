@@ -6,9 +6,9 @@
     android:padding="20dp">
 
     <LinearLayout
-        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="#f5f6cf"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -102,9 +102,9 @@
                 android:id="@+id/edtMoTa"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:gravity="left"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/edittext_background"
+                android:gravity="left"
                 android:hint="Nhập mô tả"
                 android:inputType="text"
                 android:padding="8dp" />

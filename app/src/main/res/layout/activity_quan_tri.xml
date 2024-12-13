@@ -10,9 +10,7 @@
         android:background="#f5f6cf"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="20dp"
-        android:paddingBottom="20dp"
-        android:paddingTop="36dp">
+        android:padding="16dp">
 
         <ImageButton
             android:id="@+id/imgBtnBack"

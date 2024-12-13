@@ -10,8 +10,7 @@
         android:layout_height="wrap_content"
         android:background="#f5f6cf"
         android:orientation="horizontal"
-        android:paddingTop="30dp"
-        android:paddingBottom="10dp">
+        android:padding="10dp">
 
         <ImageButton
             android:id="@+id/imgBtnThoat"
