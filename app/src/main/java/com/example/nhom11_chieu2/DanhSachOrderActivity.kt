@@ -71,6 +71,7 @@ class DanhSachOrderActivity : AppCompatActivity() {
             builder.setTitle("Thoát")
             builder.setMessage("Bạn có chắc chắn muốn thoát không?")
             builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
+                databaseHelper.deleteAllOrders()
                 val intentThoat = Intent(this, NhanVienOrderActivity::class.java)
                 startActivity(intentThoat)
             }

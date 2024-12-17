@@ -16,16 +16,38 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:text="Đăng Nhập"
+            android:text="Tạo Tài Khoản"
             android:textColor="#000"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/edtTenDangNhap"
+            android:id="@+id/edtHoTen"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="50dp"
+            android:background="@drawable/background_ten_matkhau"
+            android:hint="Họ Và Tên"
+            android:inputType="textPersonName"
+            android:paddingLeft="20dp"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/background_ten_matkhau"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="20dp"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edtTenDangNhap"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/background_ten_matkhau"
             android:hint="Tên đăng nhập"
             android:inputType="text"
@@ -58,42 +80,29 @@
         </RelativeLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnDangNhap"
+            android:id="@+id/btnTao"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/background_dangnhap_dangxuat"
-            android:text="Đăng Nhập"
+            android:text="Tạo"
             android:textColor="#fff"
             android:textSize="16sp"
             android:textStyle="bold" />
 
+
         <TextView
-            android:id="@+id/tvQuenMatKhau"
+            android:id="@+id/tvDangNhap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:clickable="true"
             android:focusable="true"
-            android:text="Quên mật khẩu?"
+            android:text="Đăng Nhập"
             android:textColor="#000"
             android:textSize="16sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvTaoTaiKhoan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="Tạo tài khoản"
-            android:textColor="#000"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
 
     </LinearLayout>
 </LinearLayout>

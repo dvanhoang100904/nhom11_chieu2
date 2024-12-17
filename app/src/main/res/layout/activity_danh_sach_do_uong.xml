@@ -44,48 +44,101 @@
         android:layout_weight="1"
         android:background="#fff"></androidx.recyclerview.widget.RecyclerView>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F5F6CF"
-        android:orientation="horizontal">
+        android:background="#f5f6cf"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="5dp">
 
-        <ImageButton
-            android:id="@+id/imgBtnDanhSachCaPhe"
-            android:layout_width="30dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/imgcoffee"></ImageButton>
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/imgBtnDanhSachTraSua"
-            android:layout_width="30dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            <ImageButton
+                android:id="@+id/imgBtnDanhSachCaPhe"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/imgcoffee" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Cà Phê"
+
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/imgmilktea"></ImageButton>
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/imgBtnDanhSachSinhTo"
-            android:layout_width="30dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            <ImageButton
+                android:id="@+id/imgBtnDanhSachTraSua"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/imgmilktea" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Trà Sữa"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/imgsmoothie"></ImageButton>
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/imgBtnDanhSachOrder"
-            android:layout_width="30dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            <ImageButton
+                android:id="@+id/imgBtnDanhSachSinhTo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/imgsmoothie" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Sinh Tố"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/imgcounter"></ImageButton>
+            android:gravity="center"
+            android:orientation="vertical">
 
+            <ImageButton
+                android:id="@+id/imgBtnDanhSachOrder"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/imgcounter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Order"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
