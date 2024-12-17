@@ -61,7 +61,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
                 email TEXT,
                 tenDangNhap TEXT UNIQUE,
                 matKhau TEXT,
-                quyen INTEGER
+                quyen INTEGER,
+                isLoggedIn INTEGER DEFAULT 0
             )"""
         db?.execSQL(sqlCreateTableNhanVien)
 
@@ -128,6 +129,35 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         val danhSachDoUong = mutableListOf<DoUong>()
         val db = readableDatabase
         val sql = "SELECT * FROM DoUong"
+        val rs = db.rawQuery(sql, null)
+        rs.use {
+            while (it.moveToNext()) {
+                val maColumnIndex = it.getColumnIndex("ma")
+                val tenColumnIndex = it.getColumnIndex("ten")
+                val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
+                val giaColumnIndex = it.getColumnIndex("gia")
+                val moTaColumnIndex = it.getColumnIndex("moTa")
+                val loaiColumnIndex = it.getColumnIndex("loai")
+                danhSachDoUong.add(
+                    DoUong(
+                        it.getInt(maColumnIndex),
+                        it.getString(tenColumnIndex),
+                        it.getInt(hinhAnhColumnIndex),
+                        it.getDouble(giaColumnIndex),
+                        it.getString(moTaColumnIndex),
+                        it.getString(loaiColumnIndex),
+                    )
+                )
+            }
+        }
+        db.close()
+        return danhSachDoUong
+    }
+
+    fun getAllDoUongNgauNhien(limit: Int): MutableList<DoUong> {
+        val danhSachDoUong = mutableListOf<DoUong>()
+        val db = readableDatabase
+        val sql = "SELECT * FROM DoUong ORDER BY RANDOM() LIMIT $limit"
         val rs = db.rawQuery(sql, null)
         rs.use {
             while (it.moveToNext()) {
@@ -497,18 +527,69 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
     }
 
     fun dangNhap(tenDangNhap: String, matKhau: String): Int? {
-        val db = readableDatabase
+        val db = writableDatabase
         val sql = "SELECT quyen FROM NhanVien WHERE tenDangNhap = ? AND matKhau = ?"
         val rs = db.rawQuery(sql, arrayOf(tenDangNhap, matKhau))
         var quyen: Int? = null
         rs.use {
-            val quyenColumnIndex = it.getColumnIndex("quyen")
             if (it.moveToFirst()) {
+                val quyenColumnIndex = it.getColumnIndex("quyen")
                 quyen = it.getInt(quyenColumnIndex)
+
+                val updateSql = "UPDATE NhanVien SET isLoggedIn = 1 WHERE tenDangNhap = ?"
+                db.execSQL(updateSql, arrayOf(tenDangNhap))
             }
         }
         db.close()
         return quyen
+    }
+
+    fun layNhanVienDangNhap(): String? {
+        val db = readableDatabase
+        val sql = "SELECT hoTen FROM NhanVien WHERE isLoggedIn = 1"
+        val rs = db.rawQuery(sql, null)
+        var hoTen: String? = null
+        rs.use {
+            if (it.moveToFirst()) {
+                val hoTenColumnIndex = it.getColumnIndex("hoTen")
+                hoTen = it.getString(hoTenColumnIndex)
+            }
+        }
+        db.close()
+        return hoTen
+    }
+
+    fun dangXuat() {
+        val db = writableDatabase
+        val sql = "UPDATE NhanVien SET isLoggedIn = 0 WHERE isLoggedIn = 1  AND tenDangNhap = ?"
+        db.execSQL(sql)
+        db.close()
+    }
+
+    fun kiemTraEmail(email: String): Boolean {
+        val db = readableDatabase
+        val sql = "SELECT 1 FROM NhanVien WHERE email = ? LIMIT 1"
+        val rs = db.rawQuery(sql, arrayOf(email))
+        var isEmail = false
+        rs.use {
+            if (it.moveToFirst()) {
+                isEmail = true
+            }
+        }
+        return isEmail
+    }
+
+    fun kiemTraTenDangNhap(tenDangNhap: String): Boolean {
+        val db = readableDatabase
+        val sql = "SELECT 1 FROM NhanVien WHERE tenDangNhap = ? LIMIT 1"
+        val rs = db.rawQuery(sql, arrayOf(tenDangNhap))
+        var isTenDangNhap = false
+        rs.use {
+            if (it.moveToFirst()) {
+                isTenDangNhap = true
+            }
+        }
+        return isTenDangNhap
     }
 
     fun updateNhanVienByMa(

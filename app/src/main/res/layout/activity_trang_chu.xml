@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,49 +11,37 @@
         android:background="#f5f6cf"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="20dp">
 
         <ImageButton
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
             android:layout_margin="4dp"
             android:background="@drawable/imgemployes" />
 
         <TextView
+            android:id="@+id/tvTieuDeTT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Nhân Viên"
+            android:text="Nhân Viên: Đào Văn Hoàng"
             android:textSize="20sp"
             android:textStyle="bold"></TextView>
+
     </LinearLayout>
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/svTimKiemQTNhanVien"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/background_timkiem"
-        android:iconifiedByDefault="true"
-        android:inputType="text"
-        android:queryHint="Tìm kiếm"
-        android:textSize="18sp" />
+        android:layout_height="200dp"
+        android:background="@drawable/imgbanner"></ImageView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDanhSachQTNhanVien"
+        android:id="@+id/rvDanhSachDoUongTT"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:layout_weight="1" />
-
-    <ImageButton
-        android:id="@+id/imgBtnThemNhanVien"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="end"
-        android:layout_margin="30dp"
-        android:background="@drawable/imgadduser" />
+        android:layout_margin="20dp"
+        android:layout_weight="1"
+        android:background="#fff"></androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -70,16 +59,16 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/imgBtnQTHome"
+                android:id="@+id/imgBtnChucNang"
                 android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/imgquantri" />
+                android:layout_height="52dp"
+                android:background="@drawable/imgfunction" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Quản Trị"
+                android:text="Chức Năng"
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -92,18 +81,19 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/imgBtnQTDoUong"
+                android:id="@+id/imgBtnDangXuat"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/imgdrink" />
+                android:background="@drawable/imglogout" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Đồ Uống"
+                android:text="Đăng Xuất"
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>

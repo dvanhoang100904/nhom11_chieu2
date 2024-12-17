@@ -13,7 +13,6 @@
         android:padding="16dp">
 
         <ImageButton
-            android:id="@+id/imgBtnBack"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
@@ -21,17 +20,18 @@
             android:background="@drawable/imgquantri" />
 
         <TextView
+            android:id="@+id/tvTieuDeQT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Quản Trị"
+            android:text="Quản Trị: Hoàng"
             android:textSize="20sp"
             android:textStyle="bold"></TextView>
     </LinearLayout>
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="200dp"
         android:background="@drawable/imgbanner"></ImageView>
 
 

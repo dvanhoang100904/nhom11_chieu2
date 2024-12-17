@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nhom11_chieu2.QuanTri.QuanTriActivity
@@ -16,10 +17,12 @@ import com.example.nhom11_chieu2.model.NhanVien
 import com.example.nhom11_chieu2.model.ViTriBan
 
 class DangNhapActivity : AppCompatActivity() {
-    private lateinit var edtTen: EditText
-    private lateinit var btnDangNhap: Button
+    private lateinit var edtTenDangNhap: EditText
     private lateinit var edtMatKhau: EditText
+    private lateinit var btnDangNhap: Button
+    private lateinit var tvTaoTaiKhoan: TextView
     private lateinit var ivShowMatKhau: ImageView
+    private var isPasswordVisible = false // Biến trạng thái hiển thị mật khẩu
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dang_nhap)
@@ -28,38 +31,31 @@ class DangNhapActivity : AppCompatActivity() {
     }
 
     private fun setEvent() {
-        var isPasswordVisible = false
+        val databaseHelper = DatabaseHelper(this)
 
         ivShowMatKhau.setOnClickListener {
             isPasswordVisible = !isPasswordVisible
 
-            // Đổi inputType của EditText để hiển thị hoặc ẩn mật khẩu
-            edtMatKhau.inputType = if (isPasswordVisible) {
-                InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            if (isPasswordVisible) {
+                edtMatKhau.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                ivShowMatKhau.setImageResource(R.drawable.imgeyehidden) // Icon tắt mắt
             } else {
-                InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                edtMatKhau.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                ivShowMatKhau.setImageResource(R.drawable.imgeyeview) // Icon mở mắt
             }
 
             // Đảm bảo con trỏ vẫn ở cuối văn bản
             edtMatKhau.setSelection(edtMatKhau.text.length)
 
-            // Thay đổi hình ảnh của ImageView dựa trên trạng thái
-            ivShowMatKhau.setImageResource(
-                if (isPasswordVisible) R.drawable.imgeyehidden else R.drawable.imgeyeview
-            )
         }
 
         btnDangNhap.setOnClickListener {
-            val ten = edtTen.text.toString().trim()
+            val tenDangNhap = edtTenDangNhap.text.toString().trim()
             val matKhau = edtMatKhau.text.toString().trim()
 
-            if (ten.isEmpty()) {
-                Toast.makeText(this, "Vui lòng nhập tên!", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            if (matKhau.isEmpty()) {
-                Toast.makeText(this, "Vui lòng nhập mật khẩu!", Toast.LENGTH_SHORT).show()
+            if (tenDangNhap.isEmpty() || matKhau.isEmpty()) {
+                Toast.makeText(this, "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -68,19 +64,19 @@ class DangNhapActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (!ten.matches(Regex("[a-zA-Z0-9._-]+"))) {
+            if (!tenDangNhap.matches(Regex("[a-zA-Z0-9._-]+"))) {
                 Toast.makeText(this, "Tên đăng nhập không hợp lệ!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            val databaseHelper = DatabaseHelper(this)
-            val quyen = databaseHelper.dangNhap(ten, matKhau)
+            val quyen = databaseHelper.dangNhap(tenDangNhap, matKhau)
             if (quyen != null) {
+                Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show()
                 if (quyen == 50) {
-                    val intentNVOD = Intent(this, NhanVienOrderActivity::class.java)
+                    val intentNVOD = Intent(this, TrangChuActivity::class.java).apply {}
                     startActivity(intentNVOD)
                 } else if (quyen == 100) {
-                    val intentQT = Intent(this, QuanTriActivity::class.java)
+                    val intentQT = Intent(this, QuanTriActivity::class.java).apply {}
                     startActivity(intentQT)
                 }
             } else {
@@ -89,7 +85,12 @@ class DangNhapActivity : AppCompatActivity() {
             }
         }
 
-        val databaseHelper = DatabaseHelper(this)
+        tvTaoTaiKhoan.setOnClickListener {
+            val intentTTK = Intent(this, DangKyActivity::class.java).apply {}
+            startActivity(intentTTK)
+        }
+
+
         val kiemTraNhanVien = databaseHelper.getAllNhanVien()
         if (kiemTraNhanVien.isEmpty()) {
             val danhSachNhanVien = getDanhSachNhanVien()
@@ -122,16 +123,26 @@ class DangNhapActivity : AppCompatActivity() {
         return listOf(
             NhanVien(
                 1,
-                "Đào Văn Hoàng",
+                "Văn Hoàng",
                 R.drawable.imgemployeecoffe4,
-                "Nhân Viên Order",
+                "Quản Trị",
+                "vanhoang11@gmail.com",
+                "vanhoang11",
+                "123456",
+                100
+            ),
+            NhanVien(
+                2,
+                "Đào Văn Hoàng",
+                R.drawable.imgemployeecoffe3,
+                "Nhân Viên",
                 "daovanhoang11@gmail.com",
                 "daovanhoang11",
                 "123456",
                 50
             ),
             NhanVien(
-                2,
+                3,
                 "Huỳnh Ngọc Dân",
                 R.drawable.imgemployeecoffe1,
                 "Quản Trị",
@@ -141,7 +152,7 @@ class DangNhapActivity : AppCompatActivity() {
                 100
             ),
             NhanVien(
-                3,
+                4,
                 "Nguyễn Đức Chuẩn",
                 R.drawable.imgemployeecoffe5,
                 "Nhân Viên",
@@ -151,7 +162,7 @@ class DangNhapActivity : AppCompatActivity() {
                 50
             ),
             NhanVien(
-                4,
+                5,
                 "Bùi Tín Thành",
                 R.drawable.imgemployeecoffe6,
                 "Nhân Viên",
@@ -161,7 +172,7 @@ class DangNhapActivity : AppCompatActivity() {
                 50
             ),
             NhanVien(
-                5,
+                6,
                 "Nguyễn Thị Minh Thu",
                 R.drawable.imgemployeecoffe2,
                 "Nhân Viên",
@@ -481,11 +492,13 @@ class DangNhapActivity : AppCompatActivity() {
         )
     }
 
+
     private fun setControl() {
-        edtTen = findViewById(R.id.edtTen)
+        edtTenDangNhap = findViewById(R.id.edtTenDangNhap)
         edtMatKhau = findViewById(R.id.edtMatKhau)
         btnDangNhap = findViewById(R.id.btnDangNhap)
         ivShowMatKhau = findViewById(R.id.ivShowMatKhau)
+        tvTaoTaiKhoan = findViewById(R.id.tvTaoTaiKhoan)
 
     }
 }
