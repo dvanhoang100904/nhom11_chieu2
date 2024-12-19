@@ -114,10 +114,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         val sql = "SELECT * FROM ViTriBan"
         val rs = db.rawQuery(sql, null)
         rs.use {
+            val maColumnIndex = it.getColumnIndex("ma")
+            val tenColumnIndex = it.getColumnIndex("ten")
+            val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
             while (it.moveToNext()) {
-                val maColumnIndex = it.getColumnIndex("ma")
-                val tenColumnIndex = it.getColumnIndex("ten")
-                val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
                 danhSachViTriBan.add(
                     ViTriBan(
                         it.getInt(maColumnIndex),
@@ -168,13 +168,13 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         val sql = "SELECT * FROM DoUong"
         val rs = db.rawQuery(sql, null)
         rs.use {
+            val maColumnIndex = it.getColumnIndex("ma")
+            val tenColumnIndex = it.getColumnIndex("ten")
+            val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
+            val giaColumnIndex = it.getColumnIndex("gia")
+            val moTaColumnIndex = it.getColumnIndex("moTa")
+            val loaiColumnIndex = it.getColumnIndex("loai")
             while (it.moveToNext()) {
-                val maColumnIndex = it.getColumnIndex("ma")
-                val tenColumnIndex = it.getColumnIndex("ten")
-                val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
-                val giaColumnIndex = it.getColumnIndex("gia")
-                val moTaColumnIndex = it.getColumnIndex("moTa")
-                val loaiColumnIndex = it.getColumnIndex("loai")
                 danhSachDoUong.add(
                     DoUong(
                         it.getInt(maColumnIndex),
@@ -197,13 +197,13 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         val sql = "SELECT * FROM DoUong ORDER BY RANDOM() LIMIT $limit"
         val rs = db.rawQuery(sql, null)
         rs.use {
+            val maColumnIndex = it.getColumnIndex("ma")
+            val tenColumnIndex = it.getColumnIndex("ten")
+            val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
+            val giaColumnIndex = it.getColumnIndex("gia")
+            val moTaColumnIndex = it.getColumnIndex("moTa")
+            val loaiColumnIndex = it.getColumnIndex("loai")
             while (it.moveToNext()) {
-                val maColumnIndex = it.getColumnIndex("ma")
-                val tenColumnIndex = it.getColumnIndex("ten")
-                val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
-                val giaColumnIndex = it.getColumnIndex("gia")
-                val moTaColumnIndex = it.getColumnIndex("moTa")
-                val loaiColumnIndex = it.getColumnIndex("loai")
                 danhSachDoUong.add(
                     DoUong(
                         it.getInt(maColumnIndex),
@@ -250,13 +250,13 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         val sql = "SELECT * FROM DoUong WHERE ten LIKE ? OR loai LIKE ? "
         val rs = db.rawQuery(sql, arrayOf("%$key%", "%$key%"))
         rs.use {
+            val maColumnIndex = it.getColumnIndex("ma")
+            val tenColumnIndex = it.getColumnIndex("ten")
+            val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
+            val giaColumnIndex = it.getColumnIndex("gia")
+            val moTaColumnIndex = it.getColumnIndex("moTa")
+            val loaiColumnIndex = it.getColumnIndex("loai")
             while (it.moveToNext()) {
-                val maColumnIndex = it.getColumnIndex("ma")
-                val tenColumnIndex = it.getColumnIndex("ten")
-                val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
-                val giaColumnIndex = it.getColumnIndex("gia")
-                val moTaColumnIndex = it.getColumnIndex("moTa")
-                val loaiColumnIndex = it.getColumnIndex("loai")
                 danhSachDoUong.add(
                     DoUong(
                         it.getInt(maColumnIndex),
@@ -279,13 +279,13 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         val sql = "SELECT * FROM DoUong WHERE ten LIKE ? OR loai LIKE ? "
         val rs = db.rawQuery(sql, arrayOf("%$key%", "%$key%"))
         rs.use {
+            val maColumnIndex = it.getColumnIndex("ma")
+            val tenColumnIndex = it.getColumnIndex("ten")
+            val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
+            val giaColumnIndex = it.getColumnIndex("gia")
+            val moTaColumnIndex = it.getColumnIndex("moTa")
+            val loaiColumnIndex = it.getColumnIndex("loai")
             while (it.moveToNext()) {
-                val maColumnIndex = it.getColumnIndex("ma")
-                val tenColumnIndex = it.getColumnIndex("ten")
-                val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
-                val giaColumnIndex = it.getColumnIndex("gia")
-                val moTaColumnIndex = it.getColumnIndex("moTa")
-                val loaiColumnIndex = it.getColumnIndex("loai")
                 danhSachDoUong.add(
                     DoUong(
                         it.getInt(maColumnIndex),
@@ -340,7 +340,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
             val soLuongColumnIndex = it.getColumnIndex("soLuong")
 
             if (it.moveToFirst()) {
-                // Nếu đã có order cho món uống ở bàn này
+                // Nếu đã có order cho bàn này
                 val maOrder = it.getInt(maColumnIndex)
                 val currentSoLuong = it.getInt(soLuongColumnIndex)
                 val soLuongMoi = currentSoLuong + soLuong // Cộng thêm số lượng mới
@@ -350,7 +350,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
                 }
                 db.update("Orders", updateCV, "ma = ?", arrayOf(maOrder.toString()))
             } else {
-                // Nếu không có order cho món uống ở bàn này
+                // Nếu không có order cho bàn này
                 val orderThemMoiCV = ContentValues().apply {
                     put("maDoUong", maDoUong)
                     put("soLuong", soLuong)
@@ -359,7 +359,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
                 db.insert("Orders", null, orderThemMoiCV)
             }
         }
-        db.close() // Đảm bảo đóng cơ sở dữ liệu sau khi thao tác xong
+        db.close()
     }
 
     fun getAllOrdersByMaOrderViTriBan(maOrderViTriBan: Int): MutableList<Order> {
@@ -381,7 +381,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
             val moTaColumnIndex = it.getColumnIndex("moTa")
             val maDoUongColumnIndex = it.getColumnIndex("maDoUong")
             val maOrderViTriBanColumnIndex = it.getColumnIndex("maOrderViTriBan")
-
             while (it.moveToNext()) {
                 danhSachOrder.add(
                     Order(
@@ -415,7 +414,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
             val moTaColumnIndex = it.getColumnIndex("moTa")
             val maDoUongColumnIndex = it.getColumnIndex("maDoUong")
             val maOrderViTriBanColumnIndex = it.getColumnIndex("maOrderViTriBan")
-
             if (it.moveToFirst()) {
                 order = Order(
                     it.getInt(maColumnIndex),
@@ -482,16 +480,15 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         val sql = "SELECT * FROM ThanhToan "
         val rs = db.rawQuery(sql, null)
         rs.use {
+            val maColumnIndex = it.getColumnIndex("ma")
+            val tenColumnIndex = it.getColumnIndex("ten")
+            val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
+            val giaColumnIndex = it.getColumnIndex("gia")
+            val soLuongColumnIndex = it.getColumnIndex("soLuong")
+            val moTaColumnIndex = it.getColumnIndex("moTa")
+            val ngayThanhToanColumnIndex = it.getColumnIndex("ngayThanhToan")
+            val maViTriBanColumnIndex = it.getColumnIndex("maViTriBan")
             while (it.moveToNext()) {
-                val maColumnIndex = it.getColumnIndex("ma")
-                val tenColumnIndex = it.getColumnIndex("ten")
-                val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
-                val giaColumnIndex = it.getColumnIndex("gia")
-                val soLuongColumnIndex = it.getColumnIndex("soLuong")
-                val moTaColumnIndex = it.getColumnIndex("moTa")
-                val ngayThanhToanColumnIndex = it.getColumnIndex("ngayThanhToan")
-                val maViTriBanColumnIndex = it.getColumnIndex("maViTriBan")
-
                 danhSachThanhToan.add(
                     ThanhToan(
                         it.getInt(maColumnIndex),
@@ -502,8 +499,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
                         it.getString(moTaColumnIndex),
                         it.getString(ngayThanhToanColumnIndex) ?: "",
                         it.getInt(maViTriBanColumnIndex),
-
-                        )
+                    )
                 )
             }
         }
@@ -515,6 +511,46 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         val db = writableDatabase
         db.execSQL("DELETE FROM ThanhToan")
         db.close()
+    }
+
+    fun getThongKeDoanhThu(): List<ThongKe> {
+        val danhSachThongKe = mutableListOf<ThongKe>()
+        val db = this.readableDatabase
+        val rs = db.rawQuery(
+            "SELECT ngayThanhToan, SUM(gia * soLuong) AS tongDoanhThu, SUM(soLuong) AS tongSoLuong FROM ThanhToan GROUP BY ngayThanhToan",
+            null
+        )
+        rs.use {
+            val tongDoanhThuColumnIndex = it.getColumnIndex("tongDoanhThu")
+            val tongSoLuongColumnIndex = it.getColumnIndex("tongSoLuong")
+            val ngayThanhToanColumnIndex = it.getColumnIndex("ngayThanhToan")
+            while (it.moveToNext()) {
+                danhSachThongKe.add(
+                    ThongKe(
+                        it.getDouble(tongDoanhThuColumnIndex),
+                        it.getInt(tongSoLuongColumnIndex),
+                        it.getString(ngayThanhToanColumnIndex)
+                    )
+                )
+            }
+        }
+
+        db.close()
+        return danhSachThongKe
+    }
+
+    fun getTongDoanhThu(): Double {
+        val db = readableDatabase
+        val rs = db.rawQuery("SELECT SUM(gia * soLuong) AS tongDoanhThu FROM ThanhToan", null)
+        var tongDoanhThu = 0.0
+        rs.use {
+            val tongDoanhThuColumnIndex = it.getColumnIndex("tongDoanhThu")
+            if (it.moveToFirst()) {
+                tongDoanhThu = it.getDouble(tongDoanhThuColumnIndex)
+            }
+        }
+        db.close()
+        return tongDoanhThu
     }
 
     fun addNhanVien(nhanVien: NhanVien) {
@@ -538,15 +574,15 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         val sql = "SELECT * FROM NhanVien"
         val rs = db.rawQuery(sql, null)
         rs.use {
+            val maColumnIndex = it.getColumnIndex("ma")
+            val hoTenColumnIndex = it.getColumnIndex("hoTen")
+            val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
+            val chucVuColumnIndex = it.getColumnIndex("chucVu")
+            val emailColumnIndex = it.getColumnIndex("email")
+            val tenDangNhapColumnIndex = it.getColumnIndex("tenDangNhap")
+            val matKhauColumnIndex = it.getColumnIndex("matKhau")
+            val quyenColumnIndex = it.getColumnIndex("quyen")
             while (it.moveToNext()) {
-                val maColumnIndex = it.getColumnIndex("ma")
-                val hoTenColumnIndex = it.getColumnIndex("hoTen")
-                val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
-                val chucVuColumnIndex = it.getColumnIndex("chucVu")
-                val emailColumnIndex = it.getColumnIndex("email")
-                val tenDangNhapColumnIndex = it.getColumnIndex("tenDangNhap")
-                val matKhauColumnIndex = it.getColumnIndex("matKhau")
-                val quyenColumnIndex = it.getColumnIndex("quyen")
                 danhSachNhanVien.add(
                     NhanVien(
                         it.getInt(maColumnIndex),
@@ -579,15 +615,16 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
             val matKhauColumnIndex = it.getColumnIndex("matKhau")
             val quyenColumnIndex = it.getColumnIndex("quyen")
             if (it.moveToFirst()) {
-                val hoTen = it.getString(hoTenColumnIndex)
-                val hinhAnh = it.getInt(hinhAnhColumnIndex)
-                val chucVu = it.getString(chucVuColumnIndex)
-                val email = it.getString(emailColumnIndex)
-                val tenDangNhap = it.getString(tenDangNhapColumnIndex)
-                val matKhau = it.getString(matKhauColumnIndex)
-                val quyen = it.getInt(quyenColumnIndex)
-                nhanVien =
-                    NhanVien(ma, hoTen, hinhAnh, chucVu, email, tenDangNhap, matKhau, quyen)
+                nhanVien = NhanVien(
+                    ma,
+                    it.getString(hoTenColumnIndex),
+                    it.getInt(hinhAnhColumnIndex),
+                    it.getString(chucVuColumnIndex),
+                    it.getString(emailColumnIndex),
+                    it.getString(tenDangNhapColumnIndex),
+                    it.getString(matKhauColumnIndex),
+                    it.getInt(quyenColumnIndex)
+                )
             }
         }
         db.close()
@@ -608,8 +645,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         val rs = db.rawQuery(sql, arrayOf(tenDangNhap, matKhau))
         var quyen: Int? = null
         rs.use {
+            val quyenColumnIndex = it.getColumnIndex("quyen")
             if (it.moveToFirst()) {
-                val quyenColumnIndex = it.getColumnIndex("quyen")
                 quyen = it.getInt(quyenColumnIndex)
 
                 val updateSql = "UPDATE NhanVien SET isLoggedIn = 1 WHERE tenDangNhap = ?"
@@ -626,8 +663,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         val rs = db.rawQuery(sql, null)
         var hoTen: String? = null
         rs.use {
+            val hoTenColumnIndex = it.getColumnIndex("hoTen")
             if (it.moveToFirst()) {
-                val hoTenColumnIndex = it.getColumnIndex("hoTen")
                 hoTen = it.getString(hoTenColumnIndex)
             }
         }
