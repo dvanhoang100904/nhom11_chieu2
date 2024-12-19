@@ -22,6 +22,7 @@ class LuuTruAdapter(private var danhSachLuuTru: List<ThanhToan>) :
         val tvLuuGia: TextView = itemView.findViewById(R.id.tvLuuGia)
         val tvLuuSoLuong: TextView = itemView.findViewById(R.id.tvLuuSoLuong)
         val tvLuuNgay: TextView = itemView.findViewById(R.id.tvLuuNgay)
+        val tvLuuMaBan: TextView = itemView.findViewById(R.id.tvLuuMaBan)
 
     }
 
@@ -44,6 +45,7 @@ class LuuTruAdapter(private var danhSachLuuTru: List<ThanhToan>) :
         holder.tvLuuGia.text = "Giá: ${formatGia(thanhToan.gia)}"
         holder.tvLuuSoLuong.text = "Số lượng: x${thanhToan.soLuong}"
         holder.tvLuuNgay.text = "Ngày thanh toán: ${formatNgay(thanhToan.ngayThanhToan)}"
+        holder.tvLuuMaBan.text = "Bàn: ${thanhToan.maViTriBan}"
     }
 
     fun updateData(newData: List<ThanhToan>) {

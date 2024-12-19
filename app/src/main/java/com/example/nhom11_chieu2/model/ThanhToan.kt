@@ -10,8 +10,9 @@ data class ThanhToan(
     val gia: Double,
     var soLuong: Int,
     val moTa: String,
-    val ngayThanhToan: String = System.currentTimeMillis().toString()
-): Parcelable{
+    val ngayThanhToan: String = System.currentTimeMillis().toString(),
+    val maViTriBan: Int
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString() ?: "",
@@ -19,7 +20,8 @@ data class ThanhToan(
         parcel.readDouble(),
         parcel.readInt(),
         parcel.readString() ?: "",
-        parcel.readString() ?: ""
+        parcel.readString() ?: "",
+        parcel.readInt()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -30,6 +32,7 @@ data class ThanhToan(
         parcel.writeInt(soLuong)
         parcel.writeString(moTa)
         parcel.writeString(ngayThanhToan)
+        parcel.writeInt(maViTriBan)
     }
 
     override fun describeContents(): Int {

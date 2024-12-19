@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,7 @@ class DanhSachOrderActivity : AppCompatActivity() {
     private lateinit var imgBtnDanhSachCaPhe: ImageButton
     private lateinit var imgBtnDanhSachTraSua: ImageButton
     private lateinit var imgBtnDanhSachSinhTo: ImageButton
+    private lateinit var tvTieuDeBanOrder: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,16 +34,27 @@ class DanhSachOrderActivity : AppCompatActivity() {
 
     private fun setEvent() {
         val databaseHelper = DatabaseHelper(this)
-        val getAllOrders = databaseHelper.getAllOrders()
+        val maViTriBan = intent.getIntExtra("maViTriBan", -1)
 
-        orderAdapter = OrderAdapter(getAllOrders)
-        rvDanhSachOrder.adapter = orderAdapter
-        rvDanhSachOrder.layoutManager = LinearLayoutManager(this)
+        if (maViTriBan != -1) {
+            val maOrderViTriBan = databaseHelper.getViTriBanByMa(maViTriBan)
+            if (maOrderViTriBan != null) {
+                tvTieuDeBanOrder.text = "Danh Sách Order ${maOrderViTriBan.ten}"
+                val getAllOrdersByMaOrderViTriBan =
+                    databaseHelper.getAllOrdersByMaOrderViTriBan(maViTriBan)
+
+                orderAdapter = OrderAdapter(getAllOrdersByMaOrderViTriBan)
+                rvDanhSachOrder.adapter = orderAdapter
+                rvDanhSachOrder.layoutManager = LinearLayoutManager(this)
+            }
+        }
 
         btnThanhToan.setOnClickListener {
-            if (!getAllOrders.isEmpty()) {
+            val getAllOrdersByMaOrderViTriBan =
+                databaseHelper.getAllOrdersByMaOrderViTriBan(maViTriBan)
+            if (!getAllOrdersByMaOrderViTriBan.isEmpty()) {
                 // Chuyển đổi danh sách Order thành danh sách ThanhToan
-                val danhSachThanhToan = getAllOrders.map { order ->
+                val danhSachThanhToan = getAllOrdersByMaOrderViTriBan.map { order ->
                     ThanhToan(
                         ma = order.ma,
                         ten = order.ten,
@@ -49,14 +62,15 @@ class DanhSachOrderActivity : AppCompatActivity() {
                         gia = order.gia,
                         soLuong = order.soLuong,
                         moTa = order.moTa,
-                        ngayThanhToan = System.currentTimeMillis()
-                            .toString()
+                        ngayThanhToan = System.currentTimeMillis().toString(),
+                        maViTriBan = order.maOrderViTriBan
                     )
                 }
                 val intentTT = Intent(this, ThanhToanActivity::class.java).apply {
                     putParcelableArrayListExtra(
                         "danhSachThanhToan", ArrayList(danhSachThanhToan)
                     )
+                    putExtra("maViTriBan", maViTriBan)
                 }
                 startActivity(intentTT)
             } else {
@@ -67,44 +81,43 @@ class DanhSachOrderActivity : AppCompatActivity() {
         }
 
         imgBtnThoat.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Thoát")
-            builder.setMessage("Bạn có chắc chắn muốn thoát không?")
-            builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
-                databaseHelper.deleteAllOrders()
-                val intentThoat = Intent(this, NhanVienOrderActivity::class.java)
-                startActivity(intentThoat)
-            }
-            builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
-            }
-            builder.show()
+            val intentThoat = Intent(this, DanhSachViTriBanActivity::class.java)
+            startActivity(intentThoat)
         }
 
         imgBtnDanhSachCaPhe.setOnClickListener {
-            val intentDSOD = Intent(this, DanhSachDoUongActivity::class.java)
-            intentDSOD.putExtra("loaiDoUong", "Cà Phê")
-            startActivity(intentDSOD)
+            val intentDSCP = Intent(this, DanhSachDoUongActivity::class.java).apply {
+                putExtra("loaiDoUong", "Cà Phê")
+                putExtra("maViTriBan", maViTriBan)
+            }
+            startActivity(intentDSCP)
         }
 
         imgBtnDanhSachTraSua.setOnClickListener {
-            val intentDSOD = Intent(this, DanhSachDoUongActivity::class.java)
-            intentDSOD.putExtra("loaiDoUong", "Trà Sữa")
-            startActivity(intentDSOD)
+            val intentDSTS = Intent(this, DanhSachDoUongActivity::class.java).apply {
+                putExtra("loaiDoUong", "Trà Sữa")
+                putExtra("maViTriBan", maViTriBan)
+            }
+            startActivity(intentDSTS)
         }
 
         imgBtnDanhSachSinhTo.setOnClickListener {
-            val intentDSOD = Intent(this, DanhSachDoUongActivity::class.java)
-            intentDSOD.putExtra("loaiDoUong", "Sinh Tố")
-            startActivity(intentDSOD)
+            val intentDSST = Intent(this, DanhSachDoUongActivity::class.java).apply {
+                putExtra("loaiDoUong", "Sinh Tố")
+                putExtra("maViTriBan", maViTriBan)
+            }
+            startActivity(intentDSST)
         }
     }
 
     private fun setControl() {
         rvDanhSachOrder = findViewById(R.id.rvDanhSachOrder)
-        btnThanhToan = findViewById(R.id.btnThanhToan)
         imgBtnThoat = findViewById(R.id.imgBtnThoat)
+        tvTieuDeBanOrder = findViewById(R.id.tvTieuDeBanOrder)
+        btnThanhToan = findViewById(R.id.btnThanhToan)
         imgBtnDanhSachCaPhe = findViewById(R.id.imgBtnDanhSachCaPhe)
         imgBtnDanhSachTraSua = findViewById(R.id.imgBtnDanhSachTraSua)
         imgBtnDanhSachSinhTo = findViewById(R.id.imgBtnDanhSachSinhTo)
+
     }
 }

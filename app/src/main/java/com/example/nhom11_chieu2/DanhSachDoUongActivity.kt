@@ -3,19 +3,14 @@ package com.example.nhom11_chieu2
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nhom11_chieu2.adapter.DoUongAdapter
 import com.example.nhom11_chieu2.model.DatabaseHelper
-import com.example.nhom11_chieu2.model.DoUong
-import java.text.Normalizer
-import java.util.Locale
+
 
 class DanhSachDoUongActivity : AppCompatActivity() {
     private lateinit var rvDanhSachDoUong: RecyclerView
@@ -36,12 +31,19 @@ class DanhSachDoUongActivity : AppCompatActivity() {
 
     private fun setEvent() {
         val databaseHelper = DatabaseHelper(this)
-
+        val maViTriBan = intent.getIntExtra("maViTriBan", -1)
         val getAllDoUong = databaseHelper.getAllDoUong()
 
-        doUongAdapter = DoUongAdapter(getAllDoUong)
+        doUongAdapter = DoUongAdapter(getAllDoUong) { doUong ->
+            val intentCT = Intent(this, ChiTietActivity::class.java).apply {
+                putExtra("maDoUong", doUong.ma)
+                putExtra("maViTriBan", maViTriBan)
+            }
+            startActivity(intentCT)
+        }
         rvDanhSachDoUong.adapter = doUongAdapter
         rvDanhSachDoUong.layoutManager = LinearLayoutManager(this)
+
 
         svTimKiem.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
@@ -81,11 +83,14 @@ class DanhSachDoUongActivity : AppCompatActivity() {
         }
 
         imgBtnDanhSachOrder.setOnClickListener {
-            val intentDSOD = Intent(this, DanhSachOrderActivity::class.java)
+            val intentDSOD = Intent(this, DanhSachOrderActivity::class.java).apply {
+                putExtra("maViTriBan", maViTriBan)
+            }
             startActivity(intentDSOD)
         }
 
         val loaiDoUong = intent.getStringExtra("loaiDoUong")
+
         val danhSachDoUong = when (loaiDoUong) {
             "Cà Phê" -> getAllDoUong.filter { it.loai == "Cà phê" }
             "Trà Sữa" -> getAllDoUong.filter { it.loai == "Trà sữa" }

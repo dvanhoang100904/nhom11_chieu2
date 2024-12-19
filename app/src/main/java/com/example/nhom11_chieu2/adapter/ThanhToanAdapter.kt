@@ -8,9 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nhom11_chieu2.R
 import com.example.nhom11_chieu2.model.ThanhToan
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+
 
 class ThanhToanAdapter(private val danhSachThanhToan: List<ThanhToan>) :
     RecyclerView.Adapter<ThanhToanAdapter.ThanhToanViewHolder>() {

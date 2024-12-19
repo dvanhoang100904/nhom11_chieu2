@@ -15,13 +15,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.nhom11_chieu2.adapter.DoUongAdapter
 import com.example.nhom11_chieu2.model.DatabaseHelper
 
-
 class TrangChuActivity : AppCompatActivity() {
     private lateinit var doUongAdapter: DoUongAdapter
-    private lateinit var rvDanhSachDoUongTT: RecyclerView
-    private lateinit var imgBtnChucNang: ImageButton
-    private lateinit var imgBtnDangXuat: ImageButton
+    private lateinit var rvDanhSachDoUong: RecyclerView
     private lateinit var tvTieuDeTT: TextView
+    private lateinit var imgBtnChonBan: ImageButton
+    private lateinit var imgBtnLuuTru: ImageButton
+    private lateinit var imgBtnDangXuat: ImageButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trang_chu)
@@ -33,16 +34,26 @@ class TrangChuActivity : AppCompatActivity() {
         val databaseHelper = DatabaseHelper(this)
         val limit = 6
         val getAllDoUong = databaseHelper.getAllDoUongNgauNhien(limit)
-        doUongAdapter = DoUongAdapter(getAllDoUong)
-        rvDanhSachDoUongTT.adapter = doUongAdapter
-        rvDanhSachDoUongTT.layoutManager = LinearLayoutManager(this)
+        doUongAdapter = DoUongAdapter(getAllDoUong) { doUong ->
+            val intentCT = Intent(this, ChiTietActivity::class.java).apply {
+                putExtra("maDoUong", doUong.ma)
+            }
+            startActivity(intentCT)
+        }
+        rvDanhSachDoUong.adapter = doUongAdapter
+        rvDanhSachDoUong.layoutManager = LinearLayoutManager(this)
 
         val hoTen = databaseHelper.layNhanVienDangNhap()
         tvTieuDeTT.text = "Nhân Viên: $hoTen"
 
-        imgBtnChucNang.setOnClickListener {
-            val intentNV = Intent(this, NhanVienOrderActivity::class.java)
-            startActivity(intentNV)
+        imgBtnChonBan.setOnClickListener {
+            val intentDSVTB = Intent(this, DanhSachViTriBanActivity::class.java)
+            startActivity(intentDSVTB)
+        }
+
+        imgBtnLuuTru.setOnClickListener {
+            val intentLTTT = Intent(this, LuuTruThanhToanActivity::class.java)
+            startActivity(intentLTTT)
         }
 
         imgBtnDangXuat.setOnClickListener {
@@ -50,9 +61,9 @@ class TrangChuActivity : AppCompatActivity() {
             builder.setTitle("Đăng xuất")
             builder.setMessage("Bạn có chắc chắn muốn đăng xuất không")
             builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
-                val intentDX = Intent(this, DangNhapActivity::class.java)
+                val intentDN = Intent(this, DangNhapActivity::class.java)
                 databaseHelper.dangXuat()
-                startActivity(intentDX)
+                startActivity(intentDN)
             }
             builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
             }
@@ -61,9 +72,11 @@ class TrangChuActivity : AppCompatActivity() {
     }
 
     private fun setControl() {
-        rvDanhSachDoUongTT = findViewById(R.id.rvDanhSachDoUongTT)
-        imgBtnChucNang = findViewById(R.id.imgBtnChucNang)
-        imgBtnDangXuat = findViewById(R.id.imgBtnDangXuat)
+        rvDanhSachDoUong = findViewById(R.id.rvDanhSachDoUong)
         tvTieuDeTT = findViewById(R.id.tvTieuDeTT)
+        imgBtnChonBan = findViewById(R.id.imgBtnChonBan)
+        imgBtnLuuTru = findViewById(R.id.imgBtnLuuTru)
+        imgBtnDangXuat = findViewById(R.id.imgBtnDangXuat)
+
     }
 }
