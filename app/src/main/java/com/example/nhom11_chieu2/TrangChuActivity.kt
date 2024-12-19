@@ -21,7 +21,9 @@ class TrangChuActivity : AppCompatActivity() {
     private lateinit var tvTieuDeTT: TextView
     private lateinit var imgBtnChonBan: ImageButton
     private lateinit var imgBtnLuuTru: ImageButton
+    private lateinit var imgBtnThongKe: ImageButton
     private lateinit var imgBtnDangXuat: ImageButton
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +58,11 @@ class TrangChuActivity : AppCompatActivity() {
             startActivity(intentLTTT)
         }
 
+        imgBtnThongKe.setOnClickListener {
+            val intentTKDT = Intent(this, ThongKeDoanhThuActivity::class.java)
+            startActivity(intentTKDT)
+        }
+
         imgBtnDangXuat.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Đăng xuất")
@@ -77,6 +84,7 @@ class TrangChuActivity : AppCompatActivity() {
         imgBtnChonBan = findViewById(R.id.imgBtnChonBan)
         imgBtnLuuTru = findViewById(R.id.imgBtnLuuTru)
         imgBtnDangXuat = findViewById(R.id.imgBtnDangXuat)
+        imgBtnThongKe = findViewById(R.id.imgBtnThongKe)
 
     }
 }

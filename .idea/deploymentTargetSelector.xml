@@ -14,10 +14,10 @@
       <SelectionState runConfigName="TrangChuActivity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="DanhSachViTriBanActivity">
+      <SelectionState runConfigName="LuuTruThanhToanActivity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="LuuTruThanhToanActivity">
+      <SelectionState runConfigName="ThongKeDoanhThuActivity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
