@@ -14,7 +14,7 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="Chi Tiết Đồ Uống "
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -34,6 +34,8 @@
             android:id="@+id/tvTenChiTiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="18dp"
             android:padding="6dp"
             android:text="Tên"
             android:textSize="22sp" />
@@ -42,6 +44,7 @@
             android:id="@+id/tvGiaChiTiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:padding="6dp"
             android:text="Giá"
             android:textSize="18sp" />
@@ -50,9 +53,10 @@
             android:id="@+id/tvMoTaChiTiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:padding="6dp"
             android:text="Mô tả"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout

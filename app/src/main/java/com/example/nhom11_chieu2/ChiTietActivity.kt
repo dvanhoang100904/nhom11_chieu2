@@ -2,13 +2,13 @@ package com.example.nhom11_chieu2
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nhom11_chieu2.model.DatabaseHelper
-import com.example.nhom11_chieu2.model.Order
 
 class ChiTietActivity : AppCompatActivity() {
     private lateinit var tvTieuDeChiTiet: TextView
@@ -26,7 +26,15 @@ class ChiTietActivity : AppCompatActivity() {
     }
 
     private fun setEvent() {
-        val maDoUong = intent.getIntExtra("ma", -1)
+        val maDoUong = intent.getIntExtra("maDoUong", -1)
+        val maViTriBan = intent.getIntExtra("maViTriBan", -1)
+
+        if (maViTriBan == -1) {
+            btnOrder.visibility = View.GONE
+        } else {
+            btnOrder.visibility = View.VISIBLE
+        }
+
         if (maDoUong != -1) {
             val databaseHelper = DatabaseHelper(this)
             val doUong = databaseHelper.getDoUongByMa(maDoUong)
@@ -36,48 +44,44 @@ class ChiTietActivity : AppCompatActivity() {
                 ivHinhAnhChiTiet.setImageResource(doUong.hinhAnh)
                 tvGiaChiTiet.text = formatGia(doUong.gia)
                 tvMoTaChiTiet.text = doUong.moTa
-            } else {
-                Toast.makeText(this, "Không tìm thấy thông tin đồ uống.", Toast.LENGTH_SHORT).show()
-                finish()
             }
-        } else {
-            finish()
         }
 
         btnQuayLai.setOnClickListener { finish() }
 
         btnOrder.setOnClickListener {
-            val maDoUong = intent.getIntExtra("ma", -1)
             if (maDoUong != -1) {
                 val databaseHelper = DatabaseHelper(this)
                 val doUong = databaseHelper.getDoUongByMa(maDoUong)
                 if (doUong != null) {
-                    val kiemTraOrders = databaseHelper.getOrdersByMaDoUong(doUong.ma)
-                    if (kiemTraOrders != null) {
-                        kiemTraOrders.soLuong++
-                        databaseHelper.updateSoLuongOrderByMaDoUong(
-                            kiemTraOrders.maDoUong,
-                            kiemTraOrders.soLuong
+                    if (maViTriBan != -1) {
+                        val kiemTraOrders = databaseHelper.getOrdersByMaDoUongVaMaOrderViTriBan(
+                            maDoUong, maViTriBan
                         )
-                        Toast.makeText(this, "Order ${doUong.ten} thành công ", Toast.LENGTH_SHORT)
-                            .show()
-                        val intentOrder = Intent(this, DanhSachOrderActivity::class.java)
-                        startActivity(intentOrder)
-                    } else {
-                        val order = Order(
-                            ma = doUong.ma,
-                            ten = doUong.ten,
-                            hinhAnh = doUong.hinhAnh,
-                            gia = doUong.gia,
-                            soLuong = 1,
-                            moTa = doUong.moTa,
-                            maDoUong = doUong.ma
-                        )
-                        databaseHelper.addOrder(order)
-                        Toast.makeText(this, "Order ${doUong.ten} thành công ", Toast.LENGTH_SHORT)
-                            .show()
-                        val intentOrder = Intent(this, DanhSachOrderActivity::class.java)
-                        startActivity(intentOrder)
+                        if (kiemTraOrders != null) {
+                            kiemTraOrders.soLuong++
+                            databaseHelper.updateSoLuongOrderByMaDoUongVaMaOderViTriBan(
+                                kiemTraOrders.maDoUong,
+                                kiemTraOrders.maOrderViTriBan,
+                                kiemTraOrders.soLuong
+                            )
+                            Toast.makeText(
+                                this,
+                                "Order ${doUong.ten} thành công",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            databaseHelper.addOrderByMaViTriBanVaMaDoUong(maViTriBan, doUong.ma, 1)
+                            Toast.makeText(
+                                this,
+                                "Order ${doUong.ten} thành công",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        val intentDSOD = Intent(this, DanhSachOrderActivity::class.java).apply {
+                            putExtra("maViTriBan", maViTriBan)
+                        }
+                        startActivity(intentDSOD)
                     }
                 }
             }

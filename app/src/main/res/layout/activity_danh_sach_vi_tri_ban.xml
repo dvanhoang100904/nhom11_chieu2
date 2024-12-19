@@ -23,11 +23,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="35dp"
             android:gravity="center"
-            android:text="Vị Trí Bàn Order "
+            android:text="Vị Trí Bàn"
             android:textColor="#000"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textStyle="bold"></TextView>
     </LinearLayout>
 

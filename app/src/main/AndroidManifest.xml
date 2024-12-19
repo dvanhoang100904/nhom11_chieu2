@@ -62,9 +62,6 @@
             android:name=".DanhSachViTriBanActivity"
             android:exported="true" />
         <activity
-            android:name=".NhanVienOrderActivity"
-            android:exported="true" />
-        <activity
             android:name=".TrangChuActivity"
             android:exported="true" />
         <activity

@@ -90,7 +90,6 @@ class DangNhapActivity : AppCompatActivity() {
             startActivity(intentTTK)
         }
 
-
         val kiemTraNhanVien = databaseHelper.getAllNhanVien()
         if (kiemTraNhanVien.isEmpty()) {
             val danhSachNhanVien = getDanhSachNhanVien()
@@ -491,7 +490,6 @@ class DangNhapActivity : AppCompatActivity() {
             )
         )
     }
-
 
     private fun setControl() {
         edtTenDangNhap = findViewById(R.id.edtTenDangNhap)

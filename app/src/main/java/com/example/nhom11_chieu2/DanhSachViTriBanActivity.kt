@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nhom11_chieu2.adapter.ViTriBanAdapter
 import com.example.nhom11_chieu2.model.DatabaseHelper
-import com.example.nhom11_chieu2.model.ViTriBan
 
 class DanhSachViTriBanActivity : AppCompatActivity() {
     private lateinit var rvDanhSachViTriBan: RecyclerView
@@ -29,21 +28,18 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
         val databaseHelper = DatabaseHelper(this)
         val getAllViTriBan = databaseHelper.getAllViTriBan()
 
-        viTriBanAdapter = ViTriBanAdapter(getAllViTriBan)
+        viTriBanAdapter = ViTriBanAdapter(getAllViTriBan) { viTriBan ->
+            val intentDSOD = Intent(this, DanhSachOrderActivity::class.java).apply {
+                putExtra("maViTriBan", viTriBan.ma)
+            }
+            startActivity(intentDSOD)
+        }
         rvDanhSachViTriBan.adapter = viTriBanAdapter
         rvDanhSachViTriBan.layoutManager = GridLayoutManager(this, 4)
 
         imgBtnThoat.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Thoát")
-            builder.setMessage("Bạn có chắc chắn muốn thoát không?")
-            builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
-                val intentThoat = Intent(this, NhanVienOrderActivity::class.java)
-                startActivity(intentThoat)
-            }
-            builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
-            }
-            builder.show()
+            val intentTT = Intent(this, TrangChuActivity::class.java)
+            startActivity(intentTT)
         }
     }
 

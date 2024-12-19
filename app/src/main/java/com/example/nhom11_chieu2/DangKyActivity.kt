@@ -1,5 +1,6 @@
 package com.example.nhom11_chieu2
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.util.Patterns
@@ -12,6 +13,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.nhom11_chieu2.QuanTri.QuanTriActivity
 import com.example.nhom11_chieu2.model.DatabaseHelper
 import com.example.nhom11_chieu2.model.NhanVien
 
@@ -75,7 +77,7 @@ class DangKyActivity : AppCompatActivity() {
             }
 
             val databaseHelper = DatabaseHelper(this)
-            if (databaseHelper.kiemTraEmail(email) ) {
+            if (databaseHelper.kiemTraEmail(email)) {
                 Toast.makeText(this, "Email đã tồn tại!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -96,11 +98,12 @@ class DangKyActivity : AppCompatActivity() {
                 matKhau = matKhau,
                 quyen = 50
             )
-
             databaseHelper.addNhanVien(nhanVien)
             Toast.makeText(this, "Tạo tài khoản thành công!", Toast.LENGTH_SHORT).show()
+            finish()
 
         }
+
         tvDangNhap.setOnClickListener {
             finish()
         }

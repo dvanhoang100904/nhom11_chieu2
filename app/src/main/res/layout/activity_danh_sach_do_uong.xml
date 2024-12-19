@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:background="#f5f6cf"
         android:orientation="horizontal"
-        android:padding="18dp">
+        android:padding="20dp">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/svTimKiem"
@@ -21,7 +21,7 @@
             android:iconifiedByDefault="true"
             android:inputType="text"
             android:queryHint="Tìm kiếm"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -33,16 +33,16 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="Danh Sách Đồ Uống (Theo Loại)"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textStyle="bold"></TextView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDanhSachDoUong"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="10dp"
         android:layout_weight="1"
-        android:background="#fff"></androidx.recyclerview.widget.RecyclerView>
+        android:background="#fff"
+        android:padding="10dp"></androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,7 +50,7 @@
         android:background="#f5f6cf"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="5dp">
+        android:padding="10dp">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -61,8 +61,8 @@
 
             <ImageButton
                 android:id="@+id/imgBtnDanhSachCaPhe"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="@drawable/imgcoffee" />
 
             <TextView
@@ -84,8 +84,8 @@
 
             <ImageButton
                 android:id="@+id/imgBtnDanhSachTraSua"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="@drawable/imgmilktea" />
 
             <TextView
@@ -106,8 +106,8 @@
 
             <ImageButton
                 android:id="@+id/imgBtnDanhSachSinhTo"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="@drawable/imgsmoothie" />
 
             <TextView
@@ -128,8 +128,8 @@
 
             <ImageButton
                 android:id="@+id/imgBtnDanhSachOrder"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="@drawable/imgcounter" />
 
             <TextView

@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22dp"
-                android:text="Tên "
+                android:text="Tên: "
                 android:textColor="#000"
                 android:textSize="18sp"
                 android:textStyle="italic" />
@@ -55,11 +55,21 @@
             android:padding="6dp">
 
             <TextView
+                android:id="@+id/tvLuuMaBan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="Bàn: "
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:textStyle="italic" />
+
+            <TextView
                 android:id="@+id/tvLuuGia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:text="giá"
+                android:text="Giá:"
                 android:textColor="#000"
                 android:textSize="18sp"
                 android:textStyle="italic" />
@@ -69,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22dp"
-                android:text="Số lượng"
+                android:text="Số lượng:"
                 android:textColor="#000"
                 android:textSize="18sp"
                 android:textStyle="italic" />

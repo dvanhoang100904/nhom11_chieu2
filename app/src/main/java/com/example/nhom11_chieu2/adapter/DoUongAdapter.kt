@@ -1,6 +1,5 @@
 package com.example.nhom11_chieu2.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +7,13 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.nhom11_chieu2.ChiTietActivity
 import com.example.nhom11_chieu2.R
 import com.example.nhom11_chieu2.model.DoUong
 
-class DoUongAdapter(private var danhSachDoUong: List<DoUong>) :
+class DoUongAdapter(
+    private var danhSachDoUong: List<DoUong>,
+    private val onChiTietClick: (DoUong) -> Unit
+) :
     RecyclerView.Adapter<DoUongAdapter.DoUongViewHolder>() {
     class DoUongViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvTenDoUong: TextView = itemView.findViewById(R.id.tvTenDoUong)
@@ -36,12 +37,10 @@ class DoUongAdapter(private var danhSachDoUong: List<DoUong>) :
         holder.tvTenDoUong.text = doUong.ten
         holder.ivHinhAnhDoUong.setImageResource(doUong.hinhAnh)
         holder.btnChiTietDoUong.setOnClickListener {
-            val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
-                putExtra("ma", doUong.ma)
-            }
-            holder.itemView.context.startActivity(intentChiTiet)
+            onChiTietClick(doUong)
         }
     }
+
     fun capNhatDanhSach(danhSachMoi: List<DoUong>) {
         danhSachDoUong = danhSachMoi
         notifyDataSetChanged()

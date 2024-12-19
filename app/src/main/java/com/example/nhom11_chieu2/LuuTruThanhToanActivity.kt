@@ -3,6 +3,7 @@ package com.example.nhom11_chieu2
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -15,8 +16,8 @@ import com.example.nhom11_chieu2.model.DatabaseHelper
 class LuuTruThanhToanActivity : AppCompatActivity() {
     private lateinit var rvLuuTruThanhToan: RecyclerView
     private lateinit var luuTruAdapter: LuuTruAdapter
-    private lateinit var imgBtnThoat: ImageView
-    private lateinit var imgBtnXoaLuuTru: ImageView
+    private lateinit var imgBtnThoat: ImageButton
+    private lateinit var imgBtnXoaLuuTru: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -34,16 +35,8 @@ class LuuTruThanhToanActivity : AppCompatActivity() {
         rvLuuTruThanhToan.layoutManager = LinearLayoutManager(this)
 
         imgBtnThoat.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Thoát")
-            builder.setMessage("Bạn có chắc chắn muốn thoát không?")
-            builder.setPositiveButton("Có") { hopThoai, nutDuocClick ->
-                val intentThoat = Intent(this, NhanVienOrderActivity::class.java)
-                startActivity(intentThoat)
-            }
-            builder.setNegativeButton("Không") { hopThoai, nutDuocClick ->
-            }
-            builder.show()
+            val intentTT = Intent(this, TrangChuActivity::class.java)
+            startActivity(intentTT)
         }
 
         imgBtnXoaLuuTru.setOnClickListener {
@@ -54,7 +47,7 @@ class LuuTruThanhToanActivity : AppCompatActivity() {
                 builder.setPositiveButton("Có") { hopThoai, _ ->
                     databaseHelper.deleteAllThanhToan()
                     val updatedData = databaseHelper.getAllThanhToan()
-                    luuTruAdapter.updateData(updatedData)  //
+                    luuTruAdapter.updateData(updatedData)
                 }
                 builder.setNegativeButton("Không") { hopThoai, nutDuocClick -> }
                 builder.show()

@@ -1,6 +1,5 @@
 package com.example.nhom11_chieu2.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
-import com.example.nhom11_chieu2.ChiTietActivity
 import com.example.nhom11_chieu2.model.DatabaseHelper
 import com.example.nhom11_chieu2.R
 import com.example.nhom11_chieu2.model.Order
@@ -45,25 +43,15 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
         holder.tvGiaOrder.text = formatGia(order.gia)
         holder.tvSoLuongOrder.text = order.soLuong.toString()
 
-        holder.ivHinhAnhOrder.setOnClickListener {
-            val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
-                putExtra("ma", order.maDoUong)
-            }
-            holder.itemView.context.startActivity(intentChiTiet)
-        }
-
-        holder.tvTenOrder.setOnClickListener {
-            val intentChiTiet = Intent(holder.itemView.context, ChiTietActivity::class.java).apply {
-                putExtra("ma", order.maDoUong)
-            }
-            holder.itemView.context.startActivity(intentChiTiet)
-        }
-
         holder.btnTangOrder.setOnClickListener {
             order.soLuong++
             holder.tvSoLuongOrder.text = order.soLuong.toString()
             val databaseHelper = DatabaseHelper(holder.itemView.context)
-            databaseHelper.updateSoLuongOrderByMaDoUong(order.maDoUong, order.soLuong)
+            databaseHelper.updateSoLuongOrderByMaDoUongVaMaOderViTriBan(
+                order.maDoUong,
+                order.maOrderViTriBan,
+                order.soLuong
+            )
         }
 
         holder.btnGiamOrder.setOnClickListener {
@@ -71,7 +59,11 @@ class OrderAdapter(private val danhSachOrder: MutableList<Order>) :
                 order.soLuong--
                 holder.tvSoLuongOrder.text = order.soLuong.toString()
                 val databaseHelper = DatabaseHelper(holder.itemView.context)
-                databaseHelper.updateSoLuongOrderByMaDoUong(order.maDoUong, order.soLuong)
+                databaseHelper.updateSoLuongOrderByMaDoUongVaMaOderViTriBan(
+                    order.maDoUong,
+                    order.soLuong,
+                    order.maOrderViTriBan
+                )
             } else {
                 Toast.makeText(
                     holder.itemView.context, "Số lượng không được nhỏ hơn 1", Toast.LENGTH_SHORT

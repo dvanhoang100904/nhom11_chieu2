@@ -11,8 +11,8 @@ data class Order(
     var soLuong: Int,
     val moTa: String,
     val maDoUong: Int,
-
-    ) : Parcelable {
+    val maOrderViTriBan: Int,
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString() ?: "",
@@ -20,7 +20,9 @@ data class Order(
         parcel.readDouble(),
         parcel.readInt(),
         parcel.readString() ?: "",
+        parcel.readInt(),
         parcel.readInt()
+
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -31,6 +33,7 @@ data class Order(
         parcel.writeInt(soLuong)
         parcel.writeString(moTa)
         parcel.writeInt(maDoUong)
+        parcel.writeInt(maOrderViTriBan)
     }
 
     override fun describeContents(): Int {
