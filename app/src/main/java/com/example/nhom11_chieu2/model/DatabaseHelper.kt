@@ -655,6 +655,13 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
         return isEmail
     }
 
+    fun capNhatMatKhau(email: String, matKhauMoi: String) {
+        val db = writableDatabase
+        val sql = "UPDATE NhanVien SET matKhau = ? WHERE email = ?"
+        db.execSQL(sql, arrayOf(matKhauMoi, email))
+        db.close()
+    }
+
     fun kiemTraTenDangNhap(tenDangNhap: String): Boolean {
         val db = readableDatabase
         val sql = "SELECT 1 FROM NhanVien WHERE tenDangNhap = ? LIMIT 1"

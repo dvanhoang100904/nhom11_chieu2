@@ -20,8 +20,9 @@ class DangNhapActivity : AppCompatActivity() {
     private lateinit var edtTenDangNhap: EditText
     private lateinit var edtMatKhau: EditText
     private lateinit var btnDangNhap: Button
-    private lateinit var tvTaoTaiKhoan: TextView
     private lateinit var ivShowMatKhau: ImageView
+    private lateinit var tvTaoTaiKhoan: TextView
+    private lateinit var tvQuenMatKhau: TextView
     private var isPasswordVisible = false // Biến trạng thái hiển thị mật khẩu
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,9 +86,14 @@ class DangNhapActivity : AppCompatActivity() {
             }
         }
 
+        tvQuenMatKhau.setOnClickListener {
+            val intentQMK = Intent(this, QuenMatKhauActivity::class.java).apply {}
+            startActivity(intentQMK)
+        }
+
         tvTaoTaiKhoan.setOnClickListener {
-            val intentTTK = Intent(this, DangKyActivity::class.java).apply {}
-            startActivity(intentTTK)
+            val intentDK = Intent(this, DangKyActivity::class.java).apply {}
+            startActivity(intentDK)
         }
 
         val kiemTraNhanVien = databaseHelper.getAllNhanVien()
@@ -497,6 +503,7 @@ class DangNhapActivity : AppCompatActivity() {
         btnDangNhap = findViewById(R.id.btnDangNhap)
         ivShowMatKhau = findViewById(R.id.ivShowMatKhau)
         tvTaoTaiKhoan = findViewById(R.id.tvTaoTaiKhoan)
+        tvQuenMatKhau = findViewById(R.id.tvQuenMatKhau)
 
     }
 }
