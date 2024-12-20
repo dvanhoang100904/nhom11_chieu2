@@ -44,7 +44,6 @@ class DanhSachDoUongActivity : AppCompatActivity() {
         rvDanhSachDoUong.adapter = doUongAdapter
         rvDanhSachDoUong.layoutManager = LinearLayoutManager(this)
 
-
         svTimKiem.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

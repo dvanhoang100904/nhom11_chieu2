@@ -20,10 +20,8 @@ class QuenMatKhauActivity : AppCompatActivity() {
     private lateinit var btnXacNhan: Button
     private lateinit var edtMatKhauMoi: EditText
     private lateinit var tvDangNhap: TextView
-
     private var luuMaXacThuc: String? = null
     private var luuEmail: String? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quen_mat_khau)
@@ -63,15 +61,6 @@ class QuenMatKhauActivity : AppCompatActivity() {
             }
 
             if (maXacThuc == luuMaXacThuc) {
-                Toast.makeText(
-                    this,
-                    "Mã xác thực đã đúng, vui lòng cập nhật mật khẩu mới",
-                    Toast.LENGTH_LONG
-                ).show()
-                if (matKhauMoi.isEmpty()) {
-                    Toast.makeText(this, "Vui lòng nhập mật khẩu mới", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
                 val databaseHelper = DatabaseHelper(this)
                 databaseHelper.capNhatMatKhau(luuEmail!!, matKhauMoi)
                 Toast.makeText(this, "Mật khẩu đã được cập nhật", Toast.LENGTH_LONG).show()

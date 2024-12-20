@@ -639,6 +639,65 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
 
     }
 
+    fun updateNhanVienByMa(
+        ma: Int,
+        hoTen: String,
+        hinhAnh: Int,
+        chucVu: String,
+        email: String,
+        tenDangNhap: String,
+        matKhau: String,
+        quyen: Int
+    ) {
+        val db = writableDatabase
+        val cv = ContentValues().apply {
+            put("hoTen", hoTen)
+            put("hinhAnh", hinhAnh)
+            put("chucVu", chucVu)
+            put("email", email)
+            put("tenDangNhap", tenDangNhap)
+            put("matKhau", matKhau)
+            put("quyen", quyen)
+        }
+        val sql = "ma = ?"
+        db.update("NhanVien", cv, sql, arrayOf(ma.toString()))
+        db.close()
+
+    }
+
+    fun searchQTNhanVien(key: String): MutableList<NhanVien> {
+        val danhSachNhanVien = mutableListOf<NhanVien>()
+        val db = readableDatabase
+        val sql = "SELECT * FROM NhanVien WHERE hoTen LIKE ? OR chucVu LIKE ?"
+        val rs = db.rawQuery(sql, arrayOf("%$key%", "%$key%"))
+        rs.use {
+            while (it.moveToNext()) {
+                val maColumnIndex = it.getColumnIndex("ma")
+                val hoTenColumnIndex = it.getColumnIndex("hoTen")
+                val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
+                val chucVuColumnIndex = it.getColumnIndex("chucVu")
+                val emailColumnIndex = it.getColumnIndex("email")
+                val tenDangNhapColumnIndex = it.getColumnIndex("tenDangNhap")
+                val matKhauColumnIndex = it.getColumnIndex("matKhau")
+                val quyenColumnIndex = it.getColumnIndex("quyen")
+                danhSachNhanVien.add(
+                    NhanVien(
+                        it.getInt(maColumnIndex),
+                        it.getString(hoTenColumnIndex),
+                        it.getInt(hinhAnhColumnIndex),
+                        it.getString(chucVuColumnIndex),
+                        it.getString(emailColumnIndex),
+                        it.getString(tenDangNhapColumnIndex),
+                        it.getString(matKhauColumnIndex),
+                        it.getInt(quyenColumnIndex)
+                    )
+                )
+            }
+        }
+        db.close()
+        return danhSachNhanVien
+    }
+
     fun dangNhap(tenDangNhap: String, matKhau: String): Int? {
         val db = writableDatabase
         val sql = "SELECT quyen FROM NhanVien WHERE tenDangNhap = ? AND matKhau = ?"
@@ -710,65 +769,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
             }
         }
         return isTenDangNhap
-    }
-
-    fun updateNhanVienByMa(
-        ma: Int,
-        hoTen: String,
-        hinhAnh: Int,
-        chucVu: String,
-        email: String,
-        tenDangNhap: String,
-        matKhau: String,
-        quyen: Int
-    ) {
-        val db = writableDatabase
-        val cv = ContentValues().apply {
-            put("hoTen", hoTen)
-            put("hinhAnh", hinhAnh)
-            put("chucVu", chucVu)
-            put("email", email)
-            put("tenDangNhap", tenDangNhap)
-            put("matKhau", matKhau)
-            put("quyen", quyen)
-        }
-        val sql = "ma = ?"
-        db.update("NhanVien", cv, sql, arrayOf(ma.toString()))
-        db.close()
-
-    }
-
-    fun searchQTNhanVien(key: String): MutableList<NhanVien> {
-        val danhSachNhanVien = mutableListOf<NhanVien>()
-        val db = readableDatabase
-        val sql = "SELECT * FROM NhanVien WHERE hoTen LIKE ? OR chucVu LIKE ?"
-        val rs = db.rawQuery(sql, arrayOf("%$key%", "%$key%"))
-        rs.use {
-            while (it.moveToNext()) {
-                val maColumnIndex = it.getColumnIndex("ma")
-                val hoTenColumnIndex = it.getColumnIndex("hoTen")
-                val hinhAnhColumnIndex = it.getColumnIndex("hinhAnh")
-                val chucVuColumnIndex = it.getColumnIndex("chucVu")
-                val emailColumnIndex = it.getColumnIndex("email")
-                val tenDangNhapColumnIndex = it.getColumnIndex("tenDangNhap")
-                val matKhauColumnIndex = it.getColumnIndex("matKhau")
-                val quyenColumnIndex = it.getColumnIndex("quyen")
-                danhSachNhanVien.add(
-                    NhanVien(
-                        it.getInt(maColumnIndex),
-                        it.getString(hoTenColumnIndex),
-                        it.getInt(hinhAnhColumnIndex),
-                        it.getString(chucVuColumnIndex),
-                        it.getString(emailColumnIndex),
-                        it.getString(tenDangNhapColumnIndex),
-                        it.getString(matKhauColumnIndex),
-                        it.getInt(quyenColumnIndex)
-                    )
-                )
-            }
-        }
-        db.close()
-        return danhSachNhanVien
     }
 }
 

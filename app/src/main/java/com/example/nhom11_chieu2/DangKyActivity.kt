@@ -39,14 +39,13 @@ class DangKyActivity : AppCompatActivity() {
 
             if (isPasswordVisible) {
                 edtMatKhau.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                ivShowMatKhau.setImageResource(R.drawable.imgeyehidden) // Icon tắt mắt
+                ivShowMatKhau.setImageResource(R.drawable.imgeyehidden)
             } else {
                 edtMatKhau.inputType =
                     InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-                ivShowMatKhau.setImageResource(R.drawable.imgeyeview) // Icon mở mắt
+                ivShowMatKhau.setImageResource(R.drawable.imgeyeview)
             }
 
-            // Đảm bảo con trỏ vẫn ở cuối văn bản
             edtMatKhau.setSelection(edtMatKhau.text.length)
         }
 

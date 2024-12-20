@@ -15,7 +15,6 @@ class DanhSachViTriBanActivity : AppCompatActivity() {
     private lateinit var rvDanhSachViTriBan: RecyclerView
     private lateinit var viTriBanAdapter: ViTriBanAdapter
     private lateinit var imgBtnThoat: ImageButton
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_danh_sach_vi_tri_ban)

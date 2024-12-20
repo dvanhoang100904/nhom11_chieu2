@@ -3,10 +3,12 @@ package com.example.nhom11_chieu2.QuanTri
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -23,7 +25,7 @@ class SuaDoUongActivity : AppCompatActivity() {
     private lateinit var edtTen: EditText
     private lateinit var edtGia: EditText
     private lateinit var edtMoTa: EditText
-    private lateinit var edtLoai: EditText
+    private lateinit var spLoai: Spinner
     private lateinit var ivHinhAnh: ImageView
     private lateinit var btnUploadHinhAnh: Button
     private lateinit var btnLuuDoUong: Button
@@ -49,7 +51,12 @@ class SuaDoUongActivity : AppCompatActivity() {
         edtGia.setText(gia.toString())
         ivHinhAnh.setImageResource(hinhAnh)
         edtMoTa.setText(moTa)
-        edtLoai.setText(loai)
+
+        val loaiDoUong = listOf("Cà phê", "Trà sữa", "Sinh tố")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, loaiDoUong)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spLoai.adapter = adapter
+        spLoai.setSelection(loaiDoUong.indexOf(loai).takeIf { it >= 0 } ?: 0)
 
         imagePickerLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -82,7 +89,7 @@ class SuaDoUongActivity : AppCompatActivity() {
             val tenMoi = edtTen.text.toString().trim()
             val giaMoi = edtGia.text.toString().trim()
             val moTaMoi = edtMoTa.text.toString().trim()
-            val loaiMoi = edtLoai.text.toString().trim()
+            val loaiMoi = spLoai.selectedItem.toString()
             val hinhAnhMoi = if (hinhAnhChonUpload != -1) hinhAnhChonUpload else hinhAnh
 
             if (tenMoi.isEmpty() || giaMoi.isEmpty() || moTaMoi.isEmpty() || loaiMoi.isEmpty() || hinhAnhMoi == -1) {
@@ -108,8 +115,8 @@ class SuaDoUongActivity : AppCompatActivity() {
                     loai = loaiMoi,
                 )
                 Toast.makeText(this, "Cập nhật $tenMoi thành công!", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, QuanTriDoUongActivity::class.java)
-                startActivity(intent)
+                val intentQTDU = Intent(this, QuanTriDoUongActivity::class.java)
+                startActivity(intentQTDU)
             }
         }
     }
@@ -119,7 +126,7 @@ class SuaDoUongActivity : AppCompatActivity() {
         edtTen = findViewById(R.id.edtTen)
         edtGia = findViewById(R.id.edtGia)
         edtMoTa = findViewById(R.id.edtMoTa)
-        edtLoai = findViewById(R.id.edtLoai)
+        spLoai = findViewById(R.id.spLoai)
         ivHinhAnh = findViewById(R.id.ivHinhAnh)
         btnUploadHinhAnh = findViewById(R.id.btnUploadHinhAnh)
         btnLuuDoUong = findViewById(R.id.btnLuuDoUong)

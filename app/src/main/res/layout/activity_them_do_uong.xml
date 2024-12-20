@@ -122,15 +122,12 @@
                 android:text="Loại đồ uống"
                 android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/edtLoai"
+            <Spinner
+                android:id="@+id/spLoai"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/edittext_background"
-                android:hint="Nhập loại đồ uống"
-                android:inputType="text"
-                android:padding="8dp" />
+                android:background="@drawable/edittext_background" />
 
         </LinearLayout>
 
