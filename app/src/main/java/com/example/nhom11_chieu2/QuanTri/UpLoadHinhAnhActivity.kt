@@ -56,6 +56,7 @@ class UpLoadHinhAnhActivity : AppCompatActivity() {
             ivHinhAnhChonUpload.setImageResource(hinhAnhChonUpload)
             this.hinhAnhChonUpload = hinhAnhChonUpload
         }
+
         rvUpLoadHinhAnh.adapter = uploadAdapter
 
         btnQuayLai.setOnClickListener { finish() }

@@ -23,7 +23,6 @@ class DanhSachOrderActivity : AppCompatActivity() {
     private lateinit var imgBtnDanhSachTraSua: ImageButton
     private lateinit var imgBtnDanhSachSinhTo: ImageButton
     private lateinit var tvTieuDeBanOrder: TextView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_danh_sach_order)

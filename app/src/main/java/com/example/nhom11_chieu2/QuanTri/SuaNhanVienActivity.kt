@@ -118,8 +118,8 @@ class SuaNhanVienActivity : AppCompatActivity() {
                     quyen = quyenMoiInt
                 )
                 Toast.makeText(this, "Cập nhật $hoTenMoi thành công!", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, QuanTriNhanVienActivity::class.java)
-                startActivity(intent)
+                val intentQTNV = Intent(this, QuanTriNhanVienActivity::class.java)
+                startActivity(intentQTNV)
             }
         }
     }

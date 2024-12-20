@@ -23,8 +23,6 @@ class TrangChuActivity : AppCompatActivity() {
     private lateinit var imgBtnLuuTru: ImageButton
     private lateinit var imgBtnThongKe: ImageButton
     private lateinit var imgBtnDangXuat: ImageButton
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trang_chu)

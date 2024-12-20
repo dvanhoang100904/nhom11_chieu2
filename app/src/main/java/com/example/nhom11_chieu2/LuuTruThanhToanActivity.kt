@@ -19,7 +19,6 @@ class LuuTruThanhToanActivity : AppCompatActivity() {
     private lateinit var imgBtnThoat: ImageButton
     private lateinit var imgBtnXoaLuuTru: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_luu_tru_thanh_toan)
         setControl()

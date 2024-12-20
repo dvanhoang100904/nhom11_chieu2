@@ -4,12 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.Toast
-
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -25,7 +26,7 @@ class ThemDoUongActivity : AppCompatActivity() {
     private lateinit var edtTen: EditText
     private lateinit var edtGia: EditText
     private lateinit var edtMoTa: EditText
-    private lateinit var edtLoai: EditText
+    private lateinit var spLoai: Spinner
     private lateinit var ivHinhAnh: ImageView
     private lateinit var btnThemDoUong: Button
     private lateinit var btnUploadHinhAnh: Button
@@ -61,8 +62,8 @@ class ThemDoUongActivity : AppCompatActivity() {
             }
 
         btnUploadHinhAnh.setOnClickListener {
-            val intent = Intent(this, UpLoadHinhAnhActivity::class.java)
-            imagePickerLauncher.launch(intent)
+            val intentULHA = Intent(this, UpLoadHinhAnhActivity::class.java)
+            imagePickerLauncher.launch(intentULHA)
         }
 
         val hinhAnhUpload = intent.getIntExtra("hinhAnhChonUpload", -1)
@@ -71,11 +72,20 @@ class ThemDoUongActivity : AppCompatActivity() {
             hinhAnhChonUpload = hinhAnhUpload
         }
 
+        val loaiDoUong = listOf("Cà phê", "Trà sữa", "Sinh tố")
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item,
+            loaiDoUong
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spLoai.adapter = adapter
+
         btnThemDoUong.setOnClickListener {
             val ten = edtTen.text.toString().trim()
             val gia = edtGia.text.toString().trim()
             val moTa = edtMoTa.text.toString().trim()
-            val loai = edtLoai.text.toString().trim()
+            val loai = spLoai.selectedItem.toString()
             val hinhAnh = hinhAnhChonUpload
 
             if (ten.isEmpty() || gia.isEmpty() || moTa.isEmpty() || loai.isEmpty() || hinhAnh == -1) {
@@ -102,7 +112,7 @@ class ThemDoUongActivity : AppCompatActivity() {
             edtTen.setText("")
             edtGia.setText("")
             edtMoTa.setText("")
-            edtLoai.setText("")
+            spLoai.setSelection(0)
             ivHinhAnh.setImageResource(0)
             edtTen.requestFocus()
 
@@ -114,7 +124,7 @@ class ThemDoUongActivity : AppCompatActivity() {
         edtTen = findViewById(R.id.edtTen)
         edtGia = findViewById(R.id.edtGia)
         edtMoTa = findViewById(R.id.edtMoTa)
-        edtLoai = findViewById(R.id.edtLoai)
+        spLoai = findViewById(R.id.spLoai)
         ivHinhAnh = findViewById(R.id.ivHinhAnh)
         btnThemDoUong = findViewById(R.id.btnThemDoUong)
         btnUploadHinhAnh = findViewById(R.id.btnUploadHinhAnh)

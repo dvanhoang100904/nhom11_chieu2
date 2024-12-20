@@ -31,8 +31,8 @@ class ThongKeAdapter(private var danhSachThongKe: List<ThongKe>) :
 
     override fun onBindViewHolder(holder: ThongKeViewHolder, position: Int) {
         val thongKe = danhSachThongKe[position]
-        holder.tvDoanhThu.text = "Tiền Bán Đồ uống: ${formatGia(thongKe.doanhThu)}"
-        holder.tvSoLuong.text = "Số Lượng Đồ uống: x${thongKe.soLuong}"
+        holder.tvDoanhThu.text = "Tổng Tiền Bán Đồ uống: ${formatGia(thongKe.doanhThu)}"
+        holder.tvSoLuong.text = "Tổng Số Lượng Đồ uống: x${thongKe.soLuong}"
         holder.tvNgayThanhToan.text = "Ngày Thanh Toán: ${formatNgay(thongKe.ngayThanhToan)}"
     }
 
