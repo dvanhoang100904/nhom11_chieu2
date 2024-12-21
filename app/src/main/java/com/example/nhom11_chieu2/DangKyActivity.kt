@@ -25,7 +25,7 @@ class DangKyActivity : AppCompatActivity() {
     private lateinit var btnTao: Button
     private lateinit var ivShowMatKhau: ImageView
     private lateinit var tvDangNhap: TextView
-    private var isPasswordVisible = false // Biến trạng thái hiển thị mật khẩu
+    private var isPasswordVisible = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dang_ky)

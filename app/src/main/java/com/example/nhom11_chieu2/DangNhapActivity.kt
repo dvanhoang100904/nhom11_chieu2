@@ -23,7 +23,7 @@ class DangNhapActivity : AppCompatActivity() {
     private lateinit var ivShowMatKhau: ImageView
     private lateinit var tvTaoTaiKhoan: TextView
     private lateinit var tvQuenMatKhau: TextView
-    private var isPasswordVisible = false // Biến trạng thái hiển thị mật khẩu
+    private var isPasswordVisible = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dang_nhap)
