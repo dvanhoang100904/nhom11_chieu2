@@ -1,9 +1,12 @@
 package com.example.nhom11_chieu2
 
 import android.os.Bundle
+import android.text.InputType
+import android.util.Patterns
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -20,8 +23,11 @@ class QuenMatKhauActivity : AppCompatActivity() {
     private lateinit var btnXacNhan: Button
     private lateinit var edtMatKhauMoi: EditText
     private lateinit var tvDangNhap: TextView
+    private lateinit var ivShowMatKhauMoi: ImageView
     private var luuMaXacThuc: String? = null
     private var luuEmail: String? = null
+    private var isPasswordVisible = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quen_mat_khau)
@@ -30,8 +36,26 @@ class QuenMatKhauActivity : AppCompatActivity() {
     }
 
     private fun setEvent() {
+        ivShowMatKhauMoi.setOnClickListener {
+            isPasswordVisible = !isPasswordVisible
+
+            if (isPasswordVisible) {
+                edtMatKhauMoi.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                ivShowMatKhauMoi.setImageResource(R.drawable.imgeyehidden)
+            } else {
+                edtMatKhauMoi.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                ivShowMatKhauMoi.setImageResource(R.drawable.imgeyeview)
+            }
+        }
+
         btnGuiMa.setOnClickListener {
             val email = edtEmail.text.toString().trim()
+
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(this, "Email không hợp lệ!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             if (email.isEmpty()) {
                 Toast.makeText(this, "Vui lòng nhập email", Toast.LENGTH_SHORT).show()
@@ -43,9 +67,6 @@ class QuenMatKhauActivity : AppCompatActivity() {
                 luuMaXacThuc = taoNgauNhienMaXacThuc()
                 luuEmail = email
                 Toast.makeText(this, "Mã xác thực: $luuMaXacThuc", Toast.LENGTH_LONG).show()
-                edtMaXacThuc.visibility = View.VISIBLE
-                edtMatKhauMoi.visibility = View.VISIBLE
-                btnXacNhan.visibility = View.VISIBLE
             } else {
                 Toast.makeText(this, "Email không tồn tại", Toast.LENGTH_SHORT).show()
             }
@@ -84,5 +105,6 @@ class QuenMatKhauActivity : AppCompatActivity() {
         edtMaXacThuc = findViewById(R.id.edtMaXacThuc)
         btnXacNhan = findViewById(R.id.btnXacNhan)
         tvDangNhap = findViewById(R.id.tvDangNhap)
+        ivShowMatKhauMoi = findViewById(R.id.ivShowMatKhauMoi)
     }
 }
