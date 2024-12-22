@@ -700,6 +700,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "DBQuanLyQuan
 
     fun dangNhap(tenDangNhap: String, matKhau: String): Int? {
         val db = writableDatabase
+
+        val resetSql = "UPDATE NhanVien SET isLoggedIn = 0 WHERE isLoggedIn = 1"
+        db.execSQL(resetSql)
+
         val sql = "SELECT quyen FROM NhanVien WHERE tenDangNhap = ? AND matKhau = ?"
         val rs = db.rawQuery(sql, arrayOf(tenDangNhap, matKhau))
         var quyen: Int? = null
