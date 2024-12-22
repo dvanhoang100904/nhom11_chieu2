@@ -36,6 +36,9 @@ class QuenMatKhauActivity : AppCompatActivity() {
     }
 
     private fun setEvent() {
+        tvDangNhap.setOnClickListener {
+            finish()
+        }
         ivShowMatKhauMoi.setOnClickListener {
             isPasswordVisible = !isPasswordVisible
 
@@ -52,13 +55,13 @@ class QuenMatKhauActivity : AppCompatActivity() {
         btnGuiMa.setOnClickListener {
             val email = edtEmail.text.toString().trim()
 
-            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                Toast.makeText(this, "Email không hợp lệ!", Toast.LENGTH_SHORT).show()
+            if (email.isEmpty()) {
+                Toast.makeText(this, "Vui lòng nhập email", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if (email.isEmpty()) {
-                Toast.makeText(this, "Vui lòng nhập email", Toast.LENGTH_SHORT).show()
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(this, "Email không hợp lệ!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -78,6 +81,16 @@ class QuenMatKhauActivity : AppCompatActivity() {
 
             if (maXacThuc.isEmpty()) {
                 Toast.makeText(this, "Vui lòng nhập mã xác thực", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (matKhauMoi.isEmpty()) {
+                Toast.makeText(this, "Vui lòng nhập mật khẩu mới", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (matKhauMoi.length < 6) {
+                Toast.makeText(this, "Mật khẩu phải có ít nhất 6 ký tự!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
