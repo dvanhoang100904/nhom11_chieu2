@@ -18,6 +18,7 @@ class ChiTietActivity : AppCompatActivity() {
     private lateinit var tvMoTaChiTiet: TextView
     private lateinit var btnQuayLai: Button
     private lateinit var btnOrder: Button
+    private lateinit var tvLoaiChiTiet: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chi_tiet)
@@ -40,10 +41,11 @@ class ChiTietActivity : AppCompatActivity() {
             val doUong = databaseHelper.getDoUongByMa(maDoUong)
             if (doUong != null) {
                 tvTieuDeChiTiet.text = "Chi Tiết ${doUong.ten}"
-                tvTenChiTiet.text = doUong.ten
+                tvTenChiTiet.text = "Tên: ${doUong.ten}"
                 ivHinhAnhChiTiet.setImageResource(doUong.hinhAnh)
-                tvGiaChiTiet.text = formatGia(doUong.gia)
-                tvMoTaChiTiet.text = doUong.moTa
+                tvGiaChiTiet.text = "Giá: ${formatGia(doUong.gia)}"
+                tvMoTaChiTiet.text = "Mô tả: ${doUong.moTa}"
+                tvLoaiChiTiet.text = "Loại: ${doUong.loai}"
             }
         }
 
@@ -101,5 +103,6 @@ class ChiTietActivity : AppCompatActivity() {
         tvMoTaChiTiet = findViewById(R.id.tvMoTaChiTiet)
         btnQuayLai = findViewById(R.id.btnQuayLai)
         btnOrder = findViewById(R.id.btnOrder)
+        tvLoaiChiTiet = findViewById(R.id.tvLoaiChiTiet)
     }
 }

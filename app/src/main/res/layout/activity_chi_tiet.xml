@@ -41,6 +41,15 @@
             android:textSize="22sp" />
 
         <TextView
+            android:id="@+id/tvLoaiChiTiet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:padding="6dp"
+            android:text="loại"
+            android:textSize="18sp" />
+
+        <TextView
             android:id="@+id/tvGiaChiTiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,6 +66,7 @@
             android:padding="6dp"
             android:text="Mô tả"
             android:textSize="18sp" />
+
     </LinearLayout>
 
     <LinearLayout
